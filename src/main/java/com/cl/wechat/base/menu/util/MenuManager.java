@@ -1,5 +1,6 @@
 package com.cl.wechat.base.menu.util;
 
+import com.cl.wechat.admin.config.AccessTokenThread;
 import com.cl.wechat.base.advanced.model.AccessToken;
 import com.cl.wechat.base.menu.model.Button;
 import com.cl.wechat.base.menu.model.CommonButton;
@@ -24,14 +25,14 @@ public class MenuManager {
   
     public static void main(String[] args) {  
         // 第三方用户唯一凭证  
-        String appId = "wx04e95443a3ac67e3";
+        //String appId = "wx04e95443a3ac67e3";
         // 第三方用户唯一凭证密钥  
-        String appSecret = "7ff170c67c641cb40b93935480b8b1c8";
+        //String appSecret = "7ff170c67c641cb40b93935480b8b1c8";
         // 调用接口获取access_token  
         //AccessToken at = CommonUtil.getAccessToken(appId, appSecret);
-        AccessToken at = new AccessToken();
-        at.setAccesstoken("20_rZYvtONR4GlUb67xDqF7V1jyOUuIz8lrkugBLFlEDs9egwNZFOfmUxOCfqZWGkazcx_kEAWi5FKShMF2NMTr2yngk39zH0v4044s4AKkS1UeVngyxKAjNRT4ePZ1gvlP1soHd3uMHn2jX9h_JTShAGAUED");
-
+       // AccessToken at = new AccessToken();
+        //at.setAccesstoken("20_rZYvtONR4GlUb67xDqF7V1jyOUuIz8lrkugBLFlEDs9egwNZFOfmUxOCfqZWGkazcx_kEAWi5FKShMF2NMTr2yngk39zH0v4044s4AKkS1UeVngyxKAjNRT4ePZ1gvlP1soHd3uMHn2jX9h_JTShAGAUED");
+        AccessToken at = AccessTokenThread.access_token;
         if (null != at) {  
             // 调用接口创建菜单  
             boolean result = MenuUtil.createMenu(getMenu(), at.getAccesstoken());
