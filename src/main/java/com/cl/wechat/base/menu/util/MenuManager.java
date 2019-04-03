@@ -28,9 +28,9 @@ public class MenuManager {
         // 第三方用户唯一凭证密钥  
         String appSecret = "7ff170c67c641cb40b93935480b8b1c8";
         // 调用接口获取access_token  
-        //AccessToken at = CommonUtil.getAccessToken(appId, appSecret);
-        AccessToken at = new AccessToken();
-        at.setAccesstoken("20_rZYvtONR4GlUb67xDqF7V1jyOUuIz8lrkugBLFlEDs9egwNZFOfmUxOCfqZWGkazcx_kEAWi5FKShMF2NMTr2yngk39zH0v4044s4AKkS1UeVngyxKAjNRT4ePZ1gvlP1soHd3uMHn2jX9h_JTShAGAUED");
+        AccessToken at = CommonUtil.getAccessToken(appId, appSecret);
+//        AccessToken at = new AccessToken();
+//        at.setAccesstoken("20_rZYvtONR4GlUb67xDqF7V1jyOUuIz8lrkugBLFlEDs9egwNZFOfmUxOCfqZWGkazcx_kEAWi5FKShMF2NMTr2yngk39zH0v4044s4AKkS1UeVngyxKAjNRT4ePZ1gvlP1soHd3uMHn2jX9h_JTShAGAUED");
 
         if (null != at) {  
             // 调用接口创建菜单  
@@ -52,7 +52,7 @@ public class MenuManager {
     public static Menu getMenu() {
  
         CommonButton btn21 = new CommonButton();
-        btn21.setName("在线贷款");  
+        btn21.setName("在线贷款");
         btn21.setType("click");  
         btn21.setKey("21");  
 
@@ -64,22 +64,21 @@ public class MenuManager {
         CommonButton btn23 = new CommonButton();  
         btn23.setName("进度查询");  
         btn23.setType("view");
-        btn23.setKey("23");
         btn23.setUrl("http://www.baidu.com/");
 
         ComplexButton mainBtn1 = new ComplexButton();
-        mainBtn1.setName("操作说明");
+        mainBtn1.setName("预约观光");
         mainBtn1.setType("click");  
-        mainBtn1.setKey("1+"); 
+        mainBtn1.setKey("1");
 
         ComplexButton mainBtn2 = new ComplexButton();  
-        mainBtn2.setName("我要贷款");  
+        mainBtn2.setName("最新活动");
         mainBtn2.setSub_button(new CommonButton[] { btn21, btn22, btn23});  
   
         ComplexButton mainBtn3 = new ComplexButton();  
-        mainBtn3.setName("微公益");
+        mainBtn3.setName("关于我们");
         mainBtn3.setType("click");  
-        mainBtn3.setKey("3+"); 
+        mainBtn3.setKey("3");
         /** 
          * 每个一级菜单都有二级菜单项 
          * 在某个一级菜单下没有二级菜单的情况，menu该如何定义呢？
