@@ -4,6 +4,8 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import com.cl.wechat.admin.config.AccessTokenThread;
+import com.cl.wechat.base.advanced.model.AccessToken;
 import com.cl.wechat.base.basic.model.*;
 import com.cl.wechat.base.wechatapi.util.WeixinUtil;
 import com.cl.wechat.base.wechatapi.util.XmlMessUtil;
@@ -11,6 +13,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("wechat")
@@ -42,6 +48,8 @@ public class AuthController {
         Map<String,String> requestParam = XmlMessUtil.parseXml(request);
         GetTextMessage getTextMessage = BeanUtil.mapToBean(requestParam, GetTextMessage.class,true);
         if(WeixinUtil.RECRIVE_EVENT.equals(requestParam.get("MsgType"))){
+            SendNewsMessage sendNewsMessage = new SendNewsMessage();
+            BeanUtil.copyProperties(getTextMessage,sendNewsMessage);
             SendNewsMessage sendNewsMessage = new SendNewsMessage();
             sendNewsMessage.setMsgType(WeixinUtil.REQUEST_NEWS);
             sendNewsMessage.setCreateTime(new Date().getTime());
