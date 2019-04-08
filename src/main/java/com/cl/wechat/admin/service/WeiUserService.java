@@ -1,6 +1,6 @@
 package com.cl.wechat.admin.service;
 
-import com.cl.wechat.admin.entity.User;
+import com.cl.wechat.admin.entity.WeiUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author bian
- * @since 2019-03-29
+ * @since 2019-04-03
  */
-public interface IUserService extends IService<User> {
+public interface WeiUserService extends IService<WeiUser> {
 
 }
