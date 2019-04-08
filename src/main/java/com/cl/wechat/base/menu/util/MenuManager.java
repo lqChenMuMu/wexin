@@ -30,20 +30,19 @@ public class MenuManager {
         //String appSecret = "7ff170c67c641cb40b93935480b8b1c8";
         // 调用接口获取access_token  
         //AccessToken at = CommonUtil.getAccessToken(appId, appSecret);
-       // AccessToken at = new AccessToken();
-        //at.setAccesstoken("20_rZYvtONR4GlUb67xDqF7V1jyOUuIz8lrkugBLFlEDs9egwNZFOfmUxOCfqZWGkazcx_kEAWi5FKShMF2NMTr2yngk39zH0v4044s4AKkS1UeVngyxKAjNRT4ePZ1gvlP1soHd3uMHn2jX9h_JTShAGAUED");
-        AccessToken at = AccessTokenThread.access_token;
-        if (null != at) {  
+//        AccessToken at = new AccessToken();
+//        at.setAccesstoken("20_Q5ekgTTuTOPdNftvmWSJwcaC1lqp9FTgd8lKkBwaKtXVz4fU_u3wAs4ei-28SnvudAhCYvvYNEYn9Nr3Vd49ZwfWHZXjx9ycGt4BqkHIOvP5GErL_9Ebc79N5evDnGXBeJ-jKVaOH9SE0jmBWPGhACAKDU");
+       // AccessToken at = AccessTokenThread.access_token;
+//        if (null != at) {
             // 调用接口创建菜单  
-            boolean result = MenuUtil.createMenu(getMenu(), at.getAccesstoken());
-            System.out.println(at.getAccesstoken());
+            boolean result = MenuUtil.createMenu(getMenu(), "20_CTED9IENe4C6IBr8FfPRzZRtzaahm67HHC4gycl88EptprclG1O_17Ut0VaxWS7v1dYGXQtFm87fXPVBJPxtHpNmEepl_kWcOECVkPEIM-eSj8WA78y_oTGb5XXIR4iBcS-ysP9vXBK0UV-_KSAhAAAGOW");
             // 判断菜单创建结果
             if (result)  
                 log.info("菜单创建成功！ok");  
             else  
                 log.info("菜单创建失败，错误码：" + result);  
         }  
-    }  
+//    }
   
     /** 
      * 组装菜单数据 
@@ -54,8 +53,8 @@ public class MenuManager {
  
         CommonButton btn21 = new CommonButton();
         btn21.setName("在线贷款");  
-        btn21.setType("click");  
-        btn21.setKey("21");  
+        btn21.setType("view");
+        btn21.setUrl("http://zzyyf.natapp1.cc/admin");
 
         CommonButton btn22 = new CommonButton();  
         btn22.setName("申请条件");  
@@ -65,13 +64,12 @@ public class MenuManager {
         CommonButton btn23 = new CommonButton();  
         btn23.setName("进度查询");  
         btn23.setType("view");
-        btn23.setKey("23");
         btn23.setUrl("http://www.baidu.com/");
 
         ComplexButton mainBtn1 = new ComplexButton();
-        mainBtn1.setName("操作说明");
-        mainBtn1.setType("click");  
-        mainBtn1.setKey("1+"); 
+        mainBtn1.setName("在线预约");
+        mainBtn1.setType("click");
+        mainBtn1.setKey("1");
 
         ComplexButton mainBtn2 = new ComplexButton();  
         mainBtn2.setName("我要贷款");  

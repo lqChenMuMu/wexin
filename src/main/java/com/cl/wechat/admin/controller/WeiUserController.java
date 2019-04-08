@@ -1,7 +1,6 @@
 package com.cl.wechat.admin.controller;
 
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -12,15 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author bian
- * @since 2019-03-29
+ * @since 2019-04-03
  */
-@Controller
-@RequestMapping("/admin")
-public class UserController {
-
-    @RequestMapping
-    public String index(){
-        return "index";
-    }
+@RestController
+@RequestMapping("/admin/wei-user")
+public class WeiUserController {
 
 }

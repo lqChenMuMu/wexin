@@ -65,7 +65,7 @@ public class WeixinUtil {
     public final static String EVENT_QRCODE_SCAN = "scan";
 	
    
-	// 获取access_token的接口地址（GET） 限200（次/天）  
+	// 获取access_token的接口地址（GET） 限2000（次/天）
 	public final static String GET_ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";   
 	// 开发者可通过OpenID来获取用户基本信息 url 
 	protected final static String GET_PERSONALINF_URL="https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";	

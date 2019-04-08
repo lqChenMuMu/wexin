@@ -2,6 +2,8 @@ package com.cl.wechat.base.advanced.util;
 
 import cn.hutool.json.JSONException;
 import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.cl.wechat.admin.entity.WeiUser;
 import com.cl.wechat.base.advanced.model.PersonalInf;
 import com.cl.wechat.base.wechatapi.util.CommonUtil;
 
@@ -19,18 +21,20 @@ public class GetPersoninf extends CommonUtil {
 	 * 获取用户基本个人信息
 	 * 
 	 * @param accessToken 调用接口凭证
-	 * @param openid 普通用户的标识，对当前公众号唯一 
+	 * @param openId 普通用户的标识，对当前公众号唯一
 	 * @return PersonalInf 基本个人信息
 	 */
-	public static PersonalInf getPersonalInf(String accessToken, String openId){
-		PersonalInf personalInf=null;
+	public static WeiUser getPersonalInf(String accessToken, String openId){
+		WeiUser weiUser=null;
 		String requestUrl = GET_PERSONALINF_URL.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);  
     	// 获取用户信息
 		JSONObject jsonObject = httpRequest(requestUrl, "GET", null);
 	    // 如果请求成功  
 	    if (null != jsonObject) { 
-	        try {  
-	        	personalInf = new PersonalInf();  
+	        try {
+
+				weiUser = JSONUtil.toBean(jsonObject,WeiUser.class);
+				/* personalInf = new PersonalInf();
 	        	// 关注状态(1为关注，0为未关注)，未关注时获取不到其余信息
 	        	personalInf.setSubscribe(jsonObject.getInt("subscribe"));
 	        	// 用户的标识
@@ -50,16 +54,16 @@ public class GetPersoninf extends CommonUtil {
 	        	// 用户头像
 	        	personalInf.setHeadimgurl(jsonObject.getStr("headimgurl"));
 	        	// 关注时间
-	        	personalInf.setSubscribetime(jsonObject.getStr("subscribetime"));
+	        	personalInf.setSubscribetime(jsonObject.getStr("subscribetime"));*/
 	        } catch (Exception e) { 
 	        	// 如果openid没有，说明是假的openid
-	        	if (null==personalInf.getOpenid()||"".equals(personalInf.getOpenid())) {
+	        	if (null==weiUser.getOpenid()||"".equals(weiUser.getOpenid())) {
 	        		log.error("用户:{} 不存在",openId);
 				}else {
-					if (0 == personalInf.getSubscribe()) {
-						log.error("用户:{} 已取消关注",personalInf.getOpenid());
-					}else if (1 == personalInf.getSubscribe()) {
-						log.error("用户:{}已关注",personalInf.getOpenid());
+					if (0 == weiUser.getSubscribe()) {
+						log.error("用户:{} 已取消关注",weiUser.getOpenid());
+					}else if (1 == weiUser.getSubscribe()) {
+						log.error("用户:{}已关注",weiUser.getOpenid());
 					}else {
 						int errorCode=jsonObject.getInt("errcode");
 						String errorMsg=jsonObject.getStr("errmsg");
@@ -69,7 +73,7 @@ public class GetPersoninf extends CommonUtil {
 				}
 	        }  
 	    }
-		return personalInf;  
+		return weiUser;
 	}
 	
 	/**
@@ -100,15 +104,4 @@ public class GetPersoninf extends CommonUtil {
 		return groupId;
 	}
 	
-	public static void main(String[] args) {
-		// 获取接口访问凭证
-		String accessToken=getAccessToken("wx13c0a227486f7e64", "864e16284d38c05c62cddc1be000351e").getAccesstoken();
-		// 获取用户基本信息
-		PersonalInf personalInf=getPersonalInf(accessToken, "odIK5uJFzt2cg1zZTEpTVdx8sJVo");
-		System.out.println(personalInf.getOpenid());
-		
-		/*// 查询用户所在分组
-		int groupid=getPersonGroupId(accessToken, "odIK5uJFzt2cg1zZTEpTVdx8sJVo");
-		System.err.println("组id是："+groupid);*/
-	}
 }

@@ -10,6 +10,7 @@ spring:
   mvc:
     view:
       suffix: .html
+      prefix: /pages/
   resources:
     static-locations: classpath:/static/
 server:
