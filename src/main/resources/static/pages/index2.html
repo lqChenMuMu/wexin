@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html style="overflow: auto; overflow-y:hidden">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    <style type="text/css">
+
+        .header-search {
+            height: 50px;
+            font-size: 20px;
+            line-height: 50px;
+        }
+
+        .header-search img {
+            width: 35px;
+            height: 35px;
+            margin: 0px 10px 0px 5px;
+        }
+
+        /*.header-search input {*/
+            /*border: 1px solid #ccc;*/
+            /*padding: 7px 0px;*/
+            /*border-radius: 3px;*/
+            /*padding-left:5px;*/
+            /*-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);*/
+            /*box-shadow: inset 0 1px 1px rgba(0,0,0,.075);*/
+            /*-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;*/
+            /*-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;*/
+            /*transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s*/
+        /*}*/
+        /*.header-search input:focus{*/
+            /*border-color: #66afe9;*/
+            /*outline: 0;*/
+            /*-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);*/
+            /*box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)*/
+        /*}*/
+
+        .content {
+            margin-top: 60px;
+        }
+
+        .header-tab {
+            float: left;
+        }
+
+        .left {
+            width: 30%;
+            font-size: 20px;
+        }
+
+        .right {
+            width: 70%;
+        }
+    </style>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current">
+        <div class="header-search">
+            <div class="content-block">
+                <div class="list-block">
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">生日</div>
+                                    <div class="item-input">
+                                        <input type="text" placeholder="Your name" id='birthday' />
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="content">-->
+            <!--<div class="card">-->
+                <!--<div class="card-content">-->
+                    <!--<div class="row">-->
+                        <!--<div class="col-25">-->
+                            <!--1-->
+                        <!--</div>-->
+                        <!--<div class="col-50">-->
+                            <!--1-->
+                        <!--</div>-->
+                        <!--<div class="col-25">-->
+                            <!--1-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+<script>
+    $(function() {
+        $(document).on("pageInit", function() {
+            $("#birthday").calendar({
+                value: ['2015-12-05'],
+                onChange: function(p, v, d) {
+                    console.log(p, v, d);
+                }
+            });
+        });
+        $.init();
+    });
+</script>
+</body>
+</html>

@@ -5,16 +5,15 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cl.wechat.admin.entity.WeiUser">
     <result column="id" property="id" />
-        <result column="subscribe" property="subscribe" />
         <result column="openid" property="openid" />
-        <result column="nickname" property="nickname" />
         <result column="sex" property="sex" />
         <result column="city" property="city" />
-        <result column="province" property="province" />
         <result column="country" property="country" />
-        <result column="language" property="language" />
+        <result column="province" property="province" />
         <result column="headimgurl" property="headimgurl" />
-        <result column="subscribetime" property="subscribetime" />
+        <result column="subcribe" property="subcribe" />
+        <result column="language" property="language" />
+        <result column="remark" property="remark" />
     </resultMap>
 
 </mapper>

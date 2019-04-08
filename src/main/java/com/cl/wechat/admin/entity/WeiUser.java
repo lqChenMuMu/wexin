@@ -20,25 +20,23 @@ public class WeiUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer subscribe;
-
     private String openid;
 
-    private String nickname;
-
-    private Integer sex;
+    private String sex;
 
     private String city;
 
-    private String province;
-
     private String country;
 
-    private String language;
+    private String province;
 
     private String headimgurl;
 
-    private String subscribetime;
+    private Integer subcribe;
 
+    private String language;
 
+    private String remark;
+
+    private String nickname;
 }

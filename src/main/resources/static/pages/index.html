@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="overflow: auto; overflow-y:hidden">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,49 +20,54 @@
             border-left: none;
         }
 
-        img{
+        .col-50 p {
+            margin: 8px;
+        }
+
+        img {
             margin-top: 20px;
             height: 50px;
             width: 50px;
         }
 
-        .tab-content{
-            margin-top: 10px;
+        .tab-content {
+            margin-top: 60px;
         }
     </style>
 </head>
 <body>
 <div class="page-group">
-    <div class="page page-current">
-        <div class="buttons-tab">
-            <a href="#tab1" class="tab-link active button">综合服务</a>
-            <a href="#tab2" class="tab-link button">专项咨询</a>
-            <a href="#tab3" class="tab-link button">项目服务</a>
-            <a href="#tab4" class="tab-link button">其他服务</a>
-        </div>
-        <div class="tab-content">
-            <div class="tabs" style="background-color: white; height: 100%">
-                <div id="tab1" class="tab active">
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50">
-                                <img src="../img/1.jpg" />
-                                <p>政策咨询</p>
-                            </div>
-                            <div class="col-50" style="border-right: none">
-                                <img src="../img/2.jpg" />
-                                <p>路径设计</p>
-                            </div>
-                        </div>
-                    </div>
+        <div class="page page-current">
+            <div class="content">
+            <div class="buttons-tab" style="position:fixed; top:0;left:0; width:100%;">
+                <a href="#tab1" class="tab-link active button">综合服务</a>
+                <a href="#tab2" class="tab-link button">专项咨询</a>
+                <a href="#tab3" class="tab-link button">项目服务</a>
+                <a href="#tab4" class="tab-link button">其他服务</a>
+            </div>
+            <div class="tab-content">
+                <div class="tabs" style="background-color: white; height: 100%">
+                    <div id="tab1" class="tab active">
                         <div class="tab-line">
                             <div class="row no-gutter">
                                 <div class="col-50">
-                                    <img src="../img/3.jpg" />
+                                    <img src="../img/1.jpg"/>
+                                    <p>政策咨询</p>
+                                </div>
+                                <div class="col-50" style="border-right: none">
+                                    <img src="../img/2.jpg"/>
+                                    <p>路径设计</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-line">
+                            <div class="row no-gutter">
+                                <div class="col-50">
+                                    <img src="../img/3.jpg"/>
                                     <p>需求对接</p>
                                 </div>
                                 <div class="col-50" style="border-right: none">
-                                    <img src="../img/4.jpg" />
+                                    <img src="../img/4.jpg"/>
                                     <p>项目申报</p>
                                 </div>
                             </div>
@@ -70,194 +75,85 @@
                         <div class="tab-line">
                             <div class="row no-gutter">
                                 <div class="col-50" style="border-bottom: none">
-                                    <img src="../img/5.jpg" />
+                                    <img src="../img/5.jpg"/>
                                     <p>专项培训</p>
                                 </div>
                                 <div class="col-50" style="border-bottom: none;border-right: none">
-                                    <img src="../img/6.jpg" />
+                                    <img src="../img/6.jpg"/>
                                     <p>国防专利申请</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                <div id="tab2" class="tab _scroll" style="height: 500px; position: relative;">
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50">
-                                <img src="../img/1.jpg" />
-                                <p>政策咨询</p>
+
+
+                    <!-- tab2 -->
+                    <!--<div style="height: 200px">-->
+                    <div id="tab2" class="tab">
+                        <div class="content-inner">
+                            <div class="tab-line">
+                                <div class="row no-gutter">
+                                    <div class="col-50">
+                                        <img src="../img/1.jpg"/>
+                                        <p>政策咨询</p>
+                                    </div>
+                                    <div class="col-50" style="border-right: none">
+                                        <img src="../img/2.jpg"/>
+                                        <p>路径设计</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-50" style="border-right: none">
-                                <img src="../img/2.jpg" />
-                                <p>路径设计</p>
+                            <div class="tab-line">
+                                <div class="row no-gutter">
+                                    <div class="col-50">
+                                        <img src="../img/3.jpg"/>
+                                        <p>需求对接</p>
+                                    </div>
+                                    <div class="col-50" style="border-right: none">
+                                        <img src="../img/4.jpg"/>
+                                        <p>项目申报</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50">
-                                <img src="../img/3.jpg" />
-                                <p>需求对接</p>
+                            <div class="tab-line">
+                                <div class="row no-gutter">
+                                    <div class="col-50">
+                                        <img src="../img/5.jpg"/>
+                                        <p>专项培训</p>
+                                    </div>
+                                    <div class="col-50" style="border-right: none">
+                                        <img src="../img/6.jpg"/>
+                                        <p>国防专利申请</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-50" style="border-right: none">
-                                <img src="../img/4.jpg" />
-                                <p>项目申报</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50">
-                                <img src="../img/5.jpg" />
-                                <p>专项培训</p>
-                            </div>
-                            <div class="col-50" style="border-right: none">
-                                <img src="../img/6.jpg" />
-                                <p>国防专利申请</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50" style="border-bottom: none">
-                                <img src="../img/5.jpg" />
-                                <p>专项培训</p>
-                            </div>
-                            <div class="col-50" style="border-bottom: none;border-right: none">
-                                <img src="../img/6.jpg" />
-                                <p>国防专利申请</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50" style="border-bottom: none">
-                                <img src="../img/5.jpg" />
-                                <p>专项培训</p>
-                            </div>
-                            <div class="col-50" style="border-bottom: none;border-right: none">
-                                <img src="../img/6.jpg" />
-                                <p>国防专利申请</p>
+                            <div class="tab-line">
+                                <div class="row no-gutter">
+                                    <div class="col-50" style="border-bottom: none">
+                                        <img src="../img/5.jpg"/>
+                                        <p>专项培训</p>
+                                    </div>
+                                    <div class="col-50" style="border-bottom: none;border-right: none">
+                                        <img src="../img/6.jpg"/>
+                                        <p>国防专利申请</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50" style="border-bottom: none">
-                                <img src="../img/5.jpg" />
-                                <p>专项培训</p>
-                            </div>
-                            <div class="col-50" style="border-bottom: none;border-right: none">
-                                <img src="../img/6.jpg" />
-                                <p>国防专利申请</p>
-                            </div>
+                    <!--</div>-->
+
+                    <!-- tab3 -->
+                    <div id="tab3" class="tab">
+                        <div class="content-block">
+                            <p style="height: 900px;">This is tab 3 content</p>
+                            <p>12314</p>
                         </div>
                     </div>
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50" style="border-bottom: none">
-                                <img src="../img/5.jpg" />
-                                <p>专项培训</p>
-                            </div>
-                            <div class="col-50" style="border-bottom: none;border-right: none">
-                                <img src="../img/6.jpg" />
-                                <p>国防专利申请</p>
-                            </div>
+                    <div id="tab4" class="tab">
+                        <div class="content-block">
+                            <p>This is tab 3 content</p>
                         </div>
-                    </div>
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50" style="border-bottom: none">
-                                <img src="../img/5.jpg" />
-                                <p>专项培训</p>
-                            </div>
-                            <div class="col-50" style="border-bottom: none;border-right: none">
-                                <img src="../img/6.jpg" />
-                                <p>国防专利申请</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50" style="border-bottom: none">
-                                <img src="../img/5.jpg" />
-                                <p>专项培训</p>
-                            </div>
-                            <div class="col-50" style="border-bottom: none;border-right: none">
-                                <img src="../img/6.jpg" />
-                                <p>国防专利申请</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50" style="border-bottom: none">
-                                <img src="../img/5.jpg" />
-                                <p>专项培训</p>
-                            </div>
-                            <div class="col-50" style="border-bottom: none;border-right: none">
-                                <img src="../img/6.jpg" />
-                                <p>国防专利申请</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50" style="border-bottom: none">
-                                <img src="../img/5.jpg" />
-                                <p>专项培训</p>
-                            </div>
-                            <div class="col-50" style="border-bottom: none;border-right: none">
-                                <img src="../img/6.jpg" />
-                                <p>国防专利申请</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50" style="border-bottom: none">
-                                <img src="../img/5.jpg" />
-                                <p>专项培训</p>
-                            </div>
-                            <div class="col-50" style="border-bottom: none;border-right: none">
-                                <img src="../img/6.jpg" />
-                                <p>国防专利申请</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50" style="border-bottom: none">
-                                <img src="../img/5.jpg" />
-                                <p>专项培训</p>
-                            </div>
-                            <div class="col-50" style="border-bottom: none;border-right: none">
-                                <img src="../img/6.jpg" />
-                                <p>国防专利申请</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-line">
-                        <div class="row no-gutter">
-                            <div class="col-50" style="border-bottom: none">
-                                <img src="../img/5.jpg" />
-                                <p>专项培训</p>
-                            </div>
-                            <div class="col-50" style="border-bottom: none;border-right: none">
-                                <img src="../img/6.jpg" />
-                                <p>国防专利申请</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="tab3" class="tab">
-                    <div class="content-block">
-                        <p>This is tab 3 content</p>
-                    </div>
-                </div>
-                <div id="tab4" class="tab">
-                    <div class="content-block">
-                        <p>This is tab 3 content</p>
                     </div>
                 </div>
             </div>
@@ -270,9 +166,7 @@
 <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
 <script src="../js/jquery-2.1.1.min.js"></script>
-<script src="../js/yi-scroll.js"></script>
 <script>
-    $("._scroll").yi_scroll();
 </script>
 </body>
 </html>

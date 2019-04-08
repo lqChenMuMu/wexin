@@ -8,79 +8,39 @@ import com.cl.wechat.base.advanced.model.PersonalInf;
 import com.cl.wechat.base.wechatapi.util.CommonUtil;
 
 /**
-*   
-* 项目名称：wechatapi  
-* 类名称：GetPersoninf  
-* 类描述：获取用户基本个人信息方法  
-* 创建人：WQ  
-* 创建时间：2014-3-7 下午1:43:39  
-* @version       
+*
+* 项目名称：wechatapi
+* 类名称：GetPersoninf
+* 类描述：获取用户基本个人信息方法
+* 创建人：WQ
+* 创建时间：2014-3-7 下午1:43:39
+* @version
 */
 public class GetPersoninf extends CommonUtil {
 	/**
 	 * 获取用户基本个人信息
-	 * 
+	 *
 	 * @param accessToken 调用接口凭证
 	 * @param openId 普通用户的标识，对当前公众号唯一
 	 * @return PersonalInf 基本个人信息
 	 */
 	public static WeiUser getPersonalInf(String accessToken, String openId){
 		WeiUser weiUser=null;
-		String requestUrl = GET_PERSONALINF_URL.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);  
+		String requestUrl = GET_PERSONALINF_URL.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);
     	// 获取用户信息
 		JSONObject jsonObject = httpRequest(requestUrl, "GET", null);
-	    // 如果请求成功  
-	    if (null != jsonObject) { 
-	        try {
-
+	    // 如果请求成功
+	    if (null != jsonObject) {
 				weiUser = JSONUtil.toBean(jsonObject,WeiUser.class);
-				/* personalInf = new PersonalInf();
-	        	// 关注状态(1为关注，0为未关注)，未关注时获取不到其余信息
-	        	personalInf.setSubscribe(jsonObject.getInt("subscribe"));
-	        	// 用户的标识
-	        	personalInf.setOpenid(jsonObject.getStr("openid"));
-	        	// 昵称
-	        	personalInf.setNickname(jsonObject.getStr("nickname"));
-	        	// 用户性别
-	        	personalInf.setSex(jsonObject.getInt("sex"));
-	        	// 用户的语言，简体中文为zh_CN
-	        	personalInf.setLanguage(jsonObject.getStr("language"));
-	        	// 用户城市
-	        	personalInf.setCity(jsonObject.getStr("city"));
-	        	// 用户省份
-	        	personalInf.setProvince(jsonObject.getStr("province"));
-	        	// 用户国家
-	        	personalInf.setCountry(jsonObject.getStr("country"));
-	        	// 用户头像
-	        	personalInf.setHeadimgurl(jsonObject.getStr("headimgurl"));
-	        	// 关注时间
-	        	personalInf.setSubscribetime(jsonObject.getStr("subscribetime"));*/
-	        } catch (Exception e) { 
-	        	// 如果openid没有，说明是假的openid
-	        	if (null==weiUser.getOpenid()||"".equals(weiUser.getOpenid())) {
-	        		log.error("用户:{} 不存在",openId);
-				}else {
-					if (0 == weiUser.getSubscribe()) {
-						log.error("用户:{} 已取消关注",weiUser.getOpenid());
-					}else if (1 == weiUser.getSubscribe()) {
-						log.error("用户:{}已关注",weiUser.getOpenid());
-					}else {
-						int errorCode=jsonObject.getInt("errcode");
-						String errorMsg=jsonObject.getStr("errmsg");
-			            // 获取token失败  
-			            log.error("获取基本个人信息失败 errcode:{} errmsg:{} ", errorCode, errorMsg);  
-					}
-				}
-	        }  
 	    }
 		return weiUser;
 	}
-	
+
 	/**
-	 * 查询用户所在分组 
-	 * 
+	 * 查询用户所在分组
+	 *
 	 * @param accessToken 调用接口凭证
-	 * @param openId 普通用户的标识，对当前公众号唯一 
+	 * @param openId 普通用户的标识，对当前公众号唯一
 	 * @return groupid
 	 */
 	public static int getPersonGroupId(String accessToken,String openId) {
@@ -89,7 +49,7 @@ public class GetPersoninf extends CommonUtil {
 		// 需要提交的json数据
 		String jsonData="{\"openid\":\"%s\"}";
 		// 创建分组
-		JSONObject jsonObject=httpRequest(requestUrl, "POST", 
+		JSONObject jsonObject=httpRequest(requestUrl, "POST",
 				String.format(jsonData, openId));
 		if (null!=jsonObject) {
 			try {
@@ -103,5 +63,5 @@ public class GetPersoninf extends CommonUtil {
 		}
 		return groupId;
 	}
-	
+
 }
