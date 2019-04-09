@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="overflow: auto; overflow-y:hidden">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,40 +25,34 @@
             margin: 0px 10px 0px 5px;
         }
 
-        /*.header-search input {*/
-            /*border: 1px solid #ccc;*/
-            /*padding: 7px 0px;*/
-            /*border-radius: 3px;*/
-            /*padding-left:5px;*/
-            /*-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);*/
-            /*box-shadow: inset 0 1px 1px rgba(0,0,0,.075);*/
-            /*-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;*/
-            /*-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;*/
-            /*transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s*/
-        /*}*/
-        /*.header-search input:focus{*/
-            /*border-color: #66afe9;*/
-            /*outline: 0;*/
-            /*-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);*/
-            /*box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)*/
-        /*}*/
-
         .content {
-            margin-top: 60px;
+            margin-top: 80px;
         }
 
-        .header-tab {
-            float: left;
+        .list-block {
+            margin: 0;
+            padding: 0;
         }
 
-        .left {
-            width: 30%;
-            font-size: 20px;
+        .content-block {
+            padding: 0;
+            margin: 0;
         }
 
-        .right {
-            width: 70%;
+        .card {
+            margin: 10px 0px 0px 0px;
         }
+
+        .photo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+        }
+
+        .personnelInfo {
+            margin-top: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -71,9 +65,9 @@
                         <li>
                             <div class="item-content">
                                 <div class="item-inner">
-                                    <div class="item-title label">生日</div>
+                                    <div class="item-title label">预约时间</div>
                                     <div class="item-input">
-                                        <input type="text" placeholder="Your name" id='birthday' />
+                                        <input type="text" placeholder="请选择时间" id='birthday'/>
                                     </div>
                                 </div>
                             </div>
@@ -83,23 +77,70 @@
             </div>
         </div>
 
-        <!--<div class="content">-->
-            <!--<div class="card">-->
-                <!--<div class="card-content">-->
-                    <!--<div class="row">-->
-                        <!--<div class="col-25">-->
-                            <!--1-->
-                        <!--</div>-->
-                        <!--<div class="col-50">-->
-                            <!--1-->
-                        <!--</div>-->
-                        <!--<div class="col-25">-->
-                            <!--1-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="content">
+            <div class="card">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col-25">
+                            <div class="photo"><img src="../img/photo.jpg"/></div>
+                        </div>
+                        <div class="col-50">
+                            <div class="personnelInfo">
+                                <span>刘甘雨</span>&nbsp;&nbsp;&nbsp;<span style="color: #FFD700">金牌解说</span></br></br>
+                                <span style="font-size: 15px;">擅长:全职业精通</span>
+                            </div>
+                        </div>
+                        <div class="col-25">
+                            <p style="margin-top: 45px; margin-bottom: 0px; width: 70px"><a href="#"
+                                                                                            class="button button-fill">预约</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col-25">
+                            <div class="photo"><img src="../img/photo.jpg"/></div>
+                        </div>
+                        <div class="col-50">
+                            <div class="personnelInfo">
+                                <span>刘甘雨</span>&nbsp;&nbsp;&nbsp;<span style="color: #FFD700">金牌解说</span></br></br>
+                                <span style="font-size: 15px;">擅长:全职业精通</span>
+                            </div>
+                        </div>
+                        <div class="col-25">
+                            <p style="margin-top: 45px; margin-bottom: 0px; width: 70px"><a href="#"
+                                                                                            class="button button-fill">预约</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col-25">
+                            <div class="photo"><img src="../img/photo.jpg"/></div>
+                        </div>
+                        <div class="col-50">
+                            <div class="personnelInfo">
+                                <span>刘甘雨</span>&nbsp;&nbsp;&nbsp;<span style="color: #FFD700">金牌解说</span></br></br>
+                                <span style="font-size: 15px;">擅长:全职业精通</span>
+                            </div>
+                        </div>
+                        <div class="col-25">
+                            <p style="margin-top: 45px; margin-bottom: 0px; width: 70px"><a href="#"
+                                                                                            class="button button-fill">预约</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -107,17 +148,40 @@
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
 <script>
-    $(function() {
-        $(document).on("pageInit", function() {
+    $(function () {
+        $(document).on("pageInit", function () {
+            let currentDate = getNowFormatDate();
+            let endTime = getNowFormatDate(true);
             $("#birthday").calendar({
-                value: ['2015-12-05'],
-                onChange: function(p, v, d) {
+                value: [currentDate],
+                minDate: [currentDate],
+                maxDate: [endTime],
+                onChange: function (p, v, d) {
                     console.log(p, v, d);
                 }
             });
         });
         $.init();
     });
+
+    //获取当前时间
+    function getNowFormatDate(endTime) {
+        var date = new Date();
+        if (endTime) {
+            date.setDate(date.getDate() + 7);
+        }
+        var seperator1 = "-";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+        return currentdate;
+    }
 </script>
 </body>
 </html>

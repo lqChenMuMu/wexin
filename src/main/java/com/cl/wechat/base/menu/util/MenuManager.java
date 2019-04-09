@@ -58,8 +58,8 @@ public class MenuManager {
 
         CommonButton btn22 = new CommonButton();  
         btn22.setName("申请条件");  
-        btn22.setType("click");  
-        btn22.setKey("22");  
+        btn22.setType("click");
+        btn22.setKey("22");
   
         CommonButton btn23 = new CommonButton();  
         btn23.setName("进度查询");  

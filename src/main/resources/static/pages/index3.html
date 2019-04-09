@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/global.css" />
+    <style type="text/css">
+        .personnelDetails {
+            background-color: white;
+        }
+
+        .photoDiv img {
+            width: 130px;
+            height: 150px;
+            margin: 30px 30px 10px 30px;
+            -webkit-box-shadow: 0px 5px 5px #c8c8c8;
+            -moz-box-shadow: 0px 5px 5px #c8c8c8;
+            box-shadow: 0px 5px 5px #c8c8c8;
+
+        }
+
+        .textInfo {
+            padding: 30px 30px 30px 30px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current">
+        <div class="content">
+            <div class="personnelDetails">
+                <div class="row">
+                    <div class="col-40 photoDiv">
+                        <img src="../img/photo.jpg"/>
+                    </div>
+                    <div class="col-60 textInfo">
+                        <div><span style="font-size: 18px">张温蕾</span>&nbsp;&nbsp;<span
+                                style="font-size: 15px; color: gold">金牌讲师呼吸部</span></div>
+                        <div><span style="font-size: 10px;">深圳市薄荷公司(天子西河公司)</span></div>
+                        <div><span style="font-size: 10px;">联系方式:1378786565</span></div>
+                        <div><span style="font-size: 10px;">负责专业:</span><span style="font-size: 10px;">交际治疗</span></div>
+                        <p style="width: 80px; height: 20px; margin-top: 10px"><a href="#" class="button button-fill">点击预约</a></p>
+                    </div>
+                </div>
+                <div style="font-size: 20px; color: cornflowerblue; margin-left: 50px;">122</div>
+                <div class="row" style="height: 50px">
+                    <div class="col-30" style="margin-left: 50px;">
+                        <div>预约次数</div>
+                    </div>
+                    <div class="col-70" style="margin-left: 70px">
+                        <div id="star">评分星级:</div>
+                    </div>
+                </div>
+            </div>
+
+            <!--    -->
+            <div class="fill_date_item" id="doc-select-1">
+                <input type="text" placeholder="请选择开始时间" id="fill_infomation_date_start1" readonly="">
+            </div>
+            <p></p>
+
+            <div class="mask-time" style="display:none"></div>
+            <div class="time-area" style="display:none">
+                <input type="hidden" name="date_" value="">
+                <input type="hidden" name="time_">
+                <div class="box-date">
+                    <ul class="promptu-menu2 font13"></ul>
+                </div>
+                <div class="time-choose-table font13 txt-gray" id="time-choose-table"></div>
+                <input type="button" value="确定选择" class="am-btn btn-default am-btn-green mt-line btn-choose-time"
+                       style='width:94.668%;margin-top:0px'>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+<script src="../js/jquery-2.1.1.min.js"></script>
+<script src="../js/jquery.raty.min.js"></script>
+<script src="../js/jquery.promptu-menu.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $('#star').raty({readOnly: true, score: 3, width: 200});
+
+
+    $(function () {
+
+        var nowDateArray = getNowFormatDate().split(' ');
+        var date_ = nowDateArray[0];
+        var DisAppointment = ['2019-04-10 am','2019-04-11 pm'];
+        t(date_, 'hour', 1, DisAppointment);
+        $('.mask-time').height($(window).height());
+
+        $('#doc-select-1').click(function () {
+            $('.mask-time,.time-area').show();
+        });
+        if ($('#fill_infomation_date_start1').val() == "请选择开始时间") {
+            $('#fill_infomation_date_start1').css('color', '#afb2b2')
+        } else {
+            $('#fill_infomation_date_start1').css('color', '#333')
+        }
+        $('.btn-choose-time').click(function () {
+            $('#fill_infomation_date_start1').css('color', '#333')
+            if (!$('input[name=time_]').val()) {
+                return alert('请选择服务时间');
+            }
+            var textTime = $('input[name=time_]').val().split(':');
+            $('#fill_infomation_date_start1').val($('input[name=date_]').val() + ' ' + textTime[0] + ':' + textTime[1]);
+            $('input[name=start_time]').val($('input[name=date_]').val() + ' ' + textTime[0] + ':' + textTime[1] + ':00');
+            $('.mask-time,.time-area').css("display", "none");
+            $('#doc-select-1').attr('value', 2);
+        });
+    });
+</script>
+</body>
+</html>
