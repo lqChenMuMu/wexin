@@ -11,24 +11,57 @@
 
     <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
     <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/global.css" />
+    <link rel="stylesheet" type="text/css" href="../css/global.css"/>
     <style type="text/css">
+        /*.content {*/
+        /*background-color: white;*/
+        /*}*/
+
         .personnelDetails {
             background-color: white;
+            /*-webkit-box-shadow: 0px 3px 3px #c8c8c8;
+            -moz-box-shadow: 0px 3px 3px #c8c8c8;
+            box-shadow: 0px 3px 3px #c8c8c8;*/
         }
 
         .photoDiv img {
             width: 130px;
             height: 150px;
             margin: 30px 30px 10px 30px;
-            -webkit-box-shadow: 0px 5px 5px #c8c8c8;
+            /*-webkit-box-shadow: 0px 5px 5px #c8c8c8;
             -moz-box-shadow: 0px 5px 5px #c8c8c8;
-            box-shadow: 0px 5px 5px #c8c8c8;
-
+            box-shadow: 0px 5px 5px #c8c8c8;*/
         }
 
         .textInfo {
             padding: 30px 30px 30px 30px;
+        }
+
+        .notice {
+            color: white;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .section2 {
+            margin-top: 10px;
+            background-color: white;
+            padding-bottom: 10px;
+            /*-webkit-box-shadow: 0px 3px 3px #c8c8c8;
+            -moz-box-shadow: 0px 3px 3px #c8c8c8;
+            box-shadow: 0px 3px 3px #c8c8c8;*/
+        }
+
+        .section-child {
+            margin: 10px;
+        }
+
+        .section3 {
+            margin-top: 10px;
+            background-color: white;
+           /* -webkit-box-shadow: 0px 3px 3px #c8c8c8;
+            -moz-box-shadow: 0px 3px 3px #c8c8c8;
+            box-shadow: 0px 3px 3px #c8c8c8;*/
         }
     </style>
 
@@ -36,6 +69,9 @@
 <body>
 <div class="page-group">
     <div class="page page-current">
+        <header class="bar bar-nav" style="background: #0066cc; height: 50px">
+            <h1 class="title" style="line-height: 50px; color: white; font-size: 16px">服务预约</h1>
+        </header>
         <div class="content">
             <div class="personnelDetails">
                 <div class="row">
@@ -44,11 +80,15 @@
                     </div>
                     <div class="col-60 textInfo">
                         <div><span style="font-size: 18px">张温蕾</span>&nbsp;&nbsp;<span
-                                style="font-size: 15px; color: gold">金牌讲师呼吸部</span></div>
+                                style="font-size: 15px; color: gold">金牌讲师</span></div>
                         <div><span style="font-size: 10px;">深圳市薄荷公司(天子西河公司)</span></div>
                         <div><span style="font-size: 10px;">联系方式:1378786565</span></div>
                         <div><span style="font-size: 10px;">负责专业:</span><span style="font-size: 10px;">交际治疗</span></div>
-                        <p style="width: 80px; height: 20px; margin-top: 10px"><a href="#" class="button button-fill">点击预约</a></p>
+                        <p style="margin-top: 10px">
+                            <a href="#" class="button button-fill" id="select-btn"
+                               style="border-radius: 0px;width: 120px; height: 30px;line-height: 30px;
+                                margin-top: 40px; margin-left: 35px">点击预约</a>
+                        </p>
                     </div>
                 </div>
                 <div style="font-size: 20px; color: cornflowerblue; margin-left: 50px;">122</div>
@@ -62,10 +102,29 @@
                 </div>
             </div>
 
-            <!--    -->
-            <div class="fill_date_item" id="doc-select-1">
-                <input type="text" placeholder="请选择开始时间" id="fill_infomation_date_start1" readonly="">
+            <div class="section2">
+                <div class="section-child">
+                    <p style="font-size: 18px; padding-top: 5px">服务须知</p>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-50 notice" style="background: #42b7e8; ">服务前一天，请提前准备好省份证等相关文件</div>
+                        <div class="col-50 notice" style="background: #0066cc; ">服务前一天，请提前准备好省份证等相关文件</div>
+                    </div>
+                </div>
             </div>
+
+            <div class="section3">
+                <div class="section-child">
+                    <p style="font-size: 18px; padding-top: 5px">解说详情</p>
+                    <div style="padding: 10px">
+                        <span style="color: #bababa; line-height: 5px">其成员的来源较为复杂，有专职的电视媒体解说，如游戏风云频道的BBC、单车、820，GTV游戏经济频道的DC、miss等，也有像DZ、海涛这样的有工作的视频解说，更还有像阿川、小满、冷冷这样的大学学生视频解说。对于形象没有要求，但是对于解说质量要求很高</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <div class="fill_date_item" id="doc-select-1">
+                 <input type="text" placeholder="请选择开始时间" id="fill_infomation_date_start1" readonly="">
+             </div>-->
             <p></p>
 
             <div class="mask-time" style="display:none"></div>
@@ -76,7 +135,8 @@
                     <ul class="promptu-menu2 font13"></ul>
                 </div>
                 <div class="time-choose-table font13 txt-gray" id="time-choose-table"></div>
-                <input type="button" value="确定选择" class="am-btn btn-default am-btn-green mt-line btn-choose-time"
+                <input type="button" value="确定选择"
+                       class="am-btn btn-default am-btn-green mt-line btn-choose-time"
                        style='width:94.668%;margin-top:0px'>
             </div>
         </div>
@@ -90,18 +150,18 @@
 <script src="../js/jquery.raty.min.js"></script>
 <script src="../js/jquery.promptu-menu.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    $('#star').raty({readOnly: true, score: 3, width: 200});
+    $('#star').raty({readOnly: true, score: 3, width: 180});
 
 
     $(function () {
 
         var nowDateArray = getNowFormatDate().split(' ');
         var date_ = nowDateArray[0];
-        var DisAppointment = ['2019-04-10 am','2019-04-11 pm'];
+        var DisAppointment = ['2019-04-10 am', '2019-04-11 pm'];
         t(date_, 'hour', 1, DisAppointment);
         $('.mask-time').height($(window).height());
 
-        $('#doc-select-1').click(function () {
+        $('#select-btn').click(function () {
             $('.mask-time,.time-area').show();
         });
         if ($('#fill_infomation_date_start1').val() == "请选择开始时间") {
@@ -115,10 +175,11 @@
                 return alert('请选择服务时间');
             }
             var textTime = $('input[name=time_]').val().split(':');
-            $('#fill_infomation_date_start1').val($('input[name=date_]').val() + ' ' + textTime[0] + ':' + textTime[1]);
+            $('#fill_infomation_date_start1').val($('input[name=date_]').val() + ' ' + textTime[0]);
             $('input[name=start_time]').val($('input[name=date_]').val() + ' ' + textTime[0] + ':' + textTime[1] + ':00');
             $('.mask-time,.time-area').css("display", "none");
             $('#doc-select-1').attr('value', 2);
+            window.location.href="index4.html";
         });
     });
 </script>
