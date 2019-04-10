@@ -153,17 +153,63 @@
                                         <img src="../img/5.jpg"/>
                                         <p>知识产权转移转让</p>
                                     </div>
-                                    <div class="col-50" style="border-bottom: none;border-right: none">
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
                     <div id="tab4" class="tab">
                         <div class="content-block">
-                            <p>This is tab 3 content</p>
+                            <div class="content-inner">
+                                <div class="tab-line">
+                                    <div class="row no-gutter">
+                                        <div class="col-50">
+                                            <img src="../img/1.jpg"/>
+                                            <p>孵化中心</p>
+                                        </div>
+                                        <div class="col-50" style="border-right: none">
+                                            <img src="../img/2.jpg"/>
+                                            <p>信息平台</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-line">
+                                    <div class="row no-gutter">
+                                        <div class="col-50">
+                                            <img src="../img/3.jpg"/>
+                                            <p>金融服务</p>
+                                        </div>
+                                        <div class="col-50" style="border-right: none">
+                                            <img src="../img/4.jpg"/>
+                                            <p>军民融合展示中心</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-line">
+                                    <div class="row no-gutter">
+                                        <div class="col-50">
+                                            <img src="../img/5.jpg"/>
+                                            <p>合作机构介绍</p>
+                                        </div>
+                                        <div class="col-50" style="border-right: none">
+                                            <img src="../img/6.jpg"/>
+                                            <p>快响小组</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-line">
+                                    <div class="row no-gutter">
+                                        <div class="col-50">
+                                            <img src="../img/5.jpg"/>
+                                            <p>检验检测中心</p>
+                                        </div>
+                                        <div class="col-50" style="border-right: none">
+                                            <img src="../img/6.jpg"/>
+                                            <p>军代表联络室</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -177,12 +223,14 @@
 <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
 <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
 <script>
-    let classNames = document.getElementsByClassName("col-50");
+    var classNames = document.getElementsByClassName("col-50");
     console.log(classNames)
-    for (let i=0; i<classNames.length; i++){
-        classNames[i].onclick=function () {
-            window.location.href="pages/index2.html?className=" + classNames[i].innerText;
-        }
+    for (var i=0; i<classNames.length; i++){
+        classNames[i].onclick=(function (num) {
+            return function () {
+                window.location.href="pages/index2.html?className=" + classNames[num].innerText;
+            }
+        })(i)
     }
 </script>
 </body>

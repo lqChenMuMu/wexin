@@ -157,8 +157,9 @@
 
         var nowDateArray = getNowFormatDate().split(' ');
         var date_ = nowDateArray[0];
-        var DisAppointment = ['2019-04-10 am', '2019-04-11 pm'];
-        t(date_, 'hour', 1, DisAppointment);
+        var disAppointment = ['2019-04-10 am', '2019-04-11 pm'];
+        var appointmentDown = ['2019-04-11 am', '2019-04-12 pm'];
+        t(date_, 'hour', 1, disAppointment,appointmentDown);
         $('.mask-time').height($(window).height());
 
         $('#select-btn').click(function () {

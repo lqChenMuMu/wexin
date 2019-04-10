@@ -3,8 +3,6 @@ package com.cl.wechat.admin.controller;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.cl.wechat.admin.config.AccessTokenThread;
-import com.cl.wechat.admin.entity.WeiUser;
-import com.cl.wechat.admin.service.WeiUserService;
 import com.cl.wechat.base.advanced.util.GetPersoninf;
 import com.cl.wechat.base.basic.model.*;
 import com.cl.wechat.base.wechatapi.util.WeixinUtil;
@@ -19,8 +17,6 @@ import java.util.*;
 @RequestMapping("wechat")
 public class AuthController {
 
-    @Autowired
-    private WeiUserService weiUserService;
 
     private static final String tooken = "biantouwa"; //开发者自行定义Tooken
     private static final String appId = "wx04e95443a3ac67e3";
@@ -49,8 +45,8 @@ public class AuthController {
         GetTextMessage getTextMessage = BeanUtil.mapToBean(requestParam, GetTextMessage.class,true);
         if(WeixinUtil.RECRIVE_EVENT.equals(requestParam.get("MsgType"))){
             if(WeixinUtil.EVENT_SUBSCRIBE.equals(requestParam.get("Event"))){
-                WeiUser weiUser = GetPersoninf.getPersonalInf(AccessTokenThread.access_token.getAccesstoken(),getTextMessage.getFromUserName());
-                weiUserService.save(weiUser);
+               /* WeiUser weiUser = GetPersoninf.getPersonalInf(AccessTokenThread.access_token.getAccesstoken(),getTextMessage.getFromUserName());
+                weiUserService.save(weiUser);*/
                 SendTextMessage sendTextMessage = new SendTextMessage();
                 sendTextMessage.setFromUserName(getTextMessage.getToUserName());
                 sendTextMessage.setToUserName(getTextMessage.getFromUserName());

@@ -24,10 +24,5 @@ public class UserController {
         return "index";
     }
 
- /*   @RequestMapping("/index2")
-    public String index2(){
-        System.out.println("11111");
-        return "index2";
-    }*/
 
 }

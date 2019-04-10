@@ -1,6 +1,6 @@
 package com.cl.wechat.admin.mapper;
 
-import com.cl.wechat.admin.entity.WeiUser;
+import com.cl.wechat.admin.entity.PersonnelClass;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author bian
- * @since 2019-04-03
+ * @since 2019-04-10
  */
-public interface WeiUserMapper extends BaseMapper<WeiUser> {
+public interface PersonnelClassMapper extends BaseMapper<PersonnelClass> {
 
 }

@@ -534,10 +534,10 @@ jQuery.extend(jQuery.easing, {
 
 
 //date_:日期   "type:halfHour显示为半小时， 其他为整小时显示，默认是半小时显示 length_：可预约多长时间以内，月为单位,默认为3个月
-function t(date_, type, length_, disAppointment) {
+function t(date_, type, length_, disAppointment, appointmentDown) {
 
     $('input[name=date_]').val(date_);
-    setTimeHtml(date_, type, disAppointment);
+    setTimeHtml(date_, type, disAppointment, appointmentDown);
     setDateHtml(length_);
     var w = $(window).width();
     $('ul.promptu-menu2').promptumenu({
@@ -552,7 +552,7 @@ function t(date_, type, length_, disAppointment) {
     $('.date_').click(function () {
         $('.date_').removeClass('active');
         $(this).addClass('active');
-        setTimeHtml($(this).attr('val'), type, disAppointment);
+        setTimeHtml($(this).attr('val'), type, disAppointment, appointmentDown);
         $('input[name=date_]').val($(this).attr('val'));
         $('input[name=time_]').val('');
     });
@@ -622,7 +622,7 @@ function setDateHtml(l) {
     $('.promptu-menu2').html(DateHtml);
 }
 
-function setTimeHtml(date_, type, disAppointment) {
+function setTimeHtml(date_, type, disAppointment, appoinmentDown) {
     var nowDate = getNowFormatDate().split(' ');
     var nowTime = nowDate[1].split(':');
     var halfHourArray = gethalfHourArray(type);
@@ -671,11 +671,30 @@ function setTimeHtml(date_, type, disAppointment) {
                 }else if (date_ == disableDate[0] && disableDate[1] == "pm" && halfHourArray[i]=="下午"){
                     flag = true;
                     break;
-                }else{
+                } else{
                     flag = false;
                 }
             }
+
+            var disFlag = false;
+            for (var k=0; k<appoinmentDown.length; k++){
+                var down = appoinmentDown[k].split(' ');
+                if (date_ == down[0] && down[1] == "am" && halfHourArray[i]=="上午"){
+                    disFlag = true;
+                    break;
+                }else if (date_ == down[0] && down[1] == "pm" && halfHourArray[i]=="下午"){
+                    disFlag = true;
+                    break;
+                } else{
+                    disFlag = false;
+                }
+            }
+
             if (flag){
+                returnHtml += '<div class="time-table disabled" style="line-height:50px;padding-top:0">' +
+                    '<div>' + halfHourArray[i] + '</div>' +
+                    '</div>';
+            }else if (disFlag){
                 returnHtml += '<div class="time-table disabled">' +
                     '<div>' + halfHourArray[i] + '<span class="font11">约满</span></div>' +
                     '</div>';

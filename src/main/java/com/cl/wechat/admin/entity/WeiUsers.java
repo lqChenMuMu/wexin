@@ -11,32 +11,36 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author bian
- * @since 2019-04-03
+ * @since 2019-04-10
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class WeiUser implements Serializable {
+public class WeiUsers implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private Integer id;
+
+    private Integer subscribe;
+
     private String openid;
 
-    private String sex;
+    private String nickname;
+
+    private Integer sex;
 
     private String city;
 
-    private String country;
-
     private String province;
 
-    private String headimgurl;
-
-    private Integer subcribe;
+    private String country;
 
     private String language;
 
-    private String remark;
+    private String headimgurl;
 
-    private String nickname;
+    private String subscribetime;
+
+
 }
