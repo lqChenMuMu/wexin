@@ -105,7 +105,7 @@ a:hover{
 .menu-right{background:#fff; position:inherit; margin-left:8.6rem; margin-top: 0.5rem; right:0; bottom:0; left: 8.6rem}
 .menu-right h5{font-size:1.3rem; color:#666; margin-top:1rem; margin-bottom:.4rem;}
 .menu-right h5:first-child{margin-top:0;}
-.menu-right ul{overflow: hidden;}
+.menu-right ul{overflow: hidden; margin-bottom: 40px}
 .menu-right ul li{text-align: center;}
 .menu-right ul li a{display:block; position: absolute; left:.3rem; top:.7rem; bottom:.7rem; right:.3rem;}
 .menu-right ul li:nth-child(3n+1) a{left:0; right:.7rem;}
@@ -140,6 +140,7 @@ a:hover{
 	border-color: #2e6da4;
 	line-height: 40px;
 	font-size: 16px;
+	z-index: 999;
 }
 
 button{

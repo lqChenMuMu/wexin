@@ -1,6 +1,6 @@
 package com.cl.wechat.admin.service;
 
-import com.cl.wechat.admin.entity.SecondClass;
+import com.cl.wechat.admin.entity.Material;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author bian
  * @since 2019-04-12
  */
-public interface SecondClassService extends IService<SecondClass> {
+public interface MaterialService extends IService<Material> {
 
 }

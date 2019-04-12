@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Data
 public class Resp<T> implements Serializable{
 
-    private T date;
+    private T data;
 
     private Integer code = 0;
 
@@ -18,11 +18,11 @@ public class Resp<T> implements Serializable{
     }
 
     public Resp(T date) {
-        this.date = date;
+        this.data = date;
     }
 
     public Resp(T date, Integer code, String msg) {
-        this.date = date;
+        this.data = date;
         this.code = code;
         this.msg = msg;
     }

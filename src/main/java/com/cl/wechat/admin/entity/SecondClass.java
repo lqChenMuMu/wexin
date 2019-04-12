@@ -1,6 +1,5 @@
 package com.cl.wechat.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,7 +11,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author bian
- * @since 2019-04-10
+ * @since 2019-04-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -23,13 +22,11 @@ public class SecondClass implements Serializable {
 
     private Integer id;
 
-    @TableField("className")
     private String className;
 
-    @TableField("firstClassId")
     private Integer firstClassId;
 
-    private String photo;
+    private String details;
 
     private String remark;
 

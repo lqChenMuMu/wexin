@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2019-04-12
  */
 @RestController
-@RequestMapping("/admin/first-class")
-public class FirstClassController {
+@RequestMapping("/admin/material")
+public class MaterialController {
 
 }

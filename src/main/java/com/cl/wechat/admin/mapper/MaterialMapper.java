@@ -1,6 +1,6 @@
 package com.cl.wechat.admin.mapper;
 
-import com.cl.wechat.admin.entity.SecondClass;
+import com.cl.wechat.admin.entity.Material;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author bian
  * @since 2019-04-12
  */
-public interface SecondClassMapper extends BaseMapper<SecondClass> {
+public interface MaterialMapper extends BaseMapper<Material> {
 
 }

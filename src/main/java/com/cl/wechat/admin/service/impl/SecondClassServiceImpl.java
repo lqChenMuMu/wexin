@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author bian
- * @since 2019-04-10
+ * @since 2019-04-12
  */
 @Service
 public class SecondClassServiceImpl extends ServiceImpl<SecondClassMapper, SecondClass> implements SecondClassService {

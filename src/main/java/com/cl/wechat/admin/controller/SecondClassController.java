@@ -3,6 +3,7 @@ package com.cl.wechat.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cl.wechat.admin.config.Resp;
+import com.cl.wechat.admin.entity.FirstClass;
 import com.cl.wechat.admin.entity.SecondClass;
 import com.cl.wechat.admin.service.FirstClassService;
 import com.cl.wechat.admin.service.SecondClassService;
@@ -22,30 +23,28 @@ import java.util.List;
  * </p>
  *
  * @author bian
- * @since 2019-04-10
+ * @since 2019-04-12
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/admin/secondclass")
+@RequestMapping("/second-class")
 public class SecondClassController {
 
     private FirstClassService firstClassService;
 
     private SecondClassService secondClassService;
 
-
-    @GetMapping("/list")
-    public Resp classShow(){
+    @GetMapping("/classInfo")
+    public Resp getClassInfo(){
         List<ClassShowVO> result = new ArrayList<>();
         firstClassService.list().forEach(firstClass -> {
-            ClassShowVO showVO = new ClassShowVO();
-            showVO.setFirstClass(firstClass);
             SecondClass qSecondClass = new SecondClass();
             qSecondClass.setFirstClassId(firstClass.getId());
+            ClassShowVO showVO = new ClassShowVO();
+            showVO.setFirstClass(firstClass);
             showVO.setSecondClassList(secondClassService.list(new QueryWrapper<>(qSecondClass)));
             result.add(showVO);
         });
         return new Resp(result);
     }
-
 }

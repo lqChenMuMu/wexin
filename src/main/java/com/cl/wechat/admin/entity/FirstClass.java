@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author bian
- * @since 2019-04-10
+ * @since 2019-04-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -23,7 +23,6 @@ public class FirstClass implements Serializable {
 
     private Integer id;
 
-    @TableField("className")
     private String className;
 
     private String remark;

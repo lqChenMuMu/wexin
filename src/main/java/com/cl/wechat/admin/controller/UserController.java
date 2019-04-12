@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2019-03-29
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/user")
 public class UserController {
 
     @RequestMapping
     public String index(){
+        System.out.println("222");
         return "index";
     }
 
