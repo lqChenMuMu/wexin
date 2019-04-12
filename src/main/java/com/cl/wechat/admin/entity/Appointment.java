@@ -2,8 +2,6 @@ package com.cl.wechat.admin.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
-
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -14,7 +12,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author bian
- * @since 2019-04-10
+ * @since 2019-04-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -48,7 +46,6 @@ public class Appointment implements Serializable {
     @TableField("appointmentState")
     private Integer appointmentState;
 
-    @TableLogic
     private Integer isDelete;
 
 

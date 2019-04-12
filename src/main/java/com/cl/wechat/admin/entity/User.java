@@ -1,8 +1,5 @@
 package com.cl.wechat.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,7 +11,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author bian
- * @since 2019-03-29
+ * @since 2019-04-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -23,20 +20,11 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "uid", type = IdType.AUTO)
-    private Integer uid;
+    private Integer id;
 
-    @TableField("userName")
-    private String userName;
+    private String name;
 
     private String password;
-
-    private String sex;
-
-    @TableField("nickName")
-    private String nickName;
-
-    private String remark;
 
 
 }

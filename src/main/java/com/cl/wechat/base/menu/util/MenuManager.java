@@ -35,7 +35,7 @@ public class MenuManager {
        // AccessToken at = AccessTokenThread.access_token;
 //        if (null != at) {
             // 调用接口创建菜单  
-            boolean result = MenuUtil.createMenu(getMenu(), "20_CTED9IENe4C6IBr8FfPRzZRtzaahm67HHC4gycl88EptprclG1O_17Ut0VaxWS7v1dYGXQtFm87fXPVBJPxtHpNmEepl_kWcOECVkPEIM-eSj8WA78y_oTGb5XXIR4iBcS-ysP9vXBK0UV-_KSAhAAAGOW");
+            boolean result = MenuUtil.createMenu(getMenu(), "20_M0-yoadlHeKHt54_fR3WtHwSapA4hr1BhVEWle0xaPdKZjOaUrZKU44J8ihE8sqwL66FxXmXX4yC1-p176BHvYS_kXnkY1wr8k-po6oWD-725zpc8Rr7mz0_2_xcw1hzat5fGFkceUQhU-Q0IHDaACAXWS");
             // 判断菜单创建结果
             if (result)  
                 log.info("菜单创建成功！ok");  
@@ -54,7 +54,7 @@ public class MenuManager {
         CommonButton btn21 = new CommonButton();
         btn21.setName("在线贷款");  
         btn21.setType("view");
-        btn21.setUrl("http://zzyyf.natapp1.cc/admin");
+        btn21.setUrl("http://zzyyf.natapp1.cc/index");
 
         CommonButton btn22 = new CommonButton();  
         btn22.setName("申请条件");  

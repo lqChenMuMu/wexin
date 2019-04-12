@@ -1,187 +1,72 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>提交预约信息</title>
 
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
-    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
-    <style type="text/css">
-
-        .header-search {
-            height: 50px;
-            font-size: 20px;
-            line-height: 50px;
-        }
-
-        .header-search img {
-            width: 35px;
-            height: 35px;
-            margin: 0px 10px 0px 5px;
-        }
-
-        .content {
-            margin-top: 80px;
-        }
-
-        .list-block {
-            margin: 0;
-            padding: 0;
-        }
-
-        .content-block {
-            padding: 0;
-            margin: 0;
-        }
-
-        .card {
-            margin: 10px 0px 0px 0px;
-        }
-
-        .photo img {
-            width: 80px;
-            height: 80px;
-            border-radius: 40px;
-        }
-
-        .personnelInfo {
-            margin-top: 10px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css"/>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/global.css"/>
 </head>
 <body>
-<div class="page-group">
-    <div class="page page-current">
-        <div class="header-search">
-            <div class="content-block">
-                <div class="list-block">
-                    <ul>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">预约时间</div>
-                                    <div class="item-input">
-                                        <input type="text" placeholder="请选择时间" id='birthday'/>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+
+<section class='container'>
+    <form>
+        <fieldset class='alpha'>
+            <div class='frow'><input class='item' placeholder='姓名' type='text'></div>
+            <div class='frow'><input class='item' placeholder='公司' type='text'></div>
+            <div class='frow' id="selectDateDiv"><input class='item' placeholder='预约日期' type='text' id="dateText" readonly></div>
+            <div class='frow'><input class='item' placeholder='手机号码' type='text' id="telphone"></div>
+            <div class='frow'><input class='item' placeholder='验证码' type='text' style="width: 60%">
+                <button id="codeBtn" type="button" class="btn btn-primary" style="width: 38%; float: right; margin-top: 8px" >获取验证码
+                </button>
             </div>
+            <div class='frow'><textarea rows="3" cols="20" placeholder='留言板'></textarea></div>
+            <div class='frow'><button class="btn btn-primary" style=" width: 100%;height: 50px;">下一步</button></div>
+        </fieldset>
+
+        <div class="mask-time" style="display:none"></div>
+        <div class="time-area" style="display:none">
+            <input type="hidden" name="date_" value="">
+            <input type="hidden" name="time_">
+            <div class="box-date">
+                <ul class="promptu-menu2 font13"></ul>
+            </div>
+            <div class="time-choose-table font13 txt-gray" id="time-choose-table"></div>
+            <input type="button" value="确定选择"
+                   class="am-btn am-btn-green mt-line btn-choose-time"
+                   style='width:94.668%;margin-top:0px'>
         </div>
-
-        <div class="content">
-            <div class="card">
-                <div class="card-content">
-                    <div class="row">
-                        <div class="col-25">
-                            <div class="photo"><img src="../img/photo.jpg"/></div>
-                        </div>
-                        <div class="col-50">
-                            <div class="personnelInfo">
-                                <span>刘甘雨</span>&nbsp;&nbsp;&nbsp;<span style="color: #FFD700">金牌解说</span></br></br>
-                                <span style="font-size: 15px;">擅长:全职业精通</span>
-                            </div>
-                        </div>
-                        <div class="col-25">
-                            <p style="margin-top: 45px; margin-bottom: 0px; width: 70px"><a href="index3.html"
-                                                                                            class="button button-fill" external>预约</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">
-                    <div class="row">
-                        <div class="col-25">
-                            <div class="photo"><img src="../img/photo.jpg"/></div>
-                        </div>
-                        <div class="col-50">
-                            <div class="personnelInfo">
-                                <span>刘甘雨</span>&nbsp;&nbsp;&nbsp;<span style="color: #FFD700">金牌解说</span></br></br>
-                                <span style="font-size: 15px;">擅长:全职业精通</span>
-                            </div>
-                        </div>
-                        <div class="col-25">
-                            <p style="margin-top: 45px; margin-bottom: 0px; width: 70px"><a href="index3.html"
-                                                                                            class="button button-fill" external>预约</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">
-                    <div class="row">
-                        <div class="col-25">
-                            <div class="photo"><img src="../img/photo.jpg"/></div>
-                        </div>
-                        <div class="col-50">
-                            <div class="personnelInfo">
-                                <span>刘甘雨</span>&nbsp;&nbsp;&nbsp;<span style="color: #FFD700">金牌解说</span></br></br>
-                                <span style="font-size: 15px;">擅长:全职业精通</span>
-                            </div>
-                        </div>
-                        <div class="col-25">
-                            <p style="margin-top: 45px; margin-bottom: 0px; width: 70px"><a href="pages/index3.html"
-                                                                                            class="button button-fill" external>预约</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+    </form>
+</section>
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/jquery.promptu-menu.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="../js/wx.js"></script>
+<script src="../js/util.js"></script>
 <script>
     $(function () {
-        $(document).on("pageInit", function () {
-            var currentDate = getNowFormatDate();
-            var endTime = getNowFormatDate(true);
-            $("#birthday").calendar({
-                value: [currentDate],
-                minDate: [currentDate],
-                maxDate: [endTime],
-                onChange: function (p, v, d) {
-                    console.log(p, v, d);
-                }
-            });
-        });
-        $.init();
-    });
+        affirmInit();
+        var nowDateArray = getNowFormatDate().split(' ');
+        var date_ = nowDateArray[0];
+        var disAppointment = ['2019-04-10 am', '2019-04-11 pm'];
+        var appointmentDown = ['2019-04-11 am', '2019-04-12 pm'];
+        t(date_, 'hour', 1, disAppointment, appointmentDown);
+        $('.mask-time').height($(window).height());
 
-    //获取当前时间
-    function getNowFormatDate(endTime) {
-        var date = new Date();
-        if (endTime) {
-            date.setDate(date.getDate() + 7);
-        }
-        var seperator1 = "-";
-        var month = date.getMonth() + 1;
-        var strDate = date.getDate();
-        if (month >= 1 && month <= 9) {
-            month = "0" + month;
-        }
-        if (strDate >= 0 && strDate <= 9) {
-            strDate = "0" + strDate;
-        }
-        var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
-        return currentdate;
-    }
+        $('#selectDateDiv').click(function () {
+            $('.mask-time,.time-area').show();
+        });
+        $('.btn-choose-time').click(function () {
+            if (!$('input[name=time_]').val()) {
+                return alert('请选择服务时间');
+            }
+            var textTime = $('input[name=time_]').val().split(':');
+            $('#dateText').val($('input[name=date_]').val() + ' ' + textTime[0]);
+            $('.mask-time,.time-area').css("display", "none");
+        });
+    });
 </script>
 </body>
 </html>

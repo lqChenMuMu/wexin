@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author bian
- * @since 2019-04-10
+ * @since 2019-04-12
  */
 @RestController
-@RequestMapping("/admin/t-first-class")
+@RequestMapping("/admin/first-class")
 public class FirstClassController {
 
 }

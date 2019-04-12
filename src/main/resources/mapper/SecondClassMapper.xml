@@ -5,8 +5,9 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cl.wechat.admin.entity.SecondClass">
     <result column="id" property="id" />
-        <result column="className" property="className" />
-        <result column="firstClassId" property="firstClassId" />
+        <result column="class_name" property="className" />
+        <result column="first_class_id" property="firstClassId" />
+        <result column="details" property="details" />
         <result column="remark" property="remark" />
     </resultMap>
 
