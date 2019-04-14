@@ -5,13 +5,12 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cl.wechat.admin.entity.Appointment">
     <result column="id" property="id" />
-        <result column="personnel_id" property="personnelId" />
         <result column="class_id" property="classId" />
+        <result column="open_id" property="openId" />
         <result column="time" property="time" />
         <result column="telphone" property="telphone" />
-        <result column="submitTime" property="submitTime" />
-        <result column="appointmentType" property="appointmentType" />
-        <result column="appointmentState" property="appointmentState" />
+        <result column="submit_time" property="submitTime" />
+        <result column="validate_code" property="validateCode"/>
         <result column="is_delete" property="isDelete" />
     </resultMap>
 

@@ -1,5 +1,6 @@
 package com.cl.wechat.genaretor;
 
+import cn.hutool.core.util.RandomUtil;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
 import com.github.qcloudsms.httpclient.HTTPException;
@@ -25,7 +26,9 @@ public class TXSendCode {
 
 
     public static void main(String[] args) {
-        String[] params = {"8965","10"};//数组具体的元素个数和模板中变量个数必须一致，例如事例中templateId:5678对应一个变量，参数数组中元素个数也必须是一个
+        Integer code = RandomUtil.randomInt(4);
+        System.out.println(code.toString());
+        String[] params = {code.toString(),"10"};//数组具体的元素个数和模板中变量个数必须一致，例如事例中templateId:5678对应一个变量，参数数组中元素个数也必须是一个
         SmsSingleSender ssender = new SmsSingleSender(appid, appkey);
         SmsSingleSenderResult result = null;  // 签名参数未提供或者为空时，会使用默认签名发送短信
         try {

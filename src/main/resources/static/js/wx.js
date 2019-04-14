@@ -57,7 +57,7 @@ function classInit() {
         $("input[type='checkbox']:checked").each(function () {
             classIds += this.value + ",";
         });
-        if (validatenull(classIds)){
+        if (validatenull(classIds)) {
             alert("请选择服务！");
             return;
         }
@@ -73,7 +73,7 @@ function affirmInit() {
         var tel = $('#telphone').val();
         console.log(tel)
         console.log($('#telphone'))
-        if (validatemobile(tel) == false){
+        if (validatemobile(tel) == false) {
             return;
         }
         clickTime();
@@ -81,13 +81,14 @@ function affirmInit() {
             type: "get",
             url: sendCodeUrl,
             async: false,
-            dataType: "json",
-            date: tel,
+            data: {
+                telphone: tel
+            },
             success: function (res) {
                 if (res.code == "0") {
-                    if (res.data == 0){
+                    if (res.data == 0) {
                         alert("发送成功");
-                    }else{
+                    } else {
                         alert("发送失败");
                     }
                 } else {
@@ -95,17 +96,71 @@ function affirmInit() {
                 }
             }
         });
-    })
+    });
+
+    $("#affirmBtn").click(function () {
+            var classIds = getQueryString("classIds");
+
+            var name = $("#name").val();
+            if (validatenull(name) == true) {
+                alert("请输入姓名！");
+                return;
+            }
+            var company = $("#company").val();
+            if (validatenull(company) == true) {
+                alert("请输入公司名称！");
+                return;
+            }
+            var appointmentTime = $("#dateText").val();
+            if (validatenull(appointmentTime) == true) {
+                alert("请选择预约时间！");
+                return;
+            }
+            var telphone = $("#telphone").val();
+            if (validatenull(telphone) == true) {
+                alert("请输入手机号码！");
+                return;
+            }
+            var validateCode = $("#validateCode").val();
+            if (validatenull(validateCode) == true) {
+                alert("请输入验证码！");
+                return;
+            }
+            var remark = $("#remark").val();
+        $.ajax({
+            type: "post",
+            url: "/appointment/affirm",
+            async: false,
+            dataType: "json",
+            data: {
+                "name": name,
+                "company": company,
+                "time":appointmentTime,
+                "telphone":telphone,
+                "validateCode":validateCode,
+                "remark":remark,
+                "classId":classIds
+            },
+            success: function (res) {
+                if (res.code == "0") {
+                    window.location.href="/pages/index3.html?classIds=" + classIds;;
+                } else {
+                    alert(res.msg);
+                }
+            }
+        });
+        }
+    )
 }
 
 var wait = 60;
+
 function clickTime() {
     if (wait == 0) {
         $("#codeBtn").html("获取验证码");
         $("#codeBtn").removeAttr("disabled")
         wait = 60;
     } else {
-        $("#codeBtn").unbind();
         $("#codeBtn").html("重新发送(" + wait + ")");
         $("#codeBtn").attr("disabled", "disabled");
         wait--;
@@ -114,4 +169,69 @@ function clickTime() {
             },
             1000)
     }
+}
+
+function appointmentSuccessInit(){
+    $.ajax({
+        type: "get",
+        url: "/material/get",
+        async: true,
+        dataType: "json",
+        data: {
+            "classIds": getQueryString("classIds")
+        },
+        success: function (res) {
+            if (res.code == "0") {
+                var materialList = "资料清单：";
+                for(var i=0; i<res.data.length; i++){
+                    if(i == res.data.length-1){
+                        materialList += res.data[i].materialText+"。";
+                    }else{
+                        materialList += res.data[i].materialText+",";
+                    }
+                }
+                console.log(materialList);
+                $("#materialP").html(materialList);
+            } else {
+                alert(res.msg);
+            }
+        }
+    });
+}
+
+function myAppointmentInit() {
+    $.ajax({
+        type: "get",
+        url: "/material/getAppointment",
+        async: true,
+        success: function (res) {
+            if (res.code == "0") {
+                var appointmentList = "";
+                for(var i=0; i<res.data.length; i++){
+                    appointmentList += "<div class='myAppointment'>"
+                    appointmentList += "<div class='appointmentTime'>";
+                    appointmentList += res.data[i].Appointment.time;
+                    appointmentList += "</div>"
+                    appointmentList += "<div class='infoHead classList'></div>"
+                    appointmentList += "<p>"
+                    for(var j=0; j<res.data[i].SecondClassList.length; j++){
+                        classList += (j+1)+":"+  res.data[i].SecondClassList[j].className + " ";
+                    }
+                    appointmentList += "</p></br>"
+
+                    appointmentList += "<div class='infoHead materialList'></div>"
+                    appointmentList += "<p>"
+                    for(var k=0; k< res.data[i].materialList.length; k++){
+                        materialList += (k+1)+":"+  res.data[i].materialList[k].materialText;
+                    }
+                    appointmentList += "</p></br>"
+                    appointmentList += "</div>"
+
+                }
+                $(".page").html(appointmentList);
+            } else {
+                alert(res.msg);
+            }
+        }
+    });
 }

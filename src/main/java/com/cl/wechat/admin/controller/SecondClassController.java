@@ -1,6 +1,8 @@
 package com.cl.wechat.admin.controller;
 
 
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.HttpResponse;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cl.wechat.admin.config.Resp;
 import com.cl.wechat.admin.entity.FirstClass;
@@ -14,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +40,9 @@ public class SecondClassController {
 
     private SecondClassService secondClassService;
 
+
     @GetMapping("/classInfo")
-    public Resp getClassInfo(){
+    public Resp getClassInfo() throws IOException {
         List<ClassShowVO> result = new ArrayList<>();
         firstClassService.list().forEach(firstClass -> {
             SecondClass qSecondClass = new SecondClass();

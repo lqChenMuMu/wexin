@@ -23,13 +23,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `appointment`;
 CREATE TABLE `appointment`  (
   `id` int(11) NOT NULL,
-  `personnel_id` int(11) NULL DEFAULT NULL,
   `class_id` int(11) NULL DEFAULT NULL,
   `time` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `telphone` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `submitTime` varchar(0) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `appointmentType` int(11) NULL DEFAULT NULL COMMENT '1：正常预约 2：手动设置',
-  `appointmentState` int(11) NULL DEFAULT NULL COMMENT '0：为处理 1：已处理',
   `is_delete` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;

@@ -35,7 +35,7 @@ public class MenuManager {
        // AccessToken at = AccessTokenThread.access_token;
 //        if (null != at) {
             // 调用接口创建菜单  
-            boolean result = MenuUtil.createMenu(getMenu(), "20_M0-yoadlHeKHt54_fR3WtHwSapA4hr1BhVEWle0xaPdKZjOaUrZKU44J8ihE8sqwL66FxXmXX4yC1-p176BHvYS_kXnkY1wr8k-po6oWD-725zpc8Rr7mz0_2_xcw1hzat5fGFkceUQhU-Q0IHDaACAXWS");
+            boolean result = MenuUtil.createMenu(getMenu(), "20_i0ZMq-bGvs7SQzPoOJd1i7w5bcKLVyT9tqnHs0viiHO_rogh6NLQ1R6iiD08TJeSA5fF-9EQHLjAGJTRcUjYz2KTS9N0yJax5EKb1p3UZz3nHlapDpUw9yjCEaQksVla5fzhbDVPvBhQx-EhYPYdAGAQHQ");
             // 判断菜单创建结果
             if (result)  
                 log.info("菜单创建成功！ok");  
@@ -52,14 +52,14 @@ public class MenuManager {
     public static Menu getMenu() {
  
         CommonButton btn21 = new CommonButton();
-        btn21.setName("在线贷款");  
+        btn21.setName("在线预约");
         btn21.setType("view");
         btn21.setUrl("http://zzyyf.natapp1.cc/index");
 
         CommonButton btn22 = new CommonButton();  
-        btn22.setName("申请条件");  
-        btn22.setType("click");
-        btn22.setKey("22");
+        btn22.setName("我的预约");
+        btn22.setType("view");
+        btn22.setUrl("http://zzyyf.natapp1.cc/appointment/myAppointment");
   
         CommonButton btn23 = new CommonButton();  
         btn23.setName("进度查询");  
