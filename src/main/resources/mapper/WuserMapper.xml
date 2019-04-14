@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.wechat.admin.mapper.WuserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cl.wechat.admin.entity.Wuser">
+    <result column="id" property="id" />
+        <result column="country" property="country" />
+        <result column="province" property="province" />
+        <result column="city" property="city" />
+        <result column="openid" property="openid" />
+        <result column="sex" property="sex" />
+        <result column="nickname" property="nickname" />
+        <result column="headimgurl" property="headimgurl" />
+    </resultMap>
+
+</mapper>
