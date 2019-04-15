@@ -1,7 +1,7 @@
 /**
  * 判断是否为空
  */
-function validatenull(val,name) {
+function validatenull(val) {
     if (val == 'null' || val == null || val == 'undefined' || val == undefined || val == '') {
         return true
     } else {
@@ -28,4 +28,16 @@ function validatemobile(mobile) {
         alert('请输入有效的手机号码！');
         return false;
     }
+}
+
+/*
+*  获取url参数
+* */
+function getQueryString(name) {
+    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        return unescape(r[2]);
+    }
+    return null;
 }

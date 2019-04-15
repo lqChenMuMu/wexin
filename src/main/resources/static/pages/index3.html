@@ -2,43 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>预约成功</title>
     <style>
 
-        html{
+        html {
             font-size: 16px;
         }
 
-        .section{
+        .section {
             text-align: center;
             background: white;
             padding: 20px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        label{
+        label {
             font-size: 3rem;
         }
 
-        .center{
+        .center {
             margin-top: 20px;
         }
 
-        .center p{
-            font-size: 1.7rem;
+        .center p {
+            font-size: 2.3rem;
             color: darkgrey;
             padding: 40px;
         }
 
-        body{
+        body {
             background: #0b6fa2;
         }
 
-        img{
+        img {
             width: 30%;
             height: 30%;
         }
 
-        .page{
+        .page {
             padding: 20px;
         }
 
@@ -46,15 +48,23 @@
     </style>
 </head>
 <body>
-   <div class="page">
-       <div class="section header">
-           <img src="../img/success.jpg"/></br>
-           <label>预约成功</label>
-       </div>
-       <div class="section center">
-           <p>资料清单：为贯彻落实《广东省教育厅关于推进落实省委省政府全面深化新时代教师队伍建设改革实施意见的通知》（粤教师函[2019]6号）文件精神，经区委区府同意，为充实我区中小学教师队伍，我局组织各中小学到肇庆学院（以下简称肇院）自主招聘53名中小学教师，现公告如下</p>
-           <p></p>
-       </div>
-   </div>
+<div class="page">
+    <div class="section header">
+        <img src="../img/success.jpg"/></br>
+        <label>预约成功</label>
+    </div>
+    <div class="section center">
+        <p id="materialP">
+            资料清单：为贯彻落实《广东省教育厅关于推进落实省委省政府全面深化新时代教师队伍建设改革实施意见的通知》（粤教师函[2019]6号）文件精神，经区委区府同意，为充实我区中小学教师队伍，我局组织各中小学到肇庆学院（以下简称肇院）自主招聘53名中小学教师，现公告如下</p>
+    </div>
+</div>
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../js/wx.js"></script>
+<script src="../js/util.js"></script>
+<script>
+    $(function () {
+        appointmentSuccessInit();
+    });
+</script>
 </body>
 </html>

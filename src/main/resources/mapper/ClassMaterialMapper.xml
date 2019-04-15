@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.wechat.admin.mapper.ClassMaterialMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cl.wechat.admin.entity.ClassMaterial">
+    <result column="id" property="id" />
+        <result column="class_id" property="classId" />
+        <result column="material_id" property="materialId" />
+    </resultMap>
+
+</mapper>
