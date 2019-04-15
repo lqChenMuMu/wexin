@@ -7,9 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class IndexController {
 
-    @RequestMapping("/index")
-    public String index(){
-        System.out.println("11");
-        return "index";
+    @RequestMapping("/classShow")
+    public String classShow(){
+        return "classShow";
+    }
+
+    @RequestMapping("/myAppointment")
+    public String myAppointment(){
+        return "myAppointment";
     }
 }

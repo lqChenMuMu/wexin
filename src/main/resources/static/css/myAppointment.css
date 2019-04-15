@@ -1,0 +1,66 @@
+html {
+    font-size: 16px;
+}
+
+body {
+    background: #0b6fa2;
+}
+
+.page {
+    padding: 20px;
+}
+
+.infoHead{
+    width: 25px;
+    height: 25px;
+    vertical-align: top;
+    margin-top: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+.classList{
+    background-color: #E8AA18;
+}
+
+.materialList{
+    background-color: #AD282A;
+}
+
+.myAppointment p{
+    width: 90%;
+    display: inline-block;
+    font-size: 2rem;
+    margin: 0 1rem 1rem 1rem;
+    color: grey;
+}
+
+.myAppointment{
+    background-color: white;
+    padding: 30px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 280px;
+}
+
+.appointmentTime{
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+img{
+    text-align: center;
+    vertical-align: middle;
+    margin: auto;
+    margin-top: 400px;
+    width: 100%;
+}
+
+.nop{
+    color: white;
+    font-size: 2.3rem;
+    margin: 0;
+    text-align: center;
+}

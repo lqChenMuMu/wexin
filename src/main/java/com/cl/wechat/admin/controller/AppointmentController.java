@@ -2,6 +2,7 @@ package com.cl.wechat.admin.controller;
 
 
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cl.wechat.admin.config.Resp;
 import com.cl.wechat.admin.config.ValidateCodeUtil;
@@ -52,43 +53,22 @@ public class AppointmentController {
     @Autowired
     private ClassMaterialService classMaterialService;
 
-    // 短信应用SDK AppID
-    private static int appid = 1400197798; // 1400开头
-
-    // 短信应用SDK AppKey
-    private static String appkey = "b1b5dc309bd0b0407272284d4e71ff78";
-
-    // 短信模板ID，需要在短信应用中申请
-    private static int templateId = 311708; // NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
-    //templateId7839对应的内容是"您的验证码是: {1}"
-    // 签名
-    private static String smsSign = "扁头娃个人使用"; // NOTE: 签名参数使用的是`签名内容`，而不是`签名ID`。这里的签名"腾讯云"只是一个示例，真实的签名需要在短信控制台申请。
 
     @GetMapping("/sendCode")
     public Resp sendCode(String telphone, HttpServletRequest request){
-        String code = RandomUtil.randomNumbers(4);
-        String[] params = {code,"10"};//数组具体的元素个数和模板中变量个数必须一致，例如事例中templateId:5678对应一个变量，参数数组中元素个数也必须是一个
-        SmsSingleSender ssender = new SmsSingleSender(appid, appkey);
-        SmsSingleSenderResult result = null;  // 签名参数未提供或者为空时，会使用默认签名发送短信
-        try {
-            result = ssender.sendWithParam("86", telphone,
-                    templateId, params, smsSign, "", "");
-            if(result.result == 0){
+
+        String result = ValidateCodeUtil.sendCode(telphone,(String) request.getSession().getAttribute("openid"));
+            if(StrUtil.isNotBlank((String) request.getSession().getAttribute("openid"))){
                 Wuser wuser = new Wuser();
-                wuser.setValidateCode(code);
+                wuser.setValidateCode(result);
                 wuser.setValidateTime(String.valueOf(new Date().getTime()));
                 Wuser qWuser = new Wuser();
                 qWuser.setOpenid((String) request.getSession().getAttribute("openid"));
                 wuserService.update(wuser,new QueryWrapper<>(qWuser));
+                return new Resp(0);
+            }else {
+                return new Resp(1);
             }
-
-        } catch (HTTPException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(result);
-        return new Resp(result.result);
     }
 
     @PostMapping("/affirm")
@@ -97,9 +77,20 @@ public class AppointmentController {
         Wuser qwuser = new Wuser();
         qwuser.setOpenid(openid);
         Wuser wuser = wuserService.getOne(new QueryWrapper<>(qwuser));
-        if(wuser.getValidateCode().equals(appointment.getValidateCode())){
+        Long failureTime = Long.valueOf(wuser.getValidateTime()) + 10 * 60 * 1000;
+        if(wuser.getValidateCode().equals(appointment.getValidateCode()) && new Date().getTime() < failureTime){
             appointment.setSubmitTime(String.valueOf(new Date().getTime()));
-            return  new Resp(appointmentService.save(appointment));
+            appointment.setOpenId(openid);
+            appointmentService.save(appointment);
+            List<SecondClass> secondClassList = secondClassService.list(new QueryWrapper<SecondClass>().in("id",appointment.getClassId().split(",")));
+            String classStr = "";
+            List<String> classNames = secondClassList.stream().map(SecondClass::getClassName).collect(Collectors.toList());
+            for (Integer i = 0; i<classNames.size(); i++) {
+                classStr += (i+1) +":";
+                classStr += classNames.get(i)+" ";
+            }
+           ValidateCodeUtil.sendNotice(appointment.getTime(),classStr,appointment.getTelphone());
+            return  new Resp(true);
         }else{
             return  new Resp(new Exception("验证码错误"));
         }
@@ -110,6 +101,7 @@ public class AppointmentController {
     public Resp getMyAppointment(HttpServletRequest request){
         Appointment appointment = new Appointment();
         appointment.setOpenId(request.getSession().getAttribute("openid").toString());
+//        appointment.setOpenId("os1do6Dn0iFOVb1HHhwwHr4BxNpM");
         List<MyAppointmentVO> myAppointmentVOS = new ArrayList<>();
         appointmentService.list(new QueryWrapper<>(appointment)).forEach(item -> {
             MyAppointmentVO myAppointmentVO = new  MyAppointmentVO();

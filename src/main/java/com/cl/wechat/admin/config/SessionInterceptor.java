@@ -26,26 +26,25 @@ public class SessionInterceptor implements HandlerInterceptor {
         Object openid = request.getSession().getAttribute("openid");
         if (openid == null) {
             if(request.getRequestURI().equals("/appointment/myAppointment")){
-                this.auth(response,"0");
+                this.auth(response,"myState");
             }else{
-                this.auth(response,"1");
+                this.auth(response,"state");
             }
-
             return false;
         }
         return true;
     }
 
-    public void auth(HttpServletResponse response, String state) throws IOException {
+    public void auth(HttpServletResponse response,String state) throws IOException {
         String path = real_url + "/wechat/invoke";
-        path = URLEncoder.encode(path, "UTF-8");
+        //path = URLEncoder.encode(path, "UTF-8");
 
         String url = "https://open.weixin.qq.com/connect" +
                 "/oauth2/authorize?appid=" + appId +
                 "&redirect_uri=" + path +
                 "&response_type=code&" +
                 "scope=snsapi_userinfo" +
-                "&state=" + state +
+                "&state="+ state +
                 "#wechat_redirect";
 
         response.sendRedirect(url);

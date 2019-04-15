@@ -61,7 +61,7 @@ function classInit() {
             alert("请选择服务！");
             return;
         }
-        window.location.href = "/pages/index2.html?classIds=" + classIds;
+        window.location.href = "/pages/affirm.html?classIds=" + classIds;
     })
 }
 
@@ -143,7 +143,7 @@ function affirmInit() {
             },
             success: function (res) {
                 if (res.code == "0") {
-                    window.location.href="/pages/index3.html?classIds=" + classIds;;
+                    window.location.href="/pages/success.html?classIds=" + classIds;;
                 } else {
                     alert(res.msg);
                 }
@@ -202,31 +202,35 @@ function appointmentSuccessInit(){
 function myAppointmentInit() {
     $.ajax({
         type: "get",
-        url: "/material/getAppointment",
-        async: true,
+        url: "/appointment/myAppointment",
+        async: false,
         success: function (res) {
             if (res.code == "0") {
                 var appointmentList = "";
                 for(var i=0; i<res.data.length; i++){
                     appointmentList += "<div class='myAppointment'>"
                     appointmentList += "<div class='appointmentTime'>";
-                    appointmentList += res.data[i].Appointment.time;
+                    appointmentList += res.data[i].appointment.time;
                     appointmentList += "</div>"
                     appointmentList += "<div class='infoHead classList'></div>"
-                    appointmentList += "<p>"
-                    for(var j=0; j<res.data[i].SecondClassList.length; j++){
-                        classList += (j+1)+":"+  res.data[i].SecondClassList[j].className + " ";
+                    appointmentList += "<p>已预约项目："
+                    for(var j=0; j<res.data[i].secondClassList.length; j++){
+                        appointmentList += (j+1)+":"+  res.data[i].secondClassList[j].className + " ";
                     }
                     appointmentList += "</p></br>"
 
                     appointmentList += "<div class='infoHead materialList'></div>"
-                    appointmentList += "<p>"
+                    appointmentList += "<p>需准备资料："
                     for(var k=0; k< res.data[i].materialList.length; k++){
-                        materialList += (k+1)+":"+  res.data[i].materialList[k].materialText;
+                        appointmentList += (k+1)+":"+  res.data[i].materialList[k].materialText;
                     }
                     appointmentList += "</p></br>"
                     appointmentList += "</div>"
 
+                }
+                if (appointmentList == ""){
+                    appointmentList += " <img src='../img/noexist.png'/>" +
+                        "    <p class='nop'>暂无预约</p>"
                 }
                 $(".page").html(appointmentList);
             } else {
