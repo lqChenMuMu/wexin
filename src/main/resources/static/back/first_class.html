@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css"  href="../css/amazeui.min.css"/>
+    <link rel="stylesheet" type="text/css"  href="../css/admin.css"/>
+</head>
+
+<body>
+<div class="admin-content-body">
+    <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">一级类别</strong>
+            <small></small>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <button type="button" class="am-btn am-btn-primary" onclick="openAdd()"><span class="am-icon-plus"></span> 新增</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <form class="am-form">
+                <table class="am-table am-table-striped am-table-hover table-main" id="first_class_table">
+                    <thead>
+                    <tr>
+                        <th class="table-id">ID</th>
+                        <th class="table-title">类别名称</th>
+                        <th class="table-title">备注</th>
+                        <th class="table-set">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            综合服务
+                        </td>
+                        <td>这是一个综合服务</td>
+                        <td>
+                            <div class="am-btn-toolbar">
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <button type="button"
+                                            class="btnedit am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                            class="am-icon-pencil-square-o"></span> 编辑
+                                    </button>
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                            class="am-icon-trash-o"></span> 删除
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <hr>
+            </form>
+        </div>
+
+    </div>
+</div>
+<div class="am-modal am-modal-alert" tabindex="-1" id="add_class">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd" style="font-size: 20px">添加类别</div>
+        <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
+        <div class="am-modal-bd" style="margin-top: 20px">
+            <form class="am-form am-form-horizontal">
+                <div class="am-form-group">
+                    <label for="class_name" class="am-u-sm-3 am-form-label">类别名称</label>
+                    <div class="am-u-sm-9">
+                        <input type="email" id="class_name">
+                    </div>
+                </div>
+
+                <div class="am-form-group">
+                    <label for="doc-ipt-pwd-2" class="am-u-sm-3 am-form-label">备注</label>
+                    <div class="am-u-sm-9">
+                        <textarea id="doc-ipt-pwd-2"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="am-modal-footer" style="margin-top: 5px;">
+            <div class="am-g">
+                <div class="am-u-sm-8"></div>
+                <div class="am-u-sm-4">
+                    <button type="button" class="am-btn am-btn-primary">确定</button>
+                    <button type="button" class="am-btn am-btn-danger">取消</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/amazeui.min.js"></script>
+<script>
+    $(function () {
+        $.ajax({
+            type: "get",
+            url: "/first-class/list",
+            async: true,
+            success: function (res) {
+                if (res.code == "0") {
+                    var dataInfo = "<thead>" +
+                        "<tr>" +
+                        "<th class='table-id'>ID</th>" +
+                        "<th class='table-title'>类别名称</th>" +
+                        "<th class='table-title'>备注</th>" +
+                        "<th class='table-set'>操作</th>" +
+                        "</tr>" +
+                        "</thead>";
+                    for(var i=0; i<res.data.length; i++){
+                        dataInfo += "<tr>";
+                        dataInfo += "<td>" + (i+1) + "</td>";
+                        dataInfo += "<td>" + res.data[i].className + "</td>";
+                        dataInfo += "<td>" + res.data[i].remark + "</td>";
+                        dataInfo += "<td>" +
+                            "<div class='am-btn-toolbar'>" +
+                            "  <div class='am-btn-group am-btn-group-xs'>" +
+                            "     <button type='button'" +
+                            "         class='btnedit am-btn am-btn-default am-btn-xs am-text-secondary'><span" +
+                            "         class='am-icon-pencil-square-o'></span> 编辑" +
+                            "     </button>" +
+                            "     <button class='am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only'><span" +
+                            "          class='am-icon-trash-o'></span> 删除" +
+                            "     </button>" +
+                            "   </div>" +
+                            "</div>" +
+                            "</td>"
+                    }
+                    console.log(dataInfo);
+                    $("#first_class_table").html(dataInfo);
+                } else {
+                    alert(res.msg);
+                }
+            }
+        });
+    })
+    function openAdd() {
+        var addModal = $("#add_class");
+        addModal.modal();
+    }
+</script>
+</body>
+
+</html>

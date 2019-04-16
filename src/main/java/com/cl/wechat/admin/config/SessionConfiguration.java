@@ -23,6 +23,7 @@ public class SessionConfiguration implements WebMvcConfigurer {
         interceptor.excludePathPatterns("/wechat/**");
         interceptor.excludePathPatterns("/js/**");
         interceptor.excludePathPatterns("/css/**");
-//        interceptor.excludePathPatterns("/*/**");
+        interceptor.excludePathPatterns("/*/**");
+
     }
 }

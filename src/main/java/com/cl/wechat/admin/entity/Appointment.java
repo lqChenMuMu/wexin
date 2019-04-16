@@ -29,6 +29,10 @@ public class Appointment implements Serializable {
 
     private String openId;
 
+    private String name;
+
+    private String company;
+
     private String time;
 
     private String telphone;
