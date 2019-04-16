@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" type="text/css"  href="../css/amazeui.min.css"/>
-    <link rel="stylesheet" type="text/css"  href="../css/admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/amazeui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
 </head>
 
 <body>
@@ -22,7 +22,9 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <button type="button" class="am-btn am-btn-primary" onclick="openAdd()"><span class="am-icon-plus"></span> 新增</button>
+                    <button type="button" class="am-btn am-btn-primary" onclick="openAdd()"><span
+                            class="am-icon-plus"></span> 新增
+                    </button>
                 </div>
             </div>
         </div>
@@ -70,30 +72,27 @@
 </div>
 <div class="am-modal am-modal-alert" tabindex="-1" id="add_class">
     <div class="am-modal-dialog">
-        <div class="am-modal-hd" style="font-size: 20px">添加类别</div>
-        <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-        <div class="am-modal-bd" style="margin-top: 20px">
-            <form class="am-form am-form-horizontal">
+            <form action="" class="am-form am-form-horizontal" id="formid">
+            <fieldset>
+                <legend id="tabHead">添加类别</legend>
                 <div class="am-form-group">
-                    <label for="class_name" class="am-u-sm-3 am-form-label">类别名称</label>
-                    <div class="am-u-sm-9">
-                        <input type="email" id="class_name">
-                    </div>
+                    <label for="class_name" style="float: left">类别名称：</label>
+                    <input type="text" id="class_name" placeholder="输入类别名称" required/>
                 </div>
 
                 <div class="am-form-group">
-                    <label for="doc-ipt-pwd-2" class="am-u-sm-3 am-form-label">备注</label>
-                    <div class="am-u-sm-9">
-                        <textarea id="doc-ipt-pwd-2"></textarea>
-                    </div>
+                    <label for="remark" style="float: left">备注：</label>
+                    <textarea id="remark"></textarea>
+                    <input id="classId" type="hidden"/>
                 </div>
+                </fieldset>
             </form>
-        </div>
+        <!--</div>-->
         <div class="am-modal-footer" style="margin-top: 5px;">
             <div class="am-g">
                 <div class="am-u-sm-8"></div>
                 <div class="am-u-sm-4">
-                    <button type="button" class="am-btn am-btn-primary">确定</button>
+                    <button type="button" class="am-btn am-btn-primary" id="submitFclass">确定</button>
                     <button type="button" class="am-btn am-btn-danger">取消</button>
                 </div>
             </div>
@@ -104,8 +103,88 @@
 
 <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
 <script src="../js/amazeui.min.js"></script>
+<script src="../js/util.js"></script>
 <script>
     $(function () {
+        getTableInfo();
+
+        $('#formid').validator({
+            onValid: function (validity) {
+                $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+            },
+
+            onInValid: function (validity) {
+                var $field = $(validity.field);
+                var $group = $field.closest('.am-form-group');
+                var $alert = $group.find('.am-alert');
+                // 使用自定义的提示信息 或 插件内置的提示信息
+                var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+                if (!$alert.length) {
+                    $alert = $('<div class="am-alert am-alert-danger"></div>').hide().appendTo($group);
+                }
+
+                $alert.html(msg).show();
+            }
+        });
+
+        $("#submitFclass").click(function () {
+            var class_name = $("#class_name").val();
+            if(validatenull(class_name)){
+                return;
+            }
+            var remark = $("#remark").val();
+            var id = $("#classId").val();
+            if(validatenull(id)){
+                $.ajax({
+                    type: "post",
+                    url: "/first-class/save",
+                    async: true,
+                    dataType: "json",
+                    data: {
+                        "className": class_name,
+                        "remark": remark
+                    },
+                    success: function (res) {
+                        if (res.code == "0") {
+                            alert("添加成功");
+                            resetValue();
+                            $("#add_class").modal('close');
+                            getTableInfo();
+                        } else {
+                            alert(res.msg);
+                        }
+                    }
+                });
+            }else{
+                $.ajax({
+                    type: "put",
+                    url: "/first-class/update",
+                    async: true,
+                    dataType: "json",
+                    data: {
+                        "id": id,
+                        "className": class_name,
+                        "remark": remark
+                    },
+                    success: function (res) {
+                        if (res.code == "0") {
+                            alert("修改成功");
+                            resetValue();
+                            $("#add_class").modal('close');
+                            getTableInfo();
+                        } else {
+                            alert(res.msg);
+                        }
+                    }
+                });
+            }
+
+        })
+
+    });
+
+    function getTableInfo() {
         $.ajax({
             type: "get",
             url: "/first-class/list",
@@ -120,36 +199,69 @@
                         "<th class='table-set'>操作</th>" +
                         "</tr>" +
                         "</thead>";
-                    for(var i=0; i<res.data.length; i++){
+                    for (var i = 0; i < res.data.length; i++) {
+                        console.log(res.data[i].id)
                         dataInfo += "<tr>";
-                        dataInfo += "<td>" + (i+1) + "</td>";
+                        dataInfo += "<td>" + (i + 1) + "</td>";
                         dataInfo += "<td>" + res.data[i].className + "</td>";
                         dataInfo += "<td>" + res.data[i].remark + "</td>";
                         dataInfo += "<td>" +
                             "<div class='am-btn-toolbar'>" +
                             "  <div class='am-btn-group am-btn-group-xs'>" +
                             "     <button type='button'" +
-                            "         class='btnedit am-btn am-btn-default am-btn-xs am-text-secondary'><span" +
+                            "         class='btnedit am-btn am-btn-default am-btn-xs am-text-secondary' onclick='openEdit(\""+ res.data[i].id +"\")'><span" +
                             "         class='am-icon-pencil-square-o'></span> 编辑" +
                             "     </button>" +
-                            "     <button class='am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only'><span" +
+                            "     <button class='am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only'  onclick='delData(\""+ res.data[i].id +"\")'><span" +
                             "          class='am-icon-trash-o'></span> 删除" +
                             "     </button>" +
                             "   </div>" +
                             "</div>" +
                             "</td>"
                     }
-                    console.log(dataInfo);
                     $("#first_class_table").html(dataInfo);
                 } else {
                     alert(res.msg);
                 }
             }
         });
-    })
+    }
+
+    function resetValue() {
+        $("#class_name").attr("value","");
+        $("#remark").attr("value","");
+        $("#classId").attr("value","");
+    }
+    
+    function openEdit(id) {
+        $.ajax({
+            url: '/first-class/get',
+            async: true,
+            dataType: "json",
+            data: {
+                "id": id
+            },
+            success: function (res) {
+                if (res.code == "0") {
+                    console.log(res)
+                    $("#class_name").attr("value",res.data.className);
+                    $("#remark").attr("value",res.data.remark);
+                    $("#classId").attr("value",res.data.id);
+                    $("#classId").value = res.data.id;
+                    $("#tabHead").html("修改类别")
+                    $("#add_class").modal();
+                } else {
+                    alert(res.msg);
+                }
+            }
+        })
+    }
+
     function openAdd() {
-        var addModal = $("#add_class");
-        addModal.modal();
+        $("#tabHead").html("添加类别")
+        $("#add_class").modal({
+            closeViaDimmer : false
+        });
     }
 </script>
 </body>

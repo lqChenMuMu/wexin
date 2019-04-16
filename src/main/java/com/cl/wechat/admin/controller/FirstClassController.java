@@ -2,12 +2,12 @@ package com.cl.wechat.admin.controller;
 
 
 import com.cl.wechat.admin.config.Resp;
+import com.cl.wechat.admin.entity.FirstClass;
 import com.cl.wechat.admin.service.FirstClassService;
+import net.sf.jsqlparser.statement.select.First;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -27,5 +27,28 @@ public class FirstClassController {
     @GetMapping("/list")
     public Resp list(){
         return new Resp(firstClassService.list());
+    }
+
+    @PostMapping("/save")
+    public Resp save(@Validated FirstClass firstClass){
+        return new Resp(firstClassService.save(firstClass));
+    }
+
+    @PutMapping("/update")
+    public Resp update(@Validated FirstClass firstClass){
+        if(firstClass.getId() == null){
+            return new Resp(new Exception("请选择一条记录"));
+        }
+        return new Resp(firstClassService.updateById(firstClass));
+    }
+
+    @DeleteMapping("/del")
+    public Resp del(String id){
+        return new Resp(firstClassService.removeById(id));
+    }
+
+    @GetMapping("/get")
+    public Resp get(String id){
+        return new Resp(firstClassService.getById(id));
     }
 }

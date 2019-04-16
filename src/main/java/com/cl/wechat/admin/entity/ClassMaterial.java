@@ -1,6 +1,9 @@
 package com.cl.wechat.admin.entity;
 
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -20,9 +23,12 @@ public class ClassMaterial implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer classId;
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
-    private Integer materialId;
+    private Long classId;
+
+    private Long materialId;
 
 
 }

@@ -39,7 +39,7 @@ public class MaterialController {
     public Resp getMaterial(String classIds) {
         String[] classIdArray = classIds.split(",");
         List<ClassMaterial> classMaterialList = classMaterialService.list(new QueryWrapper<ClassMaterial>().in("class_id", classIdArray));
-        List<Integer> materialIdsList = classMaterialList.stream().map(ClassMaterial::getMaterialId).distinct().collect(Collectors.toList());
+        List<Long> materialIdsList = classMaterialList.stream().map(ClassMaterial::getMaterialId).distinct().collect(Collectors.toList());
         List<Material> materialList = materialService.list(new QueryWrapper<Material>().in("id", materialIdsList));
         return new Resp(materialList);
     }
