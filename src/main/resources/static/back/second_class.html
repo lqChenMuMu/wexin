@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="../css/amazeui.min.css"/>
     <link rel="stylesheet" href="../css/admin.css"/>
+    <style>
+        .am-selected{
+            width: 100%;
+        }
+
+        .am-selected-status{
+            max-width: 350px;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,15 +31,15 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
+                    <button type="button" class="am-btn am-btn-primary" onclick="openAdd()"><span class="am-icon-plus"></span> 新增</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="am-g">
-        <div class="am-u-sm-12">
+        <div class="am-u-sm-12 am-scrollable-horizontal">
             <form class="am-form">
-                <table class="am-table am-table-striped am-table-hover table-main">
+                <table class="am-table am-table-striped am-table-hover table-main am-text-nowrap" id="second_class_table">
                     <thead>
                     <tr>
                         <th class="table-id">ID</th>
@@ -66,30 +75,32 @@
                     </tr>
                     </tbody>
                 </table>
-                <div class="am-cf">
+                <div class="am-cf" id="footBar">
                     共 15 条记录
                     <div class="am-fr">
-                        <ul class="am-pagination">
-                            <li class="am-disabled">
-                                <a href="#">«</a>
+                        <ul data-am-widget="pagination"
+                            class="am-pagination am-pagination-select"
+                        >
+                            <li class="am-pagination-prev ">
+                                <a href="#" class="">上一页</a>
                             </li>
-                            <li class="am-active">
-                                <a href="#">1</a>
+
+                            <li class="am-pagination-select">
+                                <select>
+                                    <option value="#" class="">1
+                                        /
+                                    </option>
+                                    <option value="#" class="">2
+                                        /
+                                    </option>
+                                    <option value="#" class="">3
+                                        /
+                                    </option>
+                                </select>
                             </li>
-                            <li>
-                                <a href="#">2</a>
-                            </li>
-                            <li>
-                                <a href="#">3</a>
-                            </li>
-                            <li>
-                                <a href="#">4</a>
-                            </li>
-                            <li>
-                                <a href="#">5</a>
-                            </li>
-                            <li>
-                                <a href="#">»</a>
+
+                            <li class="am-pagination-next ">
+                                <a href="#" class="">下一页</a>
                             </li>
                         </ul>
                     </div>
@@ -100,10 +111,312 @@
 
     </div>
 </div>
+
+<!--添加修改modal-->
+<div class="am-modal am-modal-alert" tabindex="-1" id="add_second_class">
+    <div class="am-modal-dialog">
+        <form action="" class="am-form am-form-horizontal" id="formid">
+            <fieldset>
+                <legend id="tabHead">添加类别</legend>
+                <div class="am-form-group">
+                    <label for="first_class" style="float: left">一级类别：</label>
+                    <select id="first_class" placeholder="输入类别名称" required></select>
+                </div>
+                <div class="am-form-group">
+                    <label for="class_name" style="float: left">类别名称：</label>
+                    <input type="text" id="class_name" placeholder="输入类别名称" required/>
+                </div>
+                <div class="am-form-group">
+                    <label for="materials" style="float: left">资料清单：</label>
+                    <select id="materials" multiple data-am-selected  required></select>
+                </div>
+
+                <div class="am-form-group">
+                    <label for="details" style="float: left">说明：</label>
+                    <textarea id="details"></textarea>
+                    <input id="classId" type="hidden"/>
+                </div>
+            </fieldset>
+        </form>
+        <!--</div>-->
+        <div class="am-modal-footer" style="margin-top: 5px;">
+            <div class="am-g">
+                <div class="am-u-sm-8"></div>
+                <div class="am-u-sm-4">
+                    <button type="button" class="am-btn am-btn-primary" onclick="submit()">确定</button>
+                    <button type="button" class="am-btn am-btn-danger" onclick="closeModal()">取消</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/amazeui.min.js"></script>
+<script src="../js/util.js"></script>
 <script>
     $(function () {
+        getSecondClassList(1);
+        initSelect();
+        validateForm();
     })
+
+    function getSecondClassList(page) {
+        $.ajax({
+            url: '/second-class/list',
+            type: 'get',
+            async: true,
+            data:{
+              current : page,
+              size: 10
+            },
+            success: function (res) {
+                if (res.code == "0") {
+                    var dataInfo = "<thead>" +
+                        "<tr>" +
+                        "<td>ID</td>" +
+                        "<td>一级类别名称</td>" +
+                        "<td>类别名称</td>" +
+                        /*"<td>说明</td>" +*/
+                        "<td>资料清单</td>" +
+                        "<td>操作</td>" +
+                        "</tr>" +
+                        "</thead>";
+                    for (var i = 0; i < res.data.records.length; i++) {
+                        dataInfo += "<tr>";
+                        dataInfo += "<td>" + (i + 1) + "</td>";
+                        dataInfo += "<td>" + res.data.records[i].firstClassName + "</td>";
+                        dataInfo += "<td>" + res.data.records[i].className + "</td>";
+                        /*dataInfo += "<td>" + res.data[i].details + "</td>";*/
+                        dataInfo += "<td>" + res.data.records[i].materialNames + "</td>";
+                        dataInfo += "<td>" +
+                            "<div class='am-btn-toolbar'>" +
+                            "  <div class='am-btn-group am-btn-group-xs'>" +
+                            "     <button type='button'" +
+                            "         class='btnedit am-btn am-btn-default am-btn-xs am-text-secondary' onclick='openEdit(\""+ res.data.records[i].id +"\")'><span" +
+                            "         class='am-icon-pencil-square-o'></span> 编辑" +
+                            "     </button>" +
+                            "     <button type='button' class='am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only'  onclick='delData(\""+ res.data.records[i].id +"\")'><span" +
+                            "          class='am-icon-trash-o'></span> 删除" +
+                            "     </button>" +
+                            "   </div>" +
+                            "</div>" +
+                            "</td>"
+                    }
+                    $("#second_class_table").html(dataInfo);
+
+                    var footBarStr = "共" +res.data.total +"条数据";
+                    footBarStr += "<div class='am-fr'>" +
+                        " <ul data-am-widget='pagination'" +
+                        "   class='am-pagination am-pagination-select' style='width: 250px'>" +
+                        "     <li class='am-pagination-prev'>" +
+                        "       <a href='javascript:void(0);' onclick='changePage(2)'>上一页</a>" +
+                        "     </li>" +
+                        "     <li class='am-pagination-select'>" +
+                        "        <select style='padding: 0; padding-left: 20px' id='pageSelect' onchange='changePage()'>";
+
+                    for(var j=0; j<res.data.pages; j++){
+                        var eqNum = page -1;
+                        if (j == eqNum){
+                            footBarStr += "<option value='"+ (j+1) +"' selected>"+ (j+1) + "</option>";
+                        }else{
+                            footBarStr += "<option value='"+ (j+1) +"'>"+ (j+1) + "</option>";
+                        }
+                    }
+
+                    footBarStr +="</select>" +
+                        "     </li>" +
+                        "     <li class='am-pagination-next'>" +
+                        "         <a href='javascript:void(0);' onclick='changePage(1)'>下一页</a>" +
+                        "     </li>" +
+                        " </ul>" +
+                        " </div>"
+                    $("#footBar").html(footBarStr);
+                }else{
+                }
+            }
+        })
+    }
+
+    function changePage(action) {
+        var page = $("#pageSelect").val();
+        if(validatenull(action)){
+            getSecondClassList(page);
+        }else if (action == 1){
+           var maxValue = $('#pageSelect option:last').val();
+            if (page < maxValue){
+                var currentPage = Number(page)+1;
+                getSecondClassList(currentPage);
+                $("#pageSelect").val(currentPage);
+            }
+        }else if (action == 2){
+            if (page > 1){
+                var currentPage = Number(page)-1;
+                getSecondClassList(currentPage);
+                $("#pageSelect").val(currentPage);
+            }
+        }
+
+    }
+
+ function initSelect() {
+        $.ajax({
+            url: "/first-class/list",
+            type: 'get',
+            async: true,
+            success: function (res) {
+                var firstSelect = "<option value=''></option>";
+                for (var i=0; i<res.data.length; i++){
+                    firstSelect += "<option value='"+ res.data[i].id +"'>" + res.data[i].className + "</option>";
+                }
+                $("#first_class").html(firstSelect)
+            }
+        });
+
+     $.ajax({
+         url: "/material/list",
+         type: 'get',
+         async: true,
+         success: function (res) {
+             var materialSelect = "<option value=''></option>";
+             for (var i=0; i<res.data.length; i++){
+                 materialSelect += "<option value='"+ res.data[i].id +"'>" + res.data[i].materialText + "</option>";
+             }
+             $("#materials").html(materialSelect)
+         }
+     });
+ }
+
+    function validateForm() {
+        $('#formid').validator({
+            onValid: function (validity) {
+                $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+            },
+
+            onInValid: function (validity) {
+                var $field = $(validity.field);
+                var $group = $field.closest('.am-form-group');
+                var $alert = $group.find('.am-alert');
+                // 使用自定义的提示信息 或 插件内置的提示信息
+                var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+                if (!$alert.length) {
+                    $alert = $('<div class="am-alert am-alert-danger"></div>').hide().appendTo($group);
+                }
+                $alert.html(msg).show();
+            }
+        });
+    }
+
+    function submit() {
+        var firstClassId = $("#first_class").val();
+        var className = $("#class_name").val();
+        var materialIds = $("#materials").val();
+        var details = $("#details").val();
+        var materials = materialIds.join(",");
+        console.log(firstClassId)
+        console.log(className)
+        console.log(materialIds)
+        console.log(details)
+        if (validatenull(firstClassId) || validatenull(className) || validatenull(materialIds) || validatenull(details)){
+            return;
+        }
+        var id = $("#classId").val();
+        if (validatenull(id)){
+            $.ajax({
+                url: '/second-class/save',
+                type: 'post',
+                async: true,
+                dataType: 'json',
+                data: {
+                    firstClassId: firstClassId,
+                    className: className,
+                    details: details,
+                    materialIds: materials
+                },
+                success: function (res) {
+                    if (res.code == 0){
+                        alert("保存成功");
+                        var page = $("#pageSelect").val();
+                        getSecondClassList(page);
+                        closeModal();
+                    }else{
+                        alert(res.msg);
+                    }
+                }
+            })
+        }else{
+            $.ajax({
+                url: '/second-class/update',
+                type: 'put',
+                async: true,
+                dataType: 'json',
+                data: {
+                    id: id,
+                    firstClassId: firstClassId,
+                    className: className,
+                    details: details,
+                    materialIds: materials
+                },
+                success: function (res) {
+                    if (res.code == 0){
+                        alert("修改成功");
+                        var page = $("#pageSelect").val();
+                        getSecondClassList(page);
+                        closeModal();
+                    }else{
+                        alert(res.msg);
+                    }
+                }
+            })
+        }
+
+    }
+
+    function openEdit(id) {
+        $.ajax({
+            url: '/second-class/get',
+            async: true,
+            dataType: "json",
+            data: {
+                "id": id
+            },
+            success: function (res) {
+                if (res.code == "0") {
+                    $("#class_name").val(res.data.className);
+                    $("#details").val(res.data.details);
+                    var materials = res.data.materialNames.split(",");
+                    console.log(materials)
+                    $("#materials").val(["1"]);
+                    $("#first_class").val(res.data.firstClassId);
+                    $("#classId").val(res.data.id);
+                    $("#tabHead").html("修改类别")
+                    $("#add_second_class").modal({
+                        closeViaDimmer : false
+                    });
+                } else {
+                    alert(res.msg);
+                }
+            }
+        })
+    }
+ 
+ function resetValue() {
+     $("#first_class").val("");
+     $("#materials").val("");
+     $("#class_name").val("");
+     $("#details").val("");
+ }
+
+ function closeModal() {
+     resetValue();
+     $("#add_second_class").modal('close')
+ }
+ 
+ function openAdd() {
+     $("#tabHead").html("添加类别")
+     $("#add_second_class").modal({ closeViaDimmer : false});
+ }
 </script>
 
 </body>

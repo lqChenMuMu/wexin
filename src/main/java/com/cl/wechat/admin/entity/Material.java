@@ -5,9 +5,13 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * <p>
@@ -26,9 +30,13 @@ public class Material implements Serializable {
 
     private Long id;
 
+    @NotBlank(message = "资料名称不能为空！")
     private String materialText;
 
     private String remark;
 
-
+    @JsonSerialize(using=ToStringSerializer.class)
+    public Long getId() {
+        return id;
+    }
 }

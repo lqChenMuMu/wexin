@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -48,4 +50,8 @@ public class Appointment implements Serializable {
 
     private String remark;
 
+    @JsonSerialize(using=ToStringSerializer.class)
+    public Long getId() {
+        return id;
+    }
 }

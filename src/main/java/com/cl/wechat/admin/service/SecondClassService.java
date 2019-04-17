@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SecondClassService extends IService<SecondClass> {
 
+    public void saveSecondClass(SecondClass secondClass);
+
+    public void updateSecondClass(SecondClass secondClass);
+
+    public void delSecondClass(String id);
+
 }

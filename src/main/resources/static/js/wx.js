@@ -174,7 +174,7 @@ function clickTime() {
 function appointmentSuccessInit(){
     $.ajax({
         type: "get",
-        url: "/material/get",
+        url: "/material/getByClass",
         async: true,
         dataType: "json",
         data: {
