@@ -162,6 +162,7 @@
     })
 
     function getSecondClassList(page) {
+        console.log(page)
         $.ajax({
             url: '/second-class/list',
             type: 'get',
@@ -218,7 +219,7 @@
                     for(var j=0; j<res.data.pages; j++){
                         var eqNum = page -1;
                         if (j == eqNum){
-                            footBarStr += "<option value='"+ (j+1) +"' selected>"+ (j+1) + "</option>";
+                            footBarStr += "<option value='"+ (j+1) +"'>"+ (j+1) + "</option>";
                         }else{
                             footBarStr += "<option value='"+ (j+1) +"'>"+ (j+1) + "</option>";
                         }
@@ -272,7 +273,11 @@
                 $("#first_class").html(firstSelect)
             }
         });
+     initMaterialSelect("");
 
+ }
+
+ function initMaterialSelect(selectIds) {
      $.ajax({
          url: "/material/list",
          type: 'get',
@@ -280,7 +285,14 @@
          success: function (res) {
              var materialSelect = "<option value=''></option>";
              for (var i=0; i<res.data.length; i++){
-                 materialSelect += "<option value='"+ res.data[i].id +"'>" + res.data[i].materialText + "</option>";
+                 console.log(selectIds)
+                 if (selectIds.indexOf(res.data[i].id)!=-1){
+                     console.log("???")
+                     materialSelect += "<option value='"+ res.data[i].id +"' selected>" + res.data[i].materialText + "</option>";
+                 }else{
+                     materialSelect += "<option value='"+ res.data[i].id +"'>" + res.data[i].materialText + "</option>";
+                 }
+
              }
              $("#materials").html(materialSelect)
          }
@@ -314,10 +326,6 @@
         var materialIds = $("#materials").val();
         var details = $("#details").val();
         var materials = materialIds.join(",");
-        console.log(firstClassId)
-        console.log(className)
-        console.log(materialIds)
-        console.log(details)
         if (validatenull(firstClassId) || validatenull(className) || validatenull(materialIds) || validatenull(details)){
             return;
         }
@@ -385,9 +393,7 @@
                 if (res.code == "0") {
                     $("#class_name").val(res.data.className);
                     $("#details").val(res.data.details);
-                    var materials = res.data.materialNames.split(",");
-                    console.log(materials)
-                    $("#materials").val(["1"]);
+                    initMaterialSelect(res.data.materialNames);
                     $("#first_class").val(res.data.firstClassId);
                     $("#classId").val(res.data.id);
                     $("#tabHead").html("修改类别")
