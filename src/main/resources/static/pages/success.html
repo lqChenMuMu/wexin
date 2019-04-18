@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>预约成功</title>
     <link rel="stylesheet" href="../css/affirm.css">
+    <link rel="stylesheet" href="../css/animate.css"/>
 </head>
 <body>
 <div class="page">
@@ -20,9 +21,24 @@
 <script type="text/javascript" src="../js/wx.js"></script>
 <script src="../js/util.js"></script>
 <script>
-    $(function () {
+    window.onload = function () {
         appointmentSuccessInit();
-    });
+        $(".header").addClass('fadeInLeftBig animated infinite');
+        $(".center").addClass('fadeInRightBig animated infinite');
+        setTimeout(function () {
+            $("img").addClass('rotateIn animated infinite');
+            $("label").addClass('bounceIn animated infinite');
+            $(".header").removeClass('fadeInLeftBig animated infinite');
+            $(".center").removeClass('fadeInRightBig animated infinite');
+            mag();
+        }, 1000);
+    };
+    function mag() {
+        setTimeout(function () {
+            $("img").removeClass('rotateIn animated infinite');
+            $("label").removeClass('bounceIn animated infinite');
+        }, 1000);
+    }
 </script>
 </body>
 </html>

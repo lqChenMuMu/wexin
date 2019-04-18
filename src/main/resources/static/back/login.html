@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/login.css"/>
+		
+	</head>
+	<body>
+		<div class="bg1"></div>
+		<div class="gyl">
+			学府科技创新基地有限公司
+		        
+		    <div class="gy2" >微信后台管理系统</div>
+		</div>
+		<div class="bg">
+			<div class="wel">用户登录</div>			
+	        <div class="user">
+	       	    <div id="user" style="">用户名</div>
+	       	    <input  type="text" id="userName"/>
+	        </div>
+	        <div class="password" >
+	        	<div id="password" >密&nbsp;&nbsp;&nbsp;码</div>
+	       	    <input class="" type="password" id="pwd" />
+	        </div>
+	        <input class="btn" type="button" name="登录" value="登录" onclick="login()"/>
+		</div>
+	<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+	<script src="../js/util.js"></script>
+	<script>
+		function login() {
+			var userName = $("#userName").val();
+			var password = $("#pwd").val();
+
+			if(validatenull(userName)){
+			    alert("请输入姓名！");
+			    return;
+			}
+			if (validatenull(password)){
+                alert("请输入密码！");
+                return;
+			}
+
+			$.ajax({
+				url: '/user/back/login',
+				type: 'get',
+                async: true,
+                data:{
+                    userName : userName,
+                    password: password
+                },
+				success: function (res) {
+                    console.log(res)
+					if (res.code == 0){
+                        console.log("111")
+					    window.location.href = '/back/index.html'
+					}else{
+					    console.log(res)
+					    alert(res.msg)
+					}
+                }
+			})
+        }
+	</script>
+	</body>
+</html>

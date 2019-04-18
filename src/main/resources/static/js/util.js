@@ -41,3 +41,12 @@ function getQueryString(name) {
     }
     return null;
 }
+
+function validateName(name) {
+    var regName = /^[\u4e00-\u9fa5]{2,4}$/
+    if (!regName.test(name)) {
+        return false
+    }else{
+        return true
+    }
+}

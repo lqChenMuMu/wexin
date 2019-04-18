@@ -9,11 +9,11 @@ public class IndexController {
 
     @RequestMapping("/classShow")
     public String classShow(){
-        return "classShow";
+        return "/classShow";
     }
 
     @RequestMapping("/myAppointment")
     public String myAppointment(){
-        return "myAppointment";
+        return "/myAppointment";
     }
 }

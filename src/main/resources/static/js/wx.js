@@ -106,6 +106,10 @@ function affirmInit() {
                 alert("请输入姓名！");
                 return;
             }
+            if (!validateName(name)){
+                alert("请输入正确的姓名！");
+                return;
+            }
             var company = $("#company").val();
             if (validatenull(company) == true) {
                 alert("请输入公司名称！");

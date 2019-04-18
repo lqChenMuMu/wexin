@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="../css/style.css" media="screen" type="text/css"/>
     <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/animate.css"/>
 </head>
 <body>
 
 <section class='container'>
     <form>
-        <fieldset class='alpha'>
+        <fieldset class='alpha' id="submitForm">
             <div class='frow'><input class='item' placeholder='姓名' type='text' id="name"></div>
             <div class='frow'><input class='item' placeholder='公司' type='text' id="company"></div>
             <div class='frow' id="selectDateDiv"><input class='item' placeholder='预约日期' type='text' id="dateText" readonly></div>
@@ -46,8 +47,12 @@
 <script type="text/javascript" src="../js/wx.js"></script>
 <script src="../js/util.js"></script>
 <script>
-    $(function () {
+    window.onload = function () {
         affirmInit();
+        $("#submitForm").addClass('flipInX animated infinite');
+        setTimeout(function () {
+            $("#submitForm").removeClass('flipInX animated infinite');
+        }, 1000);
         var nowDateArray = getNowFormatDate().split(' ');
         var date_ = nowDateArray[0];
         var disAppointment = ['2019-04-10 am', '2019-04-11 pm'];
@@ -66,7 +71,7 @@
             $('#dateText').val($('.appointmentDate').val() + ' ' + textTime[0]);
             $('.mask-time,.time-area').css("display", "none");
         });
-    });
+    };
 </script>
 </body>
 </html>

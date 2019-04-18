@@ -67,7 +67,7 @@ public class SecondClassController {
         return new Resp(result);
     }
 
-    @GetMapping("/list")
+    @GetMapping("/back/list")
     public Resp list(Page<SecondClass> page){
         IPage<SecondClassVO> result = new Page<>();
         List<SecondClassVO> secondClassVOS = new ArrayList<>();
@@ -96,13 +96,13 @@ public class SecondClassController {
         return new Resp(result);
     }
 
-    @PostMapping("/save")
+    @PostMapping("/back/save")
     public Resp save(SecondClass secondClass){
         secondClassService.saveSecondClass(secondClass);
         return new Resp(true);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/back/update")
     public Resp update(SecondClass secondClass){
         if(secondClass.getId() == null){
             return new Resp(new Exception("请选择记录"));
@@ -111,13 +111,13 @@ public class SecondClassController {
         return new Resp(true);
     }
 
-    @DeleteMapping("/del")
+    @DeleteMapping("/back/del")
     public Resp del(String id){
         secondClassService.delSecondClass(id);
         return new Resp();
     }
 
-    @GetMapping("/get")
+    @GetMapping("/back/get")
     public Resp get(String id){
         SecondClassVO secondClassVO = new SecondClassVO();
         SecondClass secondClass = secondClassService.getById(id);
@@ -125,8 +125,12 @@ public class SecondClassController {
         ClassMaterial qClassMaterial = new ClassMaterial();
         qClassMaterial.setClassId(Long.valueOf(id));
         List<ClassMaterial> classMaterials = classMaterialService.list(new QueryWrapper<>(qClassMaterial));
-        List<Material> materials = materialService.list(new QueryWrapper<Material>()
-                .in("id",classMaterials.stream().map(ClassMaterial::getMaterialId).collect(Collectors.toList())));
+        List<Material> materials = new ArrayList<>();
+        if(CollUtil.isNotEmpty(classMaterials)){
+             materials = materialService.list(new QueryWrapper<Material>()
+                    .in("id",classMaterials.stream().map(ClassMaterial::getMaterialId).collect(Collectors.toList())));
+        }
+
         BeanUtil.copyProperties(secondClass,secondClassVO);
         secondClassVO.setFirstClassName(firstClass.getClassName());
         StringBuffer materialNames = new StringBuffer();

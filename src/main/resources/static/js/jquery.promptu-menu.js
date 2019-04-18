@@ -642,11 +642,11 @@ function setTimeHtml(date_, type, disAppointment, appoinmentDown) {
                 for (var j=0; j<disAppointment.length; j++){
                     var disableDate = disAppointment[j].split(' ');
                     if (nowDate[0] == disableDate[0]){
-                        if (disableDate[1] == "am" && halfHourArray[i]=="上午"){
+                        if (disableDate[1] == "上午" && halfHourArray[i]=="上午"){
                             returnHtml += '<div class="time-table disabled">' +
                                 '<div>' + halfHourArray[i] + '<span class="font11">约满</span></div>' +
                                 '</div>';
-                        }else if (disableDate[1] == "pm" && halfHourArray[i]=="下午"){
+                        }else if (disableDate[1] == "下午" && halfHourArray[i]=="下午"){
                             returnHtml += '<div class="time-table disabled">' +
                                 '<div>' + halfHourArray[i] + '<span class="font11">约满</span></div>' +
                                 '</div>';

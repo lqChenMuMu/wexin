@@ -1,9 +1,11 @@
 package com.cl.wechat.admin.config;
 
+import cn.hutool.http.HttpUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.Console;
 import java.io.IOException;
 import java.net.URLEncoder;
 
@@ -17,20 +19,24 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("进入拦截器");
-        /*if (request.getRequestURI().equals("/login")) {
-            return true;
-        }*/
-
         System.out.println(request.getRequestURI());
-        //验证session是否存在
-        Object openid = request.getSession().getAttribute("openid");
-        if (openid == null) {
-            if(request.getRequestURI().equals("/appointment/myAppointment")){
-                this.auth(response,"myState");
-            }else{
-                this.auth(response,"state");
+        if(request.getRequestURI().indexOf("back")!=-1){
+            Object userName = request.getSession().getAttribute("userName");
+            if(userName == null){
+                response.sendRedirect("/back/login.html");
+                return false;
             }
-            return false;
+        }else{
+            //验证session是否存在
+            Object openid = request.getSession().getAttribute("openid");
+            if (openid == null) {
+                if(request.getRequestURI().equals("/appointment/myAppointment") || request.getRequestURI().equals("/myAppointment")){
+                    this.auth(response,"myState");
+                }else{
+                    this.auth(response,"state");
+                }
+                return false;
+            }
         }
         return true;
     }
@@ -46,7 +52,7 @@ public class SessionInterceptor implements HandlerInterceptor {
                 "scope=snsapi_userinfo" +
                 "&state="+ state +
                 "#wechat_redirect";
-
+        System.out.println(url);
         response.sendRedirect(url);
     }
 }

@@ -43,17 +43,17 @@ public class MaterialController {
         return new Resp(materialList);
     }
 
-    @GetMapping("/list")
+    @GetMapping("/back/list")
     public Resp list(){
         return new Resp(materialService.list());
     }
 
-    @PostMapping("/save")
+    @PostMapping("/back/save")
     public Resp save(@Validated Material material){
         return new Resp(materialService.save(material));
     }
 
-    @PutMapping("/update")
+    @PutMapping("/back/update")
     public Resp update(@Validated Material material){
         if(material.getId() == null){
             return new Resp(new Exception("请选择一条记录"));
@@ -61,12 +61,12 @@ public class MaterialController {
         return new Resp(materialService.updateById(material));
     }
 
-    @DeleteMapping("/del")
+    @DeleteMapping("/back/del")
     public Resp del(String id){
         return new Resp(materialService.removeById(id));
     }
 
-    @GetMapping("/get")
+    @GetMapping("/back/get")
     public Resp get(String id){
         return new Resp(materialService.getById(id));
     }

@@ -1,9 +1,12 @@
 package com.cl.wechat.admin.controller;
 
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cl.wechat.admin.config.Resp;
 import com.cl.wechat.admin.config.ValidateCodeUtil;
 import com.cl.wechat.admin.entity.*;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -114,6 +118,27 @@ public class AppointmentController {
             myAppointmentVOS.add(myAppointmentVO);
         });
         return new Resp(myAppointmentVOS);
+    }
+
+    @GetMapping("/back/list")
+    public Resp list(Page<Appointment> page){
+        IPage<Appointment> appointmentList = appointmentService.page(page);
+        appointmentList.getRecords().forEach(appointment -> {
+            if(StrUtil.isNotBlank(appointment.getClassId())){
+                List<SecondClass> secondClassList = secondClassService.list(new QueryWrapper<SecondClass>()
+                        .in("id",appointment.getClassId().split(",")));
+                StringBuffer classNames = new StringBuffer();
+                for (int i=0; i<secondClassList.size(); i++) {
+                    classNames.append((i+1)).append(":").append(secondClassList.get(i).getClassName());
+                }
+                appointment.setClassId(classNames.toString());
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                long lt = new Long(appointment.getSubmitTime());
+                Date date = new Date(lt);
+                appointment.setSubmitTime(simpleDateFormat.format(date));
+            }
+        });
+        return new Resp(appointmentList);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.cl.wechat.admin.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cl.wechat.admin.entity.ClassMaterial;
 import com.cl.wechat.admin.entity.SecondClass;
@@ -34,6 +35,9 @@ public class SecondClassServiceImpl extends ServiceImpl<SecondClassMapper, Secon
     @Override
     public void saveSecondClass(SecondClass secondClass) {
         secondClassMapper.insert(secondClass);
+        if(StrUtil.isBlank(secondClass.getMaterialIds())){
+            return;
+        }
         List<String> materialIds = Arrays.asList(secondClass.getMaterialIds().split(","));
         materialIds.forEach(id -> {
             ClassMaterial classMaterial = new ClassMaterial();
@@ -50,6 +54,9 @@ public class SecondClassServiceImpl extends ServiceImpl<SecondClassMapper, Secon
         ClassMaterial qClassMaterial = new ClassMaterial();
         qClassMaterial.setClassId(secondClass.getId());
         classMaterialMapper.delete(new QueryWrapper<>(qClassMaterial));
+        if(StrUtil.isBlank(secondClass.getMaterialIds())){
+            return;
+        }
         List<String> materialIds = Arrays.asList(secondClass.getMaterialIds().split(","));
         materialIds.forEach(id -> {
             ClassMaterial classMaterial = new ClassMaterial();

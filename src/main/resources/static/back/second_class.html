@@ -128,7 +128,7 @@
                 </div>
                 <div class="am-form-group">
                     <label for="materials" style="float: left">资料清单：</label>
-                    <select id="materials" multiple data-am-selected  required></select>
+                    <select id="materials" multiple data-am-selected></select>
                 </div>
 
                 <div class="am-form-group">
@@ -151,6 +151,21 @@
         </div>
     </div>
 </div>
+
+<!--del confirm-->
+<div class="am-modal am-modal-confirm" tabindex="-1" id="del-confirm">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">删除类别</div>
+        <div class="am-modal-bd">
+            你，确定要删除这条记录吗？
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-confirm onclick="affirmDel()">确定</span>
+            <span class="am-modal-btn" data-am-modal-cancel onclick="closeConfirm">取消</span>
+            <input id="delId" type="hidden"/>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
 <script src="../js/amazeui.min.js"></script>
 <script src="../js/util.js"></script>
@@ -164,7 +179,7 @@
     function getSecondClassList(page) {
         console.log(page)
         $.ajax({
-            url: '/second-class/list',
+            url: '/second-class/back/list',
             type: 'get',
             async: true,
             data:{
@@ -219,7 +234,7 @@
                     for(var j=0; j<res.data.pages; j++){
                         var eqNum = page -1;
                         if (j == eqNum){
-                            footBarStr += "<option value='"+ (j+1) +"'>"+ (j+1) + "</option>";
+                            footBarStr += "<option value='"+ (j+1) +"' selected>"+ (j+1) + "</option>";
                         }else{
                             footBarStr += "<option value='"+ (j+1) +"'>"+ (j+1) + "</option>";
                         }
@@ -257,12 +272,11 @@
                 $("#pageSelect").val(currentPage);
             }
         }
-
     }
 
  function initSelect() {
         $.ajax({
-            url: "/first-class/list",
+            url: "/first-class/back/list",
             type: 'get',
             async: true,
             success: function (res) {
@@ -279,7 +293,7 @@
 
  function initMaterialSelect(selectIds) {
      $.ajax({
-         url: "/material/list",
+         url: "/material/back/list",
          type: 'get',
          async: true,
          success: function (res) {
@@ -326,13 +340,14 @@
         var materialIds = $("#materials").val();
         var details = $("#details").val();
         var materials = materialIds.join(",");
-        if (validatenull(firstClassId) || validatenull(className) || validatenull(materialIds) || validatenull(details)){
+        if (validatenull(firstClassId) || validatenull(className)){
+            alert("请讲信息填写完整！");
             return;
         }
         var id = $("#classId").val();
         if (validatenull(id)){
             $.ajax({
-                url: '/second-class/save',
+                url: '/second-class/back/save',
                 type: 'post',
                 async: true,
                 dataType: 'json',
@@ -355,7 +370,7 @@
             })
         }else{
             $.ajax({
-                url: '/second-class/update',
+                url: '/second-class/back/update',
                 type: 'put',
                 async: true,
                 dataType: 'json',
@@ -383,7 +398,7 @@
 
     function openEdit(id) {
         $.ajax({
-            url: '/second-class/get',
+            url: '/second-class/back/get',
             async: true,
             dataType: "json",
             data: {
@@ -406,7 +421,36 @@
             }
         })
     }
- 
+
+    function delData(id) {
+        $("#delId").val(id)
+        $("#del-confirm").modal({closeViaDimmer : false})
+    }
+
+    function affirmDel() {
+        $.ajax({
+            url: '/second-class/back/del',
+            type: 'delete',
+            dataType: "json",
+            data: {
+                "id": $("#delId").val()
+            },
+            success: function (res) {
+                if (res.code == "0") {
+                    alert("删除成功！");
+                    getSecondClassList(3);
+                } else {
+                    alert(res.msg);
+                }
+            }
+        })
+    }
+
+    function closeConfirm() {
+        $("#delId").val("");
+        $("#del-confirm").modal('close')
+    }
+
  function resetValue() {
      $("#first_class").val("");
      $("#materials").val("");
@@ -421,6 +465,7 @@
  
  function openAdd() {
      $("#tabHead").html("添加类别")
+     initMaterialSelect("");
      $("#add_second_class").modal({ closeViaDimmer : false});
  }
 </script>

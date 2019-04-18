@@ -24,17 +24,17 @@ public class FirstClassController {
     @Autowired
     private FirstClassService firstClassService;
 
-    @GetMapping("/list")
+    @GetMapping("/back/list")
     public Resp list(){
         return new Resp(firstClassService.list());
     }
 
-    @PostMapping("/save")
+    @PostMapping("/back/save")
     public Resp save(@Validated FirstClass firstClass){
         return new Resp(firstClassService.save(firstClass));
     }
 
-    @PutMapping("/update")
+    @PutMapping("/back/update")
     public Resp update(@Validated FirstClass firstClass){
         if(firstClass.getId() == null){
             return new Resp(new Exception("请选择一条记录"));
@@ -42,12 +42,12 @@ public class FirstClassController {
         return new Resp(firstClassService.updateById(firstClass));
     }
 
-    @DeleteMapping("/del")
+    @DeleteMapping("/back/del")
     public Resp del(String id){
         return new Resp(firstClassService.removeById(id));
     }
 
-    @GetMapping("/get")
+    @GetMapping("/back/get")
     public Resp get(String id){
         return new Resp(firstClassService.getById(id));
     }

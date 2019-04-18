@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>我的预约</title>
     <link rel="stylesheet" href="../css/myAppointment.css">
+    <link rel="stylesheet" href="../css/animate.css"/>
 </head>
 <body>
 <div class="page">
@@ -12,9 +13,14 @@
 <script type="text/javascript" src="../js/wx.js"></script>
 <script src="../js/util.js"></script>
 <script>
-    $(function () {
+    window.onload = function () {
        myAppointmentInit();
-    });
+        $(".myAppointment").addClass('fadeInUpBig animated infinite');
+        setTimeout(function () {
+            $(".myAppointment").removeClass('fadeInUpBig animated infinite');
+        }, 1000);
+
+    };
 </script>
 </body>
 </html>

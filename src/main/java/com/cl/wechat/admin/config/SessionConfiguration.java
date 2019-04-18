@@ -23,7 +23,9 @@ public class SessionConfiguration implements WebMvcConfigurer {
         interceptor.excludePathPatterns("/wechat/**");
         interceptor.excludePathPatterns("/js/**");
         interceptor.excludePathPatterns("/css/**");
-        interceptor.excludePathPatterns("/*/**");
-
+        interceptor.excludePathPatterns("/img/**");
+        interceptor.excludePathPatterns("/fonts/**");
+        interceptor.excludePathPatterns("/back/login.html");
+        interceptor.excludePathPatterns("/user/back/login");
     }
 }

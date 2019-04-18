@@ -150,7 +150,7 @@
     function getTableInfo() {
         $.ajax({
             type: "get",
-            url: "/first-class/list",
+            url: "/first-class/back/list",
             async: true,
             success: function (res) {
                 if (res.code == "0") {
@@ -197,7 +197,7 @@
     
     function openEdit(id) {
         $.ajax({
-            url: '/first-class/get',
+            url: '/first-class/back/get',
             async: true,
             dataType: "json",
             data: {
@@ -226,7 +226,7 @@
 
     function affirmDel() {
         $.ajax({
-            url: '/first-class/del',
+            url: '/first-class/back/del',
             type: 'delete',
             dataType: "json",
             data: {
@@ -235,7 +235,6 @@
             success: function (res) {
                 if (res.code == "0") {
                     alert("删除成功！");
-                    console.log(this)
                     getTableInfo();
                 } else {
                     alert(res.msg);
@@ -259,7 +258,7 @@
             if(validatenull(id)){
                 $.ajax({
                     type: "post",
-                    url: "/first-class/save",
+                    url: "/first-class/back/save",
                     async: true,
                     dataType: "json",
                     data: {
@@ -279,7 +278,7 @@
             }else{
                 $.ajax({
                     type: "put",
-                    url: "/first-class/update",
+                    url: "/first-class/back/update",
                     async: true,
                     dataType: "json",
                     data: {

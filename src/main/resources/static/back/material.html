@@ -11,7 +11,7 @@
 <body>
 <div class="admin-content-body">
     <div class="am-cf am-padding am-padding-bottom-0">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">一级类别</strong>
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">资料管理</strong>
             <small></small>
         </div>
     </div>
@@ -128,7 +128,7 @@
     function materialList() {
             $.ajax({
                 type: "get",
-                url: "/material/list",
+                url: "/material/back/list",
                 async: true,
                 success: function (res) {
                     if (res.code == "0") {
@@ -198,7 +198,7 @@
             if(validatenull(id)){
                 $.ajax({
                     type: "post",
-                    url: "/material/save",
+                    url: "/material/back/save",
                     async: true,
                     dataType: "json",
                     data: {
@@ -219,7 +219,7 @@
             }else{
                 $.ajax({
                     type: "put",
-                    url: "/material/update",
+                    url: "/material/back/update",
                     async: true,
                     dataType: "json",
                     data: {
@@ -249,7 +249,7 @@
 
     function openEdit(id) {
         $.ajax({
-            url: '/material/get',
+            url: '/material/back/get',
             async: true,
             dataType: "json",
             data: {
@@ -279,7 +279,7 @@
 
     function affirmDel() {
         $.ajax({
-            url: '/material/del',
+            url: '/material/back/del',
             type: 'delete',
             dataType: "json",
             data: {
