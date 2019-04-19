@@ -11,6 +11,7 @@ import com.cl.wechat.admin.config.Resp;
 import com.cl.wechat.admin.config.ValidateCodeUtil;
 import com.cl.wechat.admin.entity.*;
 import com.cl.wechat.admin.service.*;
+import com.cl.wechat.admin.vo.ApplicationQueryVO;
 import com.cl.wechat.admin.vo.MyAppointmentVO;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
@@ -121,8 +122,25 @@ public class AppointmentController {
     }
 
     @GetMapping("/back/list")
-    public Resp list(Page<Appointment> page){
-        IPage<Appointment> appointmentList = appointmentService.page(page);
+    public Resp list(Page<Appointment> page, ApplicationQueryVO applicationQueryVO){
+        Appointment qAppointment = new Appointment();
+        if(StrUtil.isNotBlank(applicationQueryVO.getName())){
+            qAppointment.setName(applicationQueryVO.getName());
+        }
+        if(StrUtil.isNotBlank(applicationQueryVO.getCompany())){
+            qAppointment.setCompany(applicationQueryVO.getCompany());
+        }
+        IPage<Appointment> appointmentList = new Page<>();
+        if(null != applicationQueryVO.getSortTime()){
+            if(1 == applicationQueryVO.getSortTime()){
+                appointmentList = appointmentService.page(page,new QueryWrapper<>(qAppointment).orderByAsc("time"));
+            }else if(0 == applicationQueryVO.getSortTime()){
+                appointmentList = appointmentService.page(page,new QueryWrapper<>(qAppointment).orderByDesc("time"));
+            }
+        }else{
+            appointmentList = appointmentService.page(page,new QueryWrapper<>(qAppointment));
+        }
+
         appointmentList.getRecords().forEach(appointment -> {
             if(StrUtil.isNotBlank(appointment.getClassId())){
                 List<SecondClass> secondClassList = secondClassService.list(new QueryWrapper<SecondClass>()

@@ -1,11 +1,9 @@
 package com.cl.wechat.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
@@ -33,8 +31,10 @@ public class Appointment implements Serializable {
 
     private String openId;
 
+    @TableField(condition = SqlCondition.LIKE)
     private String name;
 
+    @TableField(condition = SqlCondition.LIKE)
     private String company;
 
     private String time;

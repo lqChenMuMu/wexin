@@ -1,13 +1,10 @@
 package com.cl.wechat.admin.config;
 
-import cn.hutool.http.HttpUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.Console;
 import java.io.IOException;
-import java.net.URLEncoder;
 
 public class SessionInterceptor implements HandlerInterceptor {
 

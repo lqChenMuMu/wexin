@@ -35,7 +35,7 @@ public class MenuManager {
        // AccessToken at = AccessTokenThread.access_token;
 //        if (null != at) {
             // 调用接口创建菜单  
-            boolean result = MenuUtil.createMenu(getMenu(), "20_J98uzwifzXUSaIDfUX6CZKZRaz-iYVO1A2SQ_4v-Tt3G-wQmY8GIFbXxVHBgUx7bwBTrW1YhM4v0d4Z7--QA7b3wNFGdmuktI7Dnny9dQz3JCt27tcOAmlMqKOELMXbADAOPA");
+            boolean result = MenuUtil.createMenu(getMenu(), "20_lX3B15aNuDk2ybOG5158tpwF5cYkMJaG9R_iRXjnppSGcl-DBA5CH65Fdp0uc0uQwbtm4PGAVXY7AaNjy4LLmvzdXZGzgSsdse8dmk5UdWS_DOCb__tO4JoXEFX__4u3-sHeqXRPS31kxglXLFUjAJASMB");
             // 判断菜单创建结果
             if (result)  
                 log.info("菜单创建成功！ok");  

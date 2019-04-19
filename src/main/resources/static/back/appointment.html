@@ -19,131 +19,149 @@
     <hr>
 
     <div class="am-g">
-        </div>
-        <div class="am-u-sm-12 am-u-md-3">
-            <div class="am-input-group am-input-group-sm">
-                <input type="text" class="am-form-field">
-                <span class="am-input-group-btn">
-            <button class="am-btn am-btn-default" type="button">搜索</button>
-          </span>
+    </div>
+    <div class="am-u-sm-12 am-u-md-5">
+        <div class="am-g am-input-group am-input-group-sm">
+            <div class="am-u-sm-5">
+                <input type="text" id="name" class="am-form-field" placeholder="输入姓名...">
+            </div>
+            <div class="am-u-sm-5">
+                <input type="text" id="company" class="am-form-field" placeholder="输入公司名称...">
+            </div>
+            <div class="am-u-sm-2">
+                  <span class="am-input-group-btn">
+                        <button class="am-btn am-btn-primary" type="button" onclick="appointmentList(1)">搜索</button>
+                  </span>
             </div>
         </div>
     </div>
-    <div class="am-g">
-        <div class="am-u-sm-12">
-            <form class="am-form">
-                <div class="am-scrollable-horizontal">
-                    <table class="am-table am-table-striped am-table-hover table-main am-text-nowrap" id="appointment_table">
-                        <thead>
-                        <tr>
-                            <th class="table-id">ID</th>
-                            <th class="table-title">姓名</th>
-                            <th class="table-type">公司名称</th>
-                            <th class="table-author am-hide-sm-only">服务类别</th>
-                            <th class="table-type">预约时间</th>
-                            <th class="table-type">手机号码</th>
-                            <th class="table-type">提交时间</th>
-                            <th class="table-type">备注</th>
+</div>
+<div class="am-g">
+    <div class="am-u-sm-12">
+        <form class="am-form">
+            <div class="am-scrollable-horizontal">
+                <table class="am-table am-table-striped am-table-hover table-main am-text-nowrap"
+                       id="appointment_table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>姓名</th>
+                        <th>公司名称</th>
+                        <th>服务类别</th>
+                        <th onclick="change('time')" id="time">预约时间 <span class="am-icon-sort"></span></th>
+                        <th>手机号码</th>
+                        <th>提交时间</th>
+                        <th class="no-sort">备注</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="">
+                        <td>1</td>
+                        <td>
+                            张三1
+                        </td>
+                        <td>菲普莱</td>
+                        <td class="am-hide-sm-only">
+                            1:综合服务 2:特殊服务
+                            1:综合服务 2:特殊服务
+                            1:综合服务 2:特殊服务
+                            1:综合服务 2:特殊服务
+                        </td>
+                        <td>2019-05-01上午</td>
+                        <td>13597857551</td>
+                        <td>2019-05-01</td>
+                        <td>asdasd</td>
+                    </tr>
+                    <tr class="">
+                        <td>1</td>
+                        <td>
+                            张三2
+                        </td>
+                        <td>菲普莱</td>
+                        <td class="am-hide-sm-only">
+                            1:综合服务 2:特殊服务
+                            1:综合服务 2:特殊服务
+                            1:综合服务 2:特殊服务
+                            1:综合服务 2:特殊服务
+                        </td>
+                        <td>2019-05-01上午</td>
+                        <td>13597857551</td>
+                        <td>2019-05-01</td>
+                        <td>asdasd</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="am-cf" id="footBar">
+                共 15 条记录
+                <div class="am-fr">
+                    <ul data-am-widget="pagination"
+                        class="am-pagination am-pagination-select"
+                    >
+                        <li class="am-pagination-prev ">
+                            <a href="#" class="">上一页</a>
+                        </li>
 
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="">
-                            <td>1</td>
-                            <td>
-                                张三
-                            </td>
-                            <td>菲普莱</td>
-                            <td class="am-hide-sm-only">
-                                1:综合服务 2:特殊服务
-                                1:综合服务 2:特殊服务
-                                1:综合服务 2:特殊服务
-                                1:综合服务 2:特殊服务
-                            </td>
-                            <td>2019-05-01上午</td>
-                            <td>13597857551</td>
-                            <td>2019-05-01</td>
-                            <td>asdasd</td>
-                        </tr>
-                        <tr class="">
-                            <td>1</td>
-                            <td>
-                                张三
-                            </td>
-                            <td>菲普莱</td>
-                            <td class="am-hide-sm-only">
-                                1:综合服务 2:特殊服务
-                                1:综合服务 2:特殊服务
-                                1:综合服务 2:特殊服务
-                                1:综合服务 2:特殊服务
-                            </td>
-                            <td>2019-05-01上午</td>
-                            <td>13597857551</td>
-                            <td>2019-05-01</td>
-                            <td>asdasd</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        <li class="am-pagination-select">
+                            <select>
+                                <option value="#" class="">1
+                                    /
+                                </option>
+                                <option value="#" class="">2
+                                    /
+                                </option>
+                                <option value="#" class="">3
+                                    /
+                                </option>
+                            </select>
+                        </li>
+
+                        <li class="am-pagination-next ">
+                            <a href="#" class="">下一页</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="am-cf" id="footBar">
-                    共 15 条记录
-                    <div class="am-fr">
-                        <ul data-am-widget="pagination"
-                            class="am-pagination am-pagination-select"
-                        >
-                            <li class="am-pagination-prev ">
-                                <a href="#" class="">上一页</a>
-                            </li>
-
-                            <li class="am-pagination-select">
-                                <select>
-                                    <option value="#" class="">1
-                                        /
-                                    </option>
-                                    <option value="#" class="">2
-                                        /
-                                    </option>
-                                    <option value="#" class="">3
-                                        /
-                                    </option>
-                                </select>
-                            </li>
-
-                            <li class="am-pagination-next ">
-                                <a href="#" class="">下一页</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <hr>
-            </form>
-        </div>
+            </div>
+            <hr>
+        </form>
     </div>
 </div>
+</div>
 <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/jquery.tablesort.min.js"></script>
+<script src="../js/util.js"></script>
 <script>
     $(function () {
         appointmentList(1);
+        $('#appointment_table').tablesort().data('tablesort');
     })
 
-    function appointmentList(page) {
+    function appointmentList(page, sortTime, icon) {
+        var name = $("#name").val();
+        var company = $("#company").val();
         $.ajax({
             type: "get",
             url: "/appointment/back/list",
             async: true,
-            data:{
-              current: page,
-              size: 10
+            data: {
+                current: page,
+                size: 10,
+                sortTime: sortTime,
+                name: name,
+                company: company
             },
             success: function (res) {
                 if (res.code == "0") {
+                    if (validatenull(icon)) {
+                        icon = 'am-icon-sort'
+                    }
                     var dataInfo = "<thead>" +
                         "<tr>" +
                         "<th>ID</th>" +
                         "<th>姓名</th>" +
                         "<th>公司名称</th>" +
                         "<th>服务类别</th>" +
-                        "<th>预约时间</th>" +
+                        "<th onclick=\"change('time')\" id=\"time\">预约时间 <span class='" + icon + "'></span> </th>" +
                         "<th>手机号码</th>" +
                         "<th>提交时间</th>" +
                         "<th>备注</th>" +
@@ -162,7 +180,7 @@
                     }
                     $("#appointment_table").html(dataInfo);
 
-                    var footBarStr = "共" +res.data.total +"条数据";
+                    var footBarStr = "共" + res.data.total + "条数据";
                     footBarStr += "<div class='am-fr'>" +
                         " <ul data-am-widget='pagination'" +
                         "   class='am-pagination am-pagination-select' style='width: 250px'>" +
@@ -172,16 +190,16 @@
                         "     <li class='am-pagination-select'>" +
                         "        <select style='padding: 0; padding-left: 20px' id='pageSelect' onchange='changePage()'>";
 
-                    for(var j=0; j<res.data.pages; j++){
-                        var eqNum = page -1;
-                        if (j == eqNum){
-                            footBarStr += "<option value='"+ (j+1) +"' selected>"+ (j+1) + "</option>";
-                        }else{
-                            footBarStr += "<option value='"+ (j+1) +"'>"+ (j+1) + "</option>";
+                    for (var j = 0; j < res.data.pages; j++) {
+                        var eqNum = page - 1;
+                        if (j == eqNum) {
+                            footBarStr += "<option value='" + (j + 1) + "' selected>" + (j + 1) + "</option>";
+                        } else {
+                            footBarStr += "<option value='" + (j + 1) + "'>" + (j + 1) + "</option>";
                         }
                     }
 
-                    footBarStr +="</select>" +
+                    footBarStr += "</select>" +
                         "     </li>" +
                         "     <li class='am-pagination-next'>" +
                         "         <a href='javascript:void(0);' onclick='changePage(1)'>下一页</a>" +
@@ -198,24 +216,37 @@
 
     function changePage(action) {
         var page = $("#pageSelect").val();
-        if(validatenull(action)){
+        if (validatenull(action)) {
             appointmentList(page);
-        }else if (action == 1){
+        } else if (action == 1) {
             var maxValue = $('#pageSelect option:last').val();
-            if (page < maxValue){
-                var currentPage = Number(page)+1;
+            if (page < maxValue) {
+                var currentPage = Number(page) + 1;
                 appointmentList(currentPage);
                 $("#pageSelect").val(currentPage);
             }
-        }else if (action == 2){
-            if (page > 1){
-                var currentPage = Number(page)-1;
+        } else if (action == 2) {
+            if (page > 1) {
+                var currentPage = Number(page) - 1;
                 appointmentList(currentPage);
                 $("#pageSelect").val(currentPage);
             }
         }
 
     }
+
+    function change(id) {
+        var classEle = $("#" + id).children(":first");
+        var classValue = classEle.attr("class");
+        if (classValue == 'am-icon-sort') {
+            appointmentList($("#pageSelect").val(), 0,"am-icon-sort-desc");
+        } else if (classValue == 'am-icon-sort-desc') {
+            appointmentList($("#pageSelect").val(), 1,"am-icon-sort-up");
+        } else if (classValue == 'am-icon-sort-up') {
+            appointmentList($("#pageSelect").val(), 0,"am-icon-sort-desc");
+        }
+    }
 </script>
+
 </body>
 </html>

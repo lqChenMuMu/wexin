@@ -179,7 +179,7 @@ function appointmentSuccessInit(){
     $.ajax({
         type: "get",
         url: "/material/getByClass",
-        async: true,
+        async: false,
         dataType: "json",
         data: {
             "classIds": getQueryString("classIds")
