@@ -55,8 +55,8 @@
         }, 1000);
         var nowDateArray = getNowFormatDate().split(' ');
         var date_ = nowDateArray[0];
-        var disAppointment = ['2019-04-10 am', '2019-04-11 pm'];
-        var appointmentDown = ['2019-04-11 am', '2019-04-12 pm'];
+        var disAppointment = [];
+        var appointmentDown = [];
         t(date_, 'hour', 1, disAppointment, appointmentDown);
         $('.mask-time').height($(window).height());
 

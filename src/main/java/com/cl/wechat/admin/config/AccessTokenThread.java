@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccessTokenThread implements CommandLineRunner{
     // 第三方用户唯一凭证
-    private static final String appId = "wx04e95443a3ac67e3";
+    private static final String appId = "wx99dfc8d09722faa3";
     // 第三方用户唯一凭证密钥
-    private static final String appSecret = "7ff170c67c641cb40b93935480b8b1c8";
+    private static final String appSecret = "c25870e6dbb9ba89c85c2ef33cd56d8b";
 
     public static AccessToken access_token;
 

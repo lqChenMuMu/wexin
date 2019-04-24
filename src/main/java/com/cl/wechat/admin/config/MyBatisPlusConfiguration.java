@@ -34,9 +34,9 @@ public class MyBatisPlusConfiguration {
         return new PaginationInterceptor();
     }
 
-    @Bean
+  /*  @Bean
     public PerformanceInterceptor performanceInterceptor() {
         PerformanceInterceptor performanceInterceptor = new PerformanceInterceptor();
         return performanceInterceptor;
-    }
+    }*/
 }

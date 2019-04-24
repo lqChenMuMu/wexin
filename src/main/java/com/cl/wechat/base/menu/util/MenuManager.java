@@ -62,9 +62,9 @@ public class MenuManager {
         btn22.setUrl("http://zzyyf.natapp1.cc/myAppointment");
   
         CommonButton btn23 = new CommonButton();  
-        btn23.setName("进度查询");  
+        btn23.setName("简介");
         btn23.setType("view");
-        btn23.setUrl("http://www.baidu.com/");
+        btn23.setUrl("https://c.eqxiu.com/s/Z1Fg0hA1");
 
         ComplexButton mainBtn1 = new ComplexButton();
         mainBtn1.setName("在线预约");

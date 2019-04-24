@@ -79,26 +79,7 @@ public class AppointmentController {
     @PostMapping("/affirm")
     public Resp affirm(Appointment appointment, HttpServletRequest request){
         String openid = (String) request.getSession().getAttribute("openid");
-        Wuser qwuser = new Wuser();
-        qwuser.setOpenid(openid);
-        Wuser wuser = wuserService.getOne(new QueryWrapper<>(qwuser));
-        Long failureTime = Long.valueOf(wuser.getValidateTime()) + 10 * 60 * 1000;
-        if(wuser.getValidateCode().equals(appointment.getValidateCode()) && new Date().getTime() < failureTime){
-            appointment.setSubmitTime(String.valueOf(new Date().getTime()));
-            appointment.setOpenId(openid);
-            appointmentService.save(appointment);
-            List<SecondClass> secondClassList = secondClassService.list(new QueryWrapper<SecondClass>().in("id",appointment.getClassId().split(",")));
-            String classStr = "";
-            List<String> classNames = secondClassList.stream().map(SecondClass::getClassName).collect(Collectors.toList());
-            for (Integer i = 0; i<classNames.size(); i++) {
-                classStr += (i+1) +":";
-                classStr += classNames.get(i)+" ";
-            }
-           ValidateCodeUtil.sendNotice(appointment.getTime(),classStr,appointment.getTelphone());
-            return  new Resp(true);
-        }else{
-            return  new Resp(new Exception("验证码错误"));
-        }
+        return  new Resp(appointmentService.affirm(appointment,openid));
     }
 
 

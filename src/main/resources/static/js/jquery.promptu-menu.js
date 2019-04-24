@@ -536,7 +536,7 @@ jQuery.extend(jQuery.easing, {
 //date_:日期   "type:halfHour显示为半小时， 其他为整小时显示，默认是半小时显示 length_：可预约多长时间以内，月为单位,默认为3个月
 function t(date_, type, length_, disAppointment, appointmentDown) {
 
-    $('.appointmentDatedddd').val(date_);
+    $('.appointmentDate').val(date_);
     setTimeHtml(date_, type, disAppointment, appointmentDown);
     setDateHtml(length_);
     var w = $(window).width();
@@ -639,7 +639,7 @@ function setTimeHtml(date_, type, disAppointment, appoinmentDown) {
                     '<div>' + halfHourArray[i] + '</div>' +
                     '</div>';
             }else {
-                for (var j=0; j<disAppointment.length; j++){
+                /*for (var j=0; j<disAppointment.length; j++){
                     var disableDate = disAppointment[j].split(' ');
                     if (nowDate[0] == disableDate[0]){
                         if (disableDate[1] == "上午" && halfHourArray[i]=="上午"){
@@ -656,7 +656,10 @@ function setTimeHtml(date_, type, disAppointment, appoinmentDown) {
                                 "</div>";
                         }
                     }
-                }
+                }*/
+                returnHtml += "<div class='time-table' >" +
+                    "<div>" + halfHourArray[i] + "</div>" +
+                    "</div>";
             }
         }
     } else {
