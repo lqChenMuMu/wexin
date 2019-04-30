@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cl.wechat.admin.config.AccessTokenThread;
 import com.cl.wechat.admin.entity.Wuser;
 import com.cl.wechat.admin.service.WuserService;
+import com.cl.wechat.base.advanced.model.AccessToken;
 import com.cl.wechat.base.advanced.util.GetPersoninf;
 import com.cl.wechat.base.basic.model.*;
 import com.cl.wechat.base.wechatapi.util.WeixinUtil;
@@ -27,9 +28,6 @@ import java.util.*;
 @RequestMapping("wechat")
 public class AuthController {
 
-    private static final String tooken = "biantouwa"; //开发者自行定义Tooken
-    private static final String appId = "wx04e95443a3ac67e3";
-    private static final String appSecret = "7ff170c67c641cb40b93935480b8b1c8";
     private static final String real_url = "http://zzyyf.natapp1.cc";
 
     @Autowired
@@ -41,7 +39,7 @@ public class AuthController {
         path = URLEncoder.encode(path, "UTF-8");
 
         String url = "https://open.weixin.qq.com/connect" +
-                "/oauth2/authorize?appid=" + appId +
+                "/oauth2/authorize?appid=" + AccessTokenThread.appId +
                 "&redirect_uri=" + path +
                 "&response_type=code&" +
                 "scope=snsapi_userinfo" +
@@ -55,8 +53,8 @@ public class AuthController {
         System.out.println(code);
         System.out.println(state);
         String url = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
-                "appid= " + appId +
-                "&secret=" + appSecret +
+                "appid= " + AccessTokenThread.appId +
+                "&secret=" + AccessTokenThread.appSecret +
                 "&code=" + code +
                 "&grant_type=authorization_code";
         String jsonStr = HttpUtil.post(url, "");
@@ -94,31 +92,14 @@ public class AuthController {
         }
     }
 
-    @GetMapping
-    public String validate(@RequestParam("signature") String signature, @RequestParam("timestamp") String timestamp, @RequestParam("nonce") String nonce, @RequestParam("echostr") String echostr) {
-        String[] arr = {tooken, timestamp, nonce};
-        //2.对数组进行排序
-        Arrays.sort(arr);
-        //3.生成字符串
-        StringBuffer sb = new StringBuffer();
-        for (String s : arr) {
-            sb.append(s);
-        }
-        String validateStr = DigestUtil.sha1Hex(sb.toString());
-        if (signature.equals(validateStr)) {
-            return echostr;
-        }
-        return null;
-    }
-
-    @PostMapping
-    public String receptionMsg(HttpServletRequest request) throws Exception {
+    /*@PostMapping
+    public String receptionMsg(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, String> requestParam = XmlMessUtil.parseXml(request);
         GetTextMessage getTextMessage = BeanUtil.mapToBean(requestParam, GetTextMessage.class, true);
         if (WeixinUtil.RECRIVE_EVENT.equals(requestParam.get("MsgType"))) {
             if (WeixinUtil.EVENT_SUBSCRIBE.equals(requestParam.get("Event"))) {
-               /* WeiUser weiUser = GetPersoninf.getPersonalInf(AccessTokenThread.access_token.getAccesstoken(),getTextMessage.getFromUserName());
-                weiUserService.save(weiUser);*/
+                Wuser weiUser = GetPersoninf.getPersonalInf(AccessTokenThread.access_token.getAccesstoken(), getTextMessage.getFromUserName());
+                wuserService.save(weiUser);
                 SendTextMessage sendTextMessage = new SendTextMessage();
                 sendTextMessage.setFromUserName(getTextMessage.getToUserName());
                 sendTextMessage.setToUserName(getTextMessage.getFromUserName());
@@ -127,48 +108,49 @@ public class AuthController {
                 sendTextMessage.setContent("欢迎您！");
                 return XmlMessUtil.textMessageToXml(sendTextMessage);
             } else if (WeixinUtil.EVENT_CLICK.equals(requestParam.get("Event"))) {
-                if ("1".equals(requestParam.get("EventKey"))) {
+                if ("11".equals(requestParam.get("EventKey"))) {
                     SendTextMessage sendTextMessage = new SendTextMessage();
                     sendTextMessage.setFromUserName(getTextMessage.getToUserName());
                     sendTextMessage.setToUserName(getTextMessage.getFromUserName());
                     sendTextMessage.setCreateTime(new Date().getTime());
                     sendTextMessage.setMsgType(WeixinUtil.RECRIVE_TEXT);
                     StringBuffer sb = new StringBuffer();
-                    sb.append("尊敬的xxx您好").append("\n");
-                    sb.append("您的预约号码为76号").append("\n");
-                    sb.append("前面还有2位正在排队").append("\n");
-                    sb.append("请耐心等待！");
+                    sb.append("展厅位于西北工业大学三航科技大厦一层及二层，装修面积约1800平方米，主要建设内容包括展厅装修、多媒体设备安装、展品展示等内容。");
                     sendTextMessage.setContent(sb.toString());
                     return XmlMessUtil.textMessageToXml(sendTextMessage);
-                } else {
-                    return null;
+                } else if ("12".equals(requestParam.get("EventKey"))) {
+                    SendTextMessage sendTextMessage = new SendTextMessage();
+                    sendTextMessage.setFromUserName(getTextMessage.getToUserName());
+                    sendTextMessage.setToUserName(getTextMessage.getFromUserName());
+                    sendTextMessage.setCreateTime(new Date().getTime());
+                    sendTextMessage.setMsgType(WeixinUtil.RECRIVE_TEXT);
+                    StringBuffer sb = new StringBuffer();
+                    sb.append("服务中心位于北航大厦五层，装修面积约1200平方米，主要装修内容包括参军咨询服务大厅、行政综合业务办理区、检测认证办公区、洽谈室等服务空间;");
+                    sendTextMessage.setContent(sb.toString());
+                    return XmlMessUtil.textMessageToXml(sendTextMessage);
+                }else if ("31".equals(requestParam.get("EventKey"))) {
+                    SendTextMessage sendTextMessage = new SendTextMessage();
+                    sendTextMessage.setFromUserName(getTextMessage.getToUserName());
+                    sendTextMessage.setToUserName(getTextMessage.getFromUserName());
+                    sendTextMessage.setCreateTime(new Date().getTime());
+                    sendTextMessage.setMsgType(WeixinUtil.RECRIVE_TEXT);
+                    StringBuffer sb = new StringBuffer();
+                    sb.append("地址：深圳市南山区粤海街道粤兴四道北航大厦一号楼5楼").append("\n");
+                    sb.append("联系方式：13825216821（李总）").append("\n");
+                    sb.append("&nbsp;&nbsp;&nbsp;&nbsp;").append("0755-22670807").append("\n");
+                    sb.append("&nbsp;&nbsp;&nbsp;&nbsp;").append("0755-22670656").append("\n");
+                    sendTextMessage.setContent(sb.toString());
+                    return XmlMessUtil.textMessageToXml(sendTextMessage);
                 }
-            } else {
-                SendNewsMessage sendNewsMessage = new SendNewsMessage();
-                BeanUtil.copyProperties(getTextMessage, sendNewsMessage);
-                sendNewsMessage.setFromUserName(getTextMessage.getToUserName());
-                sendNewsMessage.setToUserName(getTextMessage.getFromUserName());
-                sendNewsMessage.setMsgType(WeixinUtil.REQUEST_NEWS);
-                sendNewsMessage.setArticleCount(1);
-                List<SendArticle> sendArticles = new ArrayList<>();
-                SendArticle sendArticle = new SendArticle();
-                sendArticle.setTitle("这是个什么玩意儿？");
-                sendArticle.setDescription("测试公众号玩玩，不行吃粑粑。呵呵哈哈嘿嘿伯建瓯阿瑟东啊是大峰哥");
-                sendArticle.setPicUrl("https://ss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=60b8e72a8901a18befeb144fae2e0761/8644ebf81a4c510f3295831c6e59252dd42aa567.jpg");
-                sendArticle.setUrl("www.java1234.com");
-                sendArticles.add(sendArticle);
-                sendNewsMessage.setArticles(sendArticles);
-                return XmlMessUtil.newsMessageToXml(sendNewsMessage);
+            } else if(WeixinUtil.EVENT_VIEW.equals(requestParam.get("Event"))){
+                HttpSession session = request.getSession();
+                session.setAttribute("openid",getTextMessage.getFromUserName());
+                *//*request.getSession().setAttribute("openid","1111");*//*
+                System.out.println( request.getSession().getAttribute("openid"));
+                return null;
             }
-        } else {
-            /*AccessToken at = AccessTokenThread.access_token;
-            System.out.println(at.getAccesstoken());*/
-            SendTextMessage sendTextMessage = new SendTextMessage();
-            BeanUtil.copyProperties(getTextMessage, sendTextMessage);
-            sendTextMessage.setFromUserName(getTextMessage.getToUserName());
-            sendTextMessage.setToUserName(getTextMessage.getFromUserName());
-            return XmlMessUtil.textMessageToXml(sendTextMessage);
         }
-    }
+        return null;
+    }*/
 
 }

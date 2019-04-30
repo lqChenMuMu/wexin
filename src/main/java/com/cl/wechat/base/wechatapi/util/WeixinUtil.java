@@ -51,9 +51,11 @@ public class WeixinUtil {
     // 事件类型：LOCATION(上报地理位置事件) 
     public final static String EVENT_LOCATION = "LOCATION";  
     // 事件类型：CLICK(自定义菜单点击事件) 
-    public final static String EVENT_CLICK = "CLICK";  
-   
-    /**
+    public final static String EVENT_CLICK = "CLICK";
+
+	public final static String EVENT_VIEW = "VIEW";
+
+	/**
      * 扫描带参数二维码事件
      * 用户扫描带场景值二维码时，可能推送以下两种事件：
 		1.如果用户还未关注公众号，则用户可以关注公众号，关注后微信会将带场景值关注事件推送给开发者。

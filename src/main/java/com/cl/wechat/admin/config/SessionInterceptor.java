@@ -8,11 +8,6 @@ import java.io.IOException;
 
 public class SessionInterceptor implements HandlerInterceptor {
 
-
-    private static final String appId = "wx04e95443a3ac67e3";
-    private static final String appSecret = "7ff170c67c641cb40b93935480b8b1c8";
-    private static final String real_url = "http://zzyyf.natapp1.cc";
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("进入拦截器");
@@ -32,24 +27,24 @@ public class SessionInterceptor implements HandlerInterceptor {
                 }else{
                     this.auth(response,"state");
                 }
-                return false;
+                return true;
             }
         }
         return true;
     }
 
     public void auth(HttpServletResponse response,String state) throws IOException {
-        String path = real_url + "/wechat/invoke";
+        String path = AccessTokenThread.real_url + "/wechat/invoke";
         //path = URLEncoder.encode(path, "UTF-8");
-
         String url = "https://open.weixin.qq.com/connect" +
-                "/oauth2/authorize?appid=" + appId +
+                "/oauth2/authorize?appid=" + AccessTokenThread.appId +
                 "&redirect_uri=" + path +
                 "&response_type=code&" +
                 "scope=snsapi_userinfo" +
                 "&state="+ state +
                 "#wechat_redirect";
-        System.out.println(url);
         response.sendRedirect(url);
     }
+
+
 }

@@ -46,6 +46,7 @@ public class Appointment implements Serializable {
     @TableLogic
     private Integer isDelete;
 
+    @TableField(exist = false)
     private String validateCode;
 
     private String remark;

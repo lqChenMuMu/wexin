@@ -63,7 +63,7 @@ public class MaterialController {
 
     @DeleteMapping("/back/del")
     public Resp del(String id){
-        return new Resp(materialService.removeById(id));
+        return new Resp(materialService.delMaterial(Long.valueOf(id)));
     }
 
     @GetMapping("/back/get")

@@ -15,13 +15,16 @@ public class Resp<T> implements Serializable{
     private String msg;
 
     public Resp() {
+        super();
     }
 
     public Resp(T date) {
+        super();
         this.data = date;
     }
 
     public Resp(T date, Integer code, String msg) {
+        super();
         this.data = date;
         this.code = code;
         this.msg = msg;

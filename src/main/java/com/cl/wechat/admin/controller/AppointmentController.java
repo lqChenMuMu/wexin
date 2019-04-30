@@ -79,7 +79,11 @@ public class AppointmentController {
     @PostMapping("/affirm")
     public Resp affirm(Appointment appointment, HttpServletRequest request){
         String openid = (String) request.getSession().getAttribute("openid");
-        return  new Resp(appointmentService.affirm(appointment,openid));
+        Object res = appointmentService.affirm(appointment,openid);
+        if(res instanceof String){
+            return  new Resp(new Exception(res.toString()));
+        }
+        return  new Resp(res);
     }
 
 
@@ -87,7 +91,6 @@ public class AppointmentController {
     public Resp getMyAppointment(HttpServletRequest request){
         Appointment appointment = new Appointment();
         appointment.setOpenId(request.getSession().getAttribute("openid").toString());
-//        appointment.setOpenId("os1do6Dn0iFOVb1HHhwwHr4BxNpM");
         List<MyAppointmentVO> myAppointmentVOS = new ArrayList<>();
         appointmentService.list(new QueryWrapper<>(appointment)).forEach(item -> {
             MyAppointmentVO myAppointmentVO = new  MyAppointmentVO();

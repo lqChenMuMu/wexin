@@ -3,6 +3,7 @@ package com.cl.wechat.base.advanced.util;
 import cn.hutool.json.JSONException;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.cl.wechat.admin.entity.Wuser;
 import com.cl.wechat.base.wechatapi.util.CommonUtil;
 
 /**
@@ -20,19 +21,19 @@ public class GetPersoninf extends CommonUtil {
 	 *
 	 * @param accessToken 调用接口凭证
 	 * @param openId 普通用户的标识，对当前公众号唯一
-	 * @return PersonalInf 基本个人信息
+	 * @returnPersonalInf 基本个人信息
 	 */
-//	public static WeiUser getPersonalInf(String accessToken, String openId){
-//		WeiUser weiUser=null;
-//		String requestUrl = GET_PERSONALINF_URL.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);
-//    	// 获取用户信息
-//		JSONObject jsonObject = httpRequest(requestUrl, "GET", null);
-//	    // 如果请求成功
-//	    if (null != jsonObject) {
-//				weiUser = JSONUtil.toBean(jsonObject,WeiUser.class);
-//	    }
-//		return weiUser;
-//	}
+	public static Wuser getPersonalInf(String accessToken, String openId){
+		Wuser weiUser=null;
+		String requestUrl = GET_PERSONALINF_URL.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);
+    	// 获取用户信息
+		JSONObject jsonObject = httpRequest(requestUrl, "GET", null);
+	    // 如果请求成功
+	    if (null != jsonObject) {
+				weiUser = JSONUtil.toBean(jsonObject,Wuser.class);
+	    }
+		return weiUser;
+	}
 
 	/**
 	 * 查询用户所在分组

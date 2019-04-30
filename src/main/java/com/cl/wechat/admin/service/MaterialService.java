@@ -16,4 +16,6 @@ import java.util.List;
  */
 public interface MaterialService extends IService<Material> {
 
+    boolean delMaterial(Long id);
+
 }

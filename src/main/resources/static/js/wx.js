@@ -106,7 +106,7 @@ function affirmInit() {
                 alert("请输入姓名！");
                 return;
             }
-            if (!validateName(name)){
+            if (!validateName(name)) {
                 alert("请输入正确的姓名！");
                 return;
             }
@@ -121,8 +121,7 @@ function affirmInit() {
                 return;
             }
             var telphone = $("#telphone").val();
-            if (validatenull(telphone) == true) {
-                alert("请输入手机号码！");
+            if (validatemobile(telphone) == false) {
                 return;
             }
             var validateCode = $("#validateCode").val();
@@ -131,28 +130,28 @@ function affirmInit() {
                 return;
             }
             var remark = $("#remark").val();
-        $.ajax({
-            type: "post",
-            url: "/appointment/affirm",
-            async: false,
-            dataType: "json",
-            data: {
-                "name": name,
-                "company": company,
-                "time":appointmentTime,
-                "telphone":telphone,
-                "validateCode":validateCode,
-                "remark":remark,
-                "classId":classIds
-            },
-            success: function (res) {
-                if (res.code == "0") {
-                    window.location.href="/pages/success.html?classIds=" + classIds;;
-                } else {
-                    alert(res.msg);
+            $.ajax({
+                type: "post",
+                url: "/appointment/affirm",
+                async: false,
+                dataType: "json",
+                data: {
+                    "name": name,
+                    "company": company,
+                    "time": appointmentTime,
+                    "telphone": telphone,
+                    "validateCode": validateCode,
+                    "remark": remark,
+                    "classId": classIds
+                },
+                success: function (res) {
+                    if (res.code == "0") {
+                        window.location.href = "/pages/success.html?classIds=" + classIds;
+                    } else {
+                        alert(res.msg);
+                    }
                 }
-            }
-        });
+            });
         }
     )
 }
@@ -175,7 +174,7 @@ function clickTime() {
     }
 }
 
-function appointmentSuccessInit(){
+function appointmentSuccessInit() {
     $.ajax({
         type: "get",
         url: "/material/getByClass",
@@ -186,16 +185,22 @@ function appointmentSuccessInit(){
         },
         success: function (res) {
             if (res.code == "0") {
-                var materialList = "资料清单：";
-                for(var i=0; i<res.data.length; i++){
-                    if(i == res.data.length-1){
-                        materialList += res.data[i].materialText+"。";
-                    }else{
-                        materialList += res.data[i].materialText+",";
+                if (res.data.length > 0) {
+                    var materialList = "资料清单：";
+                    for (var i = 0; i < res.data.length; i++) {
+                        if (i == res.data.length - 1) {
+                            materialList += res.data[i].materialText + "。";
+                        } else {
+                            materialList += res.data[i].materialText + ",";
+                        }
                     }
+                    console.log(materialList);
+                    $("#materialP").html(materialList);
+                    $(".center").css("display", "block")
+                } else {
+                    $(".center").css("display", "none")
                 }
-                console.log(materialList);
-                $("#materialP").html(materialList);
+
             } else {
                 alert(res.msg);
             }
@@ -211,28 +216,32 @@ function myAppointmentInit() {
         success: function (res) {
             if (res.code == "0") {
                 var appointmentList = "";
-                for(var i=0; i<res.data.length; i++){
+                for (var i = 0; i < res.data.length; i++) {
                     appointmentList += "<div class='myAppointment'>"
                     appointmentList += "<div class='appointmentTime'>";
                     appointmentList += res.data[i].appointment.time;
                     appointmentList += "</div>"
                     appointmentList += "<div class='infoHead classList'></div>"
                     appointmentList += "<p>已预约项目："
-                    for(var j=0; j<res.data[i].secondClassList.length; j++){
-                        appointmentList += (j+1)+":"+  res.data[i].secondClassList[j].className + " ";
+                    for (var j = 0; j < res.data[i].secondClassList.length; j++) {
+                        appointmentList += (j + 1) + ":" + res.data[i].secondClassList[j].className + " ";
                     }
                     appointmentList += "</p></br>"
 
                     appointmentList += "<div class='infoHead materialList'></div>"
                     appointmentList += "<p>需准备资料："
-                    for(var k=0; k< res.data[i].materialList.length; k++){
-                        appointmentList += (k+1)+":"+  res.data[i].materialList[k].materialText;
+                    if (res.data[i].materialList.length>0){
+                        for (var k = 0; k < res.data[i].materialList.length; k++) {
+                            appointmentList += (k + 1) + ":" + res.data[i].materialList[k].materialText;
+                        }
+                    }else{
+                        appointmentList += "无"
                     }
                     appointmentList += "</p></br>"
                     appointmentList += "</div>"
 
                 }
-                if (appointmentList == ""){
+                if (appointmentList == "") {
                     appointmentList += " <img src='../img/noexist.png'/>" +
                         "    <p class='nop'>暂无预约</p>"
                 }

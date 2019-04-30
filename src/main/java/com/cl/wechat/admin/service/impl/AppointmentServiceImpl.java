@@ -65,7 +65,7 @@ public class AppointmentServiceImpl extends ServiceImpl<AppointmentMapper, Appoi
             wuserMapper.updateById(wuser);
             return true;
         } else {
-            return new Exception("验证码错误");
+            return "验证码错误";
         }
     }
 }

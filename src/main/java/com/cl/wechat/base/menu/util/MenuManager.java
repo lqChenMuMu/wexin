@@ -35,7 +35,7 @@ public class MenuManager {
        // AccessToken at = AccessTokenThread.access_token;
 //        if (null != at) {
             // 调用接口创建菜单  
-            boolean result = MenuUtil.createMenu(getMenu(), "20_lX3B15aNuDk2ybOG5158tpwF5cYkMJaG9R_iRXjnppSGcl-DBA5CH65Fdp0uc0uQwbtm4PGAVXY7AaNjy4LLmvzdXZGzgSsdse8dmk5UdWS_DOCb__tO4JoXEFX__4u3-sHeqXRPS31kxglXLFUjAJASMB");
+            boolean result = MenuUtil.createMenu(getMenu(), "20_6kVhyVYit9zAOjHXXWtju9noTPqelbgU7N-e_4aTZAJpFPQRqJek5EGhSmfD5zexJ3IVCj-Bfti-Wcy98YG0QiMWSiRn24Wb1XmFxSXwbcvBj9YsH9yl8A08-SkatNAesYgkW2H2YK23ewpHSVPdADAEHB");
             // 判断菜单创建结果
             if (result)  
                 log.info("菜单创建成功！ok");  
@@ -50,36 +50,50 @@ public class MenuManager {
      * @return 
      */  
     public static Menu getMenu() {
- 
+        CommonButton btn11 = new CommonButton();
+        btn11.setName("展示中心");
+        btn11.setType("click");
+        btn11.setKey("11");
+
+        CommonButton btn12 = new CommonButton();
+        btn12.setName("服务中心");
+        btn12.setType("click");
+        btn12.setKey("12");
+
         CommonButton btn21 = new CommonButton();
-        btn21.setName("在线预约");
+        btn21.setName("预约服务");
         btn21.setType("view");
+        btn21.setKey("21");
         btn21.setUrl("http://zzyyf.natapp1.cc/classShow");
 
         CommonButton btn22 = new CommonButton();  
         btn22.setName("我的预约");
         btn22.setType("view");
+        btn22.setKey("22");
         btn22.setUrl("http://zzyyf.natapp1.cc/myAppointment");
-  
-        CommonButton btn23 = new CommonButton();  
-        btn23.setName("简介");
-        btn23.setType("view");
-        btn23.setUrl("https://c.eqxiu.com/s/Z1Fg0hA1");
+
+        CommonButton btn31 = new CommonButton();
+        btn31.setName("联系我们");
+        btn31.setType("click");
+        btn31.setKey("31");
+
+        CommonButton btn32 = new CommonButton();
+        btn32.setName("公司简介");
+        btn32.setType("view");
+        btn32.setUrl("https://c.eqxiu.com/s/Z1Fg0hA1");
 
         ComplexButton mainBtn1 = new ComplexButton();
-        mainBtn1.setName("在线预约");
-        mainBtn1.setType("click");
-        mainBtn1.setKey("1");
+        mainBtn1.setName("学府基地");
+        mainBtn1.setSub_button(new CommonButton[]{btn11,btn12});
 
         ComplexButton mainBtn2 = new ComplexButton();  
-        mainBtn2.setName("我要贷款");  
-        mainBtn2.setSub_button(new CommonButton[] { btn21, btn22, btn23});  
+        mainBtn2.setName("预约服务");
+        mainBtn2.setSub_button(new CommonButton[] { btn21, btn22});
   
         ComplexButton mainBtn3 = new ComplexButton();  
-        mainBtn3.setName("微公益");
-        mainBtn3.setType("click");  
-        mainBtn3.setKey("3+"); 
-        /** 
+        mainBtn3.setName("关于我们");
+        mainBtn3.setSub_button(new CommonButton[]{btn31,btn32});
+        /**
          * 每个一级菜单都有二级菜单项 
          * 在某个一级菜单下没有二级菜单的情况，menu该如何定义呢？
          * 比如，第三个一级菜单项不是“更多体验”，而直接是“幽默笑话”，那么menu应该这样定义：
