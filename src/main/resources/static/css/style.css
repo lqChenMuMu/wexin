@@ -113,6 +113,19 @@ form fieldset input{
   -webkit-transition: all 0.2s ease-in-out;
 }
 
+form fieldset select{
+  float: left;
+  width: 100%;
+  padding: 12px 6px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "microsoft yahei";
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  box-shadow: 0 0 0 transparent, inset 0 0 5px #eee;
+  -webkit-transition: all 0.2s ease-in-out;
+}
+
 form fieldset textarea{
   float: left;
   width: 100%;
