@@ -155,3 +155,49 @@ CREATE TABLE `wuser` (
 INSERT INTO `wuser` VALUES ('1', '中国', '湖北', '荆门', 'os1do6Dn0iFOVb1HHhwwHr4BxNpM', '1', '扁基儿', 'http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqjbAA9DOA3k1by4Am1IZge4eexicibOWiaAUiaupBbQ2RBqGEd4krp24b2CH0hxk8osct4OGlNcVpXEg/132', '7679', '1555226947900');
 INSERT INTO `wuser` VALUES ('2', '中国', '湖北', '荆门', 'os1do6I_Ls53tFCmAplnXUw997mA', '2', '二凤', 'http://thirdwx.qlogo.cn/mmopen/vi_32/mnjDgaHjTEO3bRQVaCNsaIgqCKG2ia8LsTZE0uNJ56fAuWhXKgQ9NzSzLdzJwo3qSLMnCjr0J3Uzzicx2tCI0Y8w/132', '4802', '1555234325848');
 INSERT INTO `wuser` VALUES ('3', '中国', '广东', '广州', 'os1do6Bl_kOmqGkNskUXK4B5xCW4', '2', '虫二', 'http://thirdwx.qlogo.cn/mmopen/vi_32/YWahVicuveLF0nfgQErWafdqOpcfPd1ldmpMj06plKsGFNnOICS1ebZYIIcpxmh5nGxumlxGSAEvlpI6HcaiaxgA/132', '7695', '1555247428194');
+
+
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : localhost_3306
+Source Server Version : 50622
+Source Host           : localhost:3306
+Source Database       : db_wx
+
+Target Server Type    : MYSQL
+Target Server Version : 50622
+File Encoding         : 65001
+
+Date: 2019-05-19 22:24:52
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `ex_appointment`
+-- ----------------------------
+DROP TABLE IF EXISTS `ex_appointment`;
+CREATE TABLE `ex_appointment` (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
+  `open_id` varchar(300) COLLATE utf8_bin NOT NULL,
+  `name` varchar(50) COLLATE utf8_bin NOT NULL,
+  `company` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `job` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `telphone` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `type` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `object` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `to_date` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `form_date` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `sub_time` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `people` int(11) DEFAULT NULL,
+  `remark` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of ex_appointment
+-- ----------------------------
+INSERT INTO `ex_appointment` VALUES ('1', 'os1do6I_Ls53tFCmAplnXUw997mA', '艾伦', 'KTV', '秃头', '18371952812', '科普教育', '北理工研究院', '2019-05-19 09:07 PM', '2019-05-19 09:06 PM', '1558267627014', null, null);
+INSERT INTO `ex_appointment` VALUES ('2', 'os1do6I_Ls53tFCmAplnXUw997mA', '不普通', 'KTV', '秃头', '18371952812', '业务洽谈', '基地公司', '2019-05-19 09:16 PM', '2019-05-19 09:16 PM', '1558268218553', '2', null);
+INSERT INTO `ex_appointment` VALUES ('3', 'os1do6Dn0iFOVb1HHhwwHr4BxNpM', '心狠', '123', '123', '13597857551', '研讨会', '清华大学研究院', '2019-05-19 11:13 PM', '2019-05-19 11:13 PM', '1558275312204', '2', null);
