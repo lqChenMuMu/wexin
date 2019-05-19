@@ -15,9 +15,11 @@ import java.util.List;
 @Data
 public class MyAppointmentVO {
 
-    private Appointment appointment;
+    private Integer appointmentType;
 
-    private List<SecondClass> secondClassList;
+    private String time;
+
+    private List<String> classList;
 
     private List<Material> materialList;
 }

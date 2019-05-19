@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cl.wechat.admin.mapper.ExAppointmentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cl.wechat.admin.entity.ExAppointment">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="company" property="company" />
+        <result column="job" property="job" />
+        <result column="telphone" property="telphone" />
+        <result column="type" property="type" />
+        <result column="object" property="object" />
+        <result column="to_date" property="toDate"/>
+        <result column="form_date" property="formDate"/>
+        <result column="people" property="people" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+</mapper>

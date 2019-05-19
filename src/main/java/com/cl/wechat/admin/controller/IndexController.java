@@ -16,4 +16,9 @@ public class IndexController {
     public String myAppointment(){
         return "/myAppointment";
     }
+
+    @RequestMapping("/exAppointment")
+    public String exAppointment(){
+        return "/exAppointment";
+    }
 }

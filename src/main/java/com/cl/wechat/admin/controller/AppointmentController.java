@@ -16,19 +16,15 @@ import com.cl.wechat.admin.vo.MyAppointmentVO;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
 import com.github.qcloudsms.httpclient.HTTPException;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -39,24 +35,22 @@ import java.util.stream.Collectors;
  * @author bian
  * @since 2019-04-12
  */
+@AllArgsConstructor
 @RestController
 @RequestMapping("/appointment")
 public class AppointmentController {
 
-    @Autowired
     private WuserService wuserService;
 
-    @Autowired
     private AppointmentService appointmentService;
 
-    @Autowired
     private SecondClassService secondClassService;
 
-    @Autowired
     private MaterialService materialService;
 
-    @Autowired
     private ClassMaterialService classMaterialService;
+
+    private ExAppointmentService exAppointmentService;
 
 
     @GetMapping("/sendCode")
@@ -97,11 +91,26 @@ public class AppointmentController {
             List<SecondClass> secondClassList = secondClassService.list(new QueryWrapper<SecondClass>().in("id",item.getClassId().split(",")));
             List<ClassMaterial> classMaterialList = classMaterialService.list(new QueryWrapper<ClassMaterial>().in("class_id",secondClassList.stream().map(SecondClass::getId).collect(Collectors.toList())));
             List<Material> materialList = materialService.list(new QueryWrapper<Material>().in("id",classMaterialList.stream().map(ClassMaterial::getMaterialId).distinct().collect(Collectors.toList())));
-            myAppointmentVO.setAppointment(item);
+            myAppointmentVO.setAppointmentType(1);
+            myAppointmentVO.setTime(item.getTime());
             myAppointmentVO.setMaterialList(materialList);
-            myAppointmentVO.setSecondClassList(secondClassList);
+            myAppointmentVO.setClassList(secondClassList.stream().map(SecondClass::getClassName).collect(Collectors.toList()));
             myAppointmentVOS.add(myAppointmentVO);
         });
+        ExAppointment exAppointment = new ExAppointment();
+        exAppointment.setOpenId(request.getSession().getAttribute("openid").toString());
+        exAppointmentService.list(new QueryWrapper<>(exAppointment)).forEach(item -> {
+            MyAppointmentVO myAppointmentVO = new  MyAppointmentVO();
+            myAppointmentVO.setAppointmentType(2);
+            String time = item.getFormDate();
+            time = time.replace("AM","上午");
+            time = time.replace("PM","下午");
+            myAppointmentVO.setTime(time);
+            myAppointmentVO.setClassList(Arrays.asList(item.getType()));
+            myAppointmentVO.setMaterialList(new ArrayList<>());
+            myAppointmentVOS.add(myAppointmentVO);
+        });
+        myAppointmentVOS.stream().sorted(Comparator.comparing(MyAppointmentVO::getTime));
         return new Resp(myAppointmentVOS);
     }
 

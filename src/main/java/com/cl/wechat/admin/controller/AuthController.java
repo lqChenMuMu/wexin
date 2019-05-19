@@ -87,8 +87,10 @@ public class AuthController {
         System.out.println(wuser.toString());
         if(state.equals("state")){
             response.sendRedirect("/classShow");
-        }else{
+        }else if(state.equals("myState")){
             response.sendRedirect("/myAppointment");
+        }else if(state.equals("exState")){
+            response.sendRedirect("/exAppointment");
         }
     }
 

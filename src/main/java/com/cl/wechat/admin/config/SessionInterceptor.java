@@ -24,6 +24,8 @@ public class SessionInterceptor implements HandlerInterceptor {
             if (openid == null) {
                 if(request.getRequestURI().equals("/appointment/myAppointment") || request.getRequestURI().equals("/myAppointment")){
                     this.auth(response,"myState");
+                }else if(request.getRequestURI().equals("/exAppointment")){
+                    this.auth(response,"exState");
                 }else{
                     this.auth(response,"state");
                 }

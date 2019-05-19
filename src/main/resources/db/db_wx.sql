@@ -32,17 +32,6 @@ CREATE TABLE `appointment` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
 
--- ----------------------------
--- Records of appointment
--- ----------------------------
-INSERT INTO `appointment` VALUES ('1117327973846941697', null, '1,2,', '2019-04-15 下午', '13597857551', null, null, '7329', '努力');
-INSERT INTO `appointment` VALUES ('1117329270268559361', null, '5,6,', '2019-04-15 上午', '18371952812', null, null, '7679', '');
-INSERT INTO `appointment` VALUES ('1117337661296734210', null, '7,10,', '2019-04-16 下午', '13597857551', null, null, '7679', '咯娄');
-INSERT INTO `appointment` VALUES ('1117338199396560898', null, '1,2,', '2019-04-15 下午', '13597857551', null, null, '7679', '具体');
-INSERT INTO `appointment` VALUES ('1117360012621037569', null, '1,2,', '2019-04-15 上午', '18371952812', null, null, '4802', '');
-INSERT INTO `appointment` VALUES ('1117414867133841409', null, '2,3,4,', '2019-04-16 下午', '15507163137', null, null, '7695', '。。。。');
-INSERT INTO `appointment` VALUES ('1117447338357452802', null, '1,2,', '2019-04-15 下午', '13597857551', '1555255181290', null, '7679', '录取');
-INSERT INTO `appointment` VALUES ('1117447845729894401', null, '13,14,', '2019-04-16 下午', '13597857551', '1555255301972', null, '7679', '卓');
 
 -- ----------------------------
 -- Table structure for `class_material`
@@ -55,29 +44,6 @@ CREATE TABLE `class_material` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of class_material
--- ----------------------------
-INSERT INTO `class_material` VALUES ('1', '1', '1');
-INSERT INTO `class_material` VALUES ('2', '1', '2');
-INSERT INTO `class_material` VALUES ('3', '2', '2');
-INSERT INTO `class_material` VALUES ('4', '3', '3');
-INSERT INTO `class_material` VALUES ('5', '4', '4');
-INSERT INTO `class_material` VALUES ('6', '5', '5');
-INSERT INTO `class_material` VALUES ('7', '6', '6');
-INSERT INTO `class_material` VALUES ('8', '7', '7');
-INSERT INTO `class_material` VALUES ('9', '8', '8');
-INSERT INTO `class_material` VALUES ('10', '9', '1');
-INSERT INTO `class_material` VALUES ('11', '10', '2');
-INSERT INTO `class_material` VALUES ('12', '11', '3');
-INSERT INTO `class_material` VALUES ('13', '12', '4');
-INSERT INTO `class_material` VALUES ('14', '13', '5');
-INSERT INTO `class_material` VALUES ('15', '14', '6');
-INSERT INTO `class_material` VALUES ('16', '15', '7');
-INSERT INTO `class_material` VALUES ('17', '16', '8');
-INSERT INTO `class_material` VALUES ('18', '17', '1');
-INSERT INTO `class_material` VALUES ('19', '18', '2');
-INSERT INTO `class_material` VALUES ('20', '19', '3');
 
 -- ----------------------------
 -- Table structure for `first_class`
@@ -109,16 +75,6 @@ CREATE TABLE `material` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
--- ----------------------------
--- Records of material
--- ----------------------------
-INSERT INTO `material` VALUES ('1', '省份证', null);
-INSERT INTO `material` VALUES ('2', '户口本', null);
-INSERT INTO `material` VALUES ('3', '驾驶证', null);
-INSERT INTO `material` VALUES ('4', '结婚照', null);
-INSERT INTO `material` VALUES ('5', '学生证', null);
-INSERT INTO `material` VALUES ('6', '教育局abcefg证明', null);
-INSERT INTO `material` VALUES ('7', '希望小学培训证书', null);
 
 -- ----------------------------
 -- Table structure for `second_class`
