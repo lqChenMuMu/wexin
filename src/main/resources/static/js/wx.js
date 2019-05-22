@@ -175,13 +175,12 @@ function clickTime() {
 }
 
 
-
 function appointmentSuccessInit() {
-   var classIds =  getQueryString("classIds");
-   if(validatenull(classIds) == true){
-       $(".center").css("display", "none");
-       return;
-   }
+    var classIds = getQueryString("classIds");
+    if (validatenull(classIds) == true) {
+        $(".center").css("display", "none");
+        return;
+    }
     $.ajax({
         type: "get",
         url: "/material/getByClass",
@@ -227,9 +226,9 @@ function myAppointmentInit() {
                     appointmentList += "<div class='myAppointment'>"
                     appointmentList += "<div class='appointmentTime'>";
                     appointmentList += res.data[i].time;
-                    if(res.data[i].appointmentType == 1){
+                    if (res.data[i].appointmentType == 1) {
                         appointmentList += "--项目预约"
-                    }else if(res.data[i].appointmentType == 2){
+                    } else if (res.data[i].appointmentType == 2) {
                         appointmentList += "--展厅预约"
                     }
                     appointmentList += "</div>"
@@ -298,6 +297,24 @@ function exAffirmInit() {
         });
     });
 
+    $("#s_class").change(function () {
+        var value = $("#s_class").val();
+        if (value == '其他') {
+            $("#hide_class").css("display", "block");
+        } else {
+            $("#hide_class").css("display", "none");
+        }
+    });
+
+    $("#s_object").change(function () {
+        var value = $("#s_object").val();
+        if (value == '其他') {
+            $("#hide_object").css("display", "block");
+        } else {
+            $("#hide_object").css("display", "none");
+        }
+    });
+
     $("#s_affirmBtn").click(function () {
             var name = $("#s_name").val();
             if (validatenull(name) == true) {
@@ -320,14 +337,30 @@ function exAffirmInit() {
             }
             var s_class = $("#s_class").val();
             if (validatenull(s_class) == true) {
-                alert("请输入预约类型！");
+                alert("请选择预约类型！");
                 return;
             }
+            if (s_class == "其他") {
+                s_class == $("#s_sca_class").val();
+                if (validatenull(s_class) == true) {
+                    alert("请备注预约类型！");
+                    return;
+                }
+            }
+
             var s_object = $("#s_object").val();
             if (validatenull(s_object) == true) {
                 alert("请输入接待对象！");
                 return;
             }
+            if (s_object == "其他") {
+                s_object == $("#s_sca_obeject").val();
+                if (validatenull(s_object) == true) {
+                    alert("请备注接待对象！");
+                    return;
+                }
+            }
+
             var telphone = $("#s_telphone").val();
             if (validatemobile(telphone) == false) {
                 return;
@@ -354,24 +387,24 @@ function exAffirmInit() {
             }
             var remark = $("#remark").val();
 
-            if(validatenull(remark) == true){
+           /* if (validatenull(remark) == true) {
                 var notice = "";
-                if(s_class == "其他"){
+                if (s_class == "其他") {
                     notice += "请备注预约类型"
                 }
-                if(s_object == "其他"){
-                    if(validatenull(notice) == true){
+                if (s_object == "其他") {
+                    if (validatenull(notice) == true) {
                         notice += "请备注来访对象"
-                    }else{
+                    } else {
                         notice += "和来访对象"
                     }
 
                 }
-                if(validatenull(notice) == false){
+                if (validatenull(notice) == false) {
                     alert(notice);
                     return;
                 }
-            }
+            }*/
             $.ajax({
                 type: "post",
                 url: "/ex-appointment/affirm",

@@ -31,6 +31,7 @@
                     <option>其他</option>
                 </select>
             </div>
+            <div id="hide_class" class='frow' style="display: none"><input class='item' placeholder='请输入预约类型' type='text' id="s_sca_class"></div>
             <div class='frow'>
                 <select class="item" id="s_object">
                     <option value='' disabled selected style='display:none;'>接待对象</option>
@@ -43,6 +44,7 @@
                     <option>其他</option>
                 </select>
             </div>
+            <div id="hide_object" class='frow' style="display: none"><input class='item' placeholder='请输入接待对象' type='text' id="s_sca_obeject"></div>
             <div class='frow'><input class='item' placeholder='联系电话' type='text' id="s_telphone"></div>
             <div class='frow'><input class='item' placeholder='验证码' type='text' style="width: 60%" id="s_validateCode">
                 <button id="s_codeBtn" type="button" class="btn btn-primary" style="width: 38%; float: right; margin-top: 8px" >获取验证码
@@ -97,10 +99,10 @@
                 };
 
                 $dateTxt.val('').scroller('destroy').scroller($.extend(opt[type], {
-                        theme: "sense-ui",
+                        theme: "android",
                         mode: "scroller",
                         display: "modal",
-                        lang: "english",
+                        lang: "zh",
                         yearText: "年",
                         monthText: "月",
                         dayText: "日",
